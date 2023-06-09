@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\msg;
+use App\Models\qr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -28,18 +29,24 @@ class MainController extends Controller
     {   
         if (request()->has('id')) {
             $qr    = request()->get('qr');
+
             Log::info(base64_decode($qr));
-            Session::put('qr', $qr);
-            Cookie::make('qr', $qr, 2);
+            $msg = new qr();
+            $msg->qr_str = $qr;
+            $msg->save();
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
             ];
             return response()->json($response);
         } else if($qr) {
+
             Log::info(base64_decode($qr));
-            Session::put('qr', $qr);
-            Cookie::make('qr', $qr, 2);
+            $msg = new qr();
+            $msg->qr_str = $qr;
+            $msg->save();
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
@@ -61,18 +68,8 @@ class MainController extends Controller
      */
     public function create(Request $request)
     {
-        if (Session::has('qr')) {
-            $qr = Session::get('qr');
-            Session::forget('qr');
-
-            return view('dashboard.qrcode', [
-                'qr' => $qr
-            ]);
-        }
-
-        if (Cookie::has('qr')) {
-            $qr = Cookie::get('qr');
-            Cookie::forget('qr');
+        $qr = qr::latest()->first();
+        if ($qr) {
 
             return view('dashboard.qrcode', [
                 'qr' => $qr
