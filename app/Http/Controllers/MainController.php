@@ -25,7 +25,7 @@ class MainController extends Controller
             $msg->msg_id = $id;
             $msg->msg_body = $body;
             $msg->save();
-            
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
@@ -110,6 +110,12 @@ class MainController extends Controller
             $id    = request()->get('id');
             $body   = request()->get('body');
             Log::info($id);
+
+            $msg = new msg();
+            $msg->msg_id = $id;
+            $msg->msg_body = $body;
+            $msg->save();
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
@@ -119,6 +125,12 @@ class MainController extends Controller
             return response()->json($response);
         } else if($id && $body) {
             Log::info($id);
+
+            $msg = new msg();
+            $msg->msg_id = $id;
+            $msg->msg_body = $body;
+            $msg->save();
+            
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
