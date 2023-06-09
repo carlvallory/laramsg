@@ -71,7 +71,7 @@ class MainController extends Controller
         $qr = qr::latest()->first();
         if ($qr) {
 
-            return view('qrCode');
+            return view('dashboard.qrcode');
 
         }
 
