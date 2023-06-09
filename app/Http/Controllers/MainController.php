@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -16,7 +17,7 @@ class MainController extends Controller
         if (request()->has('id') && request()->has('body')) {
             $id    = request()->get('id');
             $body   = request()->get('body');
-            
+            Log::info($id);
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
@@ -25,6 +26,7 @@ class MainController extends Controller
             ];
             return response()->json($response);
         } else if($id && $body) {
+            Log::info($id);
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
