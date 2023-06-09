@@ -30,6 +30,7 @@ class MainController extends Controller
             $qr    = request()->get('qr');
             Log::info(base64_decode($qr));
             Session::put('qr', $qr);
+            Cookie::make('qr', $qr, 2);
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
