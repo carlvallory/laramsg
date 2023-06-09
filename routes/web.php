@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/msg', [MainController::class, 'index']);
+Route::get('/msg/id/{id}/body/{body}', [MainController::class, 'index']);
