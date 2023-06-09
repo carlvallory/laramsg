@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/msg/id/{id}/body/{body}', [MainController::class, 'index']);
+Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);

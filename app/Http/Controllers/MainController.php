@@ -43,6 +43,32 @@ class MainController extends Controller
         }
     }
 
+    public function qr(Request $request, $qr)
+    {   
+        if (request()->has('id')) {
+            $qr    = request()->get('qr');
+            Log::info($qr);
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'QR Receive'
+            ];
+            return response()->json($response);
+        } else if($qr) {
+            Log::info($qr);
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'QR Receive'
+            ];
+            return response()->json($response);
+        } else {
+            $response = [ 
+                'status'    => 404, 
+                'message'   => 'QR Not Found'
+            ];
+            return response()->json($response);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
