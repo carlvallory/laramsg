@@ -11,7 +11,7 @@ class MainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id, $body)
     {   
         if (request()->has('id') && request()->has('body')) {
             $id    = request()->get('id');
@@ -24,6 +24,13 @@ class MainController extends Controller
                 'body'      => $body
             ];
             return response()->json($response);
+        } else if($id && $body) {
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Message Receive',
+                'id'        => $id,
+                'body'      => $body
+            ];
         } else {
             $response = [ 
                 'status'    => 404, 
