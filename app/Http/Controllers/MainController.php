@@ -66,6 +66,12 @@ class MainController extends Controller
                 'qr' => $qr
             ]);
         }
+
+        $response = [ 
+            'status'    => 500, 
+            'message'   => 'QR NOT SET'
+        ];
+        return response()->json($response);
     }
 
     /**
