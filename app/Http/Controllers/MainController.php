@@ -71,9 +71,11 @@ class MainController extends Controller
         $qr = qr::latest()->first();
         if ($qr) {
 
-            return view('dashboard.qrcode', [
-                'qr' => $qr
-            ]);
+            \QrCode::size(500)
+            ->format('png')
+            ->generate(base64_decode($qr), public_path('images/qrcode.png'));
+            return view('qrCode');
+
         }
 
         $response = [ 
