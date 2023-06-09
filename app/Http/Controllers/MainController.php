@@ -14,47 +14,13 @@ class MainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id, $body)
+    public function index(Request $request)
     {   
-        if (request()->has('id') && request()->has('body')) {
-            $id    = request()->get('id');
-            $body   = request()->get('body');
-            Log::info($id);
+        $msgs = msg::all();
 
-            $msg = new msg();
-            $msg->msg_id = $id;
-            $msg->msg_body = $body;
-            $msg->save();
-
-            $response = [ 
-                'status'    => 200, 
-                'message'   => 'Message Receive',
-                'id'        => $id,
-                'body'      => $body
-            ];
-            return response()->json($response);
-        } else if($id && $body) {
-            Log::info($id);
-
-            $msg = new msg();
-            $msg->msg_id = $id;
-            $msg->msg_body = $body;
-            $msg->save();
-            
-            $response = [ 
-                'status'    => 200, 
-                'message'   => 'Message Receive',
-                'id'        => $id,
-                'body'      => $body
-            ];
-            return response()->json($response);
-        } else {
-            $response = [ 
-                'status'    => 404, 
-                'message'   => 'Message Not Found'
-            ];
-            return response()->json($response);
-        }
+        return view('dashboard.index', [
+            'msgs' => $msgs
+        ]);
     }
 
     public function qr(Request $request, $qr)
@@ -130,7 +96,7 @@ class MainController extends Controller
             $msg->msg_id = $id;
             $msg->msg_body = $body;
             $msg->save();
-            
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
