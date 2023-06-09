@@ -13,7 +13,24 @@ class MainController extends Controller
      */
     public function index(Request $request)
     {   
-        return response()->json($request);
+        if (request()->has('id') && request()->has('body')) {
+            $id    = request()->get('id');
+            $body   = request()->get('body');
+            
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Message Receive',
+                'id'        => $id,
+                'body'      => $body
+            ];
+            return response()->json($response);
+        } else {
+            $response = [ 
+                'status'    => 404, 
+                'message'   => 'Message Not Found'
+            ];
+            return response()->json($response);
+        }
     }
 
     /**
