@@ -31,6 +31,7 @@ class MainController extends Controller
                 'id'        => $id,
                 'body'      => $body
             ];
+            return response()->json($response);
         } else {
             $response = [ 
                 'status'    => 404, 
