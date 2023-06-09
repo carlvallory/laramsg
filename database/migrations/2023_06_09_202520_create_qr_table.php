@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('qr', function (Blueprint $table) {
             $table->id();
-            $table->string('qr_str');
+            $table->text('qr_str');
             $table->timestamps();
         });
     }
