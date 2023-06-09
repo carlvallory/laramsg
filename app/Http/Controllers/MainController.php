@@ -6,6 +6,7 @@ use App\Models\msg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class MainController extends Controller
 {
@@ -37,6 +38,7 @@ class MainController extends Controller
         } else if($qr) {
             Log::info(base64_decode($qr));
             Session::put('qr', $qr);
+            Cookie::make('qr', $qr, 2);
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
@@ -56,11 +58,20 @@ class MainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         if (Session::has('qr')) {
             $qr = Session::get('qr');
             Session::forget('qr');
+
+            return view('dashboard.qrcode', [
+                'qr' => $qr
+            ]);
+        }
+
+        if (Cookie::has('qr')) {
+            $qr = Cookie::get('qr');
+            Cookie::forget('qr');
 
             return view('dashboard.qrcode', [
                 'qr' => $qr
