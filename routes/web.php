@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/msg/id/{id}/body/{body}', [MainController::class, 'index']);
+Route::get('/msg/id/{id}/body/{body}', [MainController::class, 'store']);
 Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [MainController::class, 'admin']);
+});
