@@ -62,6 +62,10 @@ class MainController extends Controller
             $qr = Session::get('qr');
             Session::forget('qr');
         }
+
+        return view('dashboard.qrcode', [
+            'qr' => $qr
+        ]);
     }
 
     /**
