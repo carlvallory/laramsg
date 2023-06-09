@@ -47,14 +47,14 @@ class MainController extends Controller
     {   
         if (request()->has('id')) {
             $qr    = request()->get('qr');
-            Log::info($qr);
+            Log::info(base64_decode($qr));
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
             ];
             return response()->json($response);
         } else if($qr) {
-            Log::info($qr);
+            Log::info(base64_decode($qr));
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'QR Receive'
