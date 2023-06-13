@@ -63,7 +63,7 @@
                                     </a>
                                     </div> --}}
                                 
-                                <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg_from}}">
+                                <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                     <li>
                                     <p> {{$msg->msg_body}} </p>
                                     </li>

@@ -68,7 +68,7 @@ class MainController extends Controller
      */
     public function create(Request $request)
     {
-        $qr = qr::latest()->first();
+        $qr = Qr::latest()->first();
         if ($qr) {
 
             return view('dashboard.qrcode', [
