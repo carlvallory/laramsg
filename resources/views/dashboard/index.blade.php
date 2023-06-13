@@ -66,9 +66,7 @@
                                 <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                     <li>
                                         <a> {{base64_decode($msg->msg_name)}} </a>
-                                    </li>
-                                    <li>
-                                    <p> {{base64_decode($msg->msg_body)}} </p>
+                                        <p> {{base64_decode($msg->msg_body)}} </p>
                                     </li>
                                     {{-- <li>
                                     <p> Lorem ipsum dolor sit amet.<span class="chat_message_time">13:38</span> </p>
