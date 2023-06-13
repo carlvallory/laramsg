@@ -90,7 +90,7 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id, $from, $to, $body, $author = null)
+    public function store(Request $request, $id, $from, $to, $body, $name = null, $author = null)
     {
         if (request()->has('id') && request()->has('body')) {
             $id     = request()->get('id');
