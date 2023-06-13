@@ -117,7 +117,10 @@ class MainController extends Controller
 
             $msg = new msg();
             $msg->msg_id = $id;
+            $msg->msg_from  = $from;
+            $msg->msg_to    = $to;
             $msg->msg_body = $body;
+            $msg->msg_author = $author;
             $msg->save();
 
             $response = [ 
