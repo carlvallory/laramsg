@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MsgController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',    [MainController::class, 'index']);
     Route::get('/dashboard/qr', [MainController::class, 'create']);
     Route::get('/dashboard/wa', [MainController::class, 'show']);
+    Route::resource('msgs', MsgController::class);
 });
