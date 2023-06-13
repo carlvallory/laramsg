@@ -24,6 +24,7 @@
             <th>id</th>
             <th>from</th>
             <th class="d-none">to</th>
+            <th class="d-none">name</th>
             <th class="d-none">author</th>
             <th width="280px">Action</th>
         </tr>
@@ -33,8 +34,9 @@
             <td>{{ $msg->msg_id }}</td>
             <td>{{ $msg->msg_from }}</td>
             <td class="d-none">{{ $msg->msg_to }}</td>
+            <td class="d-none">{{ $msg->msg_name }}</td>
             <td class="d-none">{{ $msg->msg_author }}</td>
-            <td>{{ $msg->msg_body }}</td>
+            <td>{{ base64_decode($msg->msg_body) }}</td>
             <td>
                 <form action="{{ route('admin.msgs.destroy',$msg->id) }}" method="POST">
    
