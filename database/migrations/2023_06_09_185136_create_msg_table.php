@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("msg_id");
             $table->string("msg_from");
             $table->string("msg_to");
-            $table->string("msg_body");
-            $table->string("msg_name")->nullable(true);
+            $table->text("msg_body");
+            $table->text("msg_name")->nullable(true);
             $table->string("msg_author")->nullable(true);
             $table->softDeletes();
             $table->timestamps();
