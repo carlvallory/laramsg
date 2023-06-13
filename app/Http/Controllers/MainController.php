@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\msg;
-use App\Models\qr;
+use App\Models\Msg;
+use App\Models\Qr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +18,7 @@ class MainController extends Controller
      */
     public function index(Request $request)
     {   
-        $msgs = msg::all();
+        $msgs = Msg::all();
 
         return view('dashboard.index', [
             'msgs' => $msgs
@@ -31,7 +31,7 @@ class MainController extends Controller
             $qr    = request()->get('qr');
 
             Log::info(base64_decode($qr));
-            $msg = new qr();
+            $msg = new Qr();
             $msg->qr_str = $qr;
             $msg->save();
 
@@ -43,7 +43,7 @@ class MainController extends Controller
         } else if($qr) {
 
             Log::info(base64_decode($qr));
-            $msg = new qr();
+            $msg = new Qr();
             $msg->qr_str = $qr;
             $msg->save();
 
@@ -106,7 +106,7 @@ class MainController extends Controller
 
             Log::info($id);
 
-            $msg = new msg();
+            $msg = new Msg();
             $msg->msg_id    = $id;
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
@@ -124,7 +124,7 @@ class MainController extends Controller
         } else if($id && $body) {
             Log::info($id);
 
-            $msg = new msg();
+            $msg = new Msg();
             $msg->msg_id = $id;
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
@@ -156,7 +156,7 @@ class MainController extends Controller
      */
     public function show($id)
     {
-        $msgs = msg::all();
+        $msgs = Msg::all();
 
         return view('dashboard.show', [
             'msgs' => $msgs
