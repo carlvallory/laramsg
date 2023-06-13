@@ -1,13 +1,13 @@
-@extends('products.layout')
+@extends('msgs.layout')
   
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Product</h2>
+            <h2>Add New Message</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('msgs.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
    
-<form action="{{ route('products.store') }}" method="POST">
+<form action="{{ route('msgs.store') }}" method="POST">
     @csrf
   
      <div class="row">
