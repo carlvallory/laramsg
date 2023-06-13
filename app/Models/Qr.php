@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class qr extends Model
+class Qr extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    protected $table = 'qr';
+    protected $table = 'qrs';
 
     protected $fillable = [
         'qr_str'

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class msg extends Model
+class Msg extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'msg';
+    protected $table = 'msgs';
 
     protected $fillable = [
         'msg_id',
