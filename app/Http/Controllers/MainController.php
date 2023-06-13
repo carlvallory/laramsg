@@ -156,7 +156,11 @@ class MainController extends Controller
      */
     public function show($id)
     {
-        //
+        $msgs = msg::all();
+
+        return view('dashboard.show', [
+            'msgs' => $msgs
+        ]);
     }
 
     /**

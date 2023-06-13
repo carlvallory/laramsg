@@ -20,4 +20,5 @@ Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',    [MainController::class, 'index']);
     Route::get('/dashboard/qr', [MainController::class, 'create']);
+    Route::get('/dashboard/wa', [MainController::class, 'show']);
 });
