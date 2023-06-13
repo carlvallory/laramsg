@@ -134,11 +134,11 @@ class MainController extends Controller
             Log::info($id);
 
             $msg = new Msg();
-            $msg->msg_id = $id;
+            $msg->msg_id    = $id;
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
-            $msg->msg_body = $body;
-            $msg->msg_name  = $name;
+            $msg->msg_body  = base64_decode($body);
+            $msg->msg_name  = base64_decode($name);
             $msg->msg_author = $author;
             $msg->save();
 
