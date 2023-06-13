@@ -96,10 +96,10 @@ class MainController extends Controller
             $id     = request()->get('id');
             $from   = request()->get('from');
             $to     = request()->get('to');
-            $body   = request()->get('body');
+            $body   = base64_decode(request()->get('body'));
 
             if(request()->has('name')) {
-                $name   = request()->get('name');
+                $name   = base64_decode(request()->get('name'));
             } else {
                 $name   = null;
             }
@@ -116,8 +116,8 @@ class MainController extends Controller
             $msg->msg_id    = $id;
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
-            $msg->msg_body  = $body;
-            $msg->msg_name  = $name;
+            $msg->msg_body  = base64_decode($body);
+            $msg->msg_name  = base64_decode($name);
             $msg->msg_author = $author;
             $msg->save();
 
