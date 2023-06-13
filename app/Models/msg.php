@@ -13,6 +13,9 @@ class msg extends Model
 
     protected $fillable = [
         'msg_id',
-        'msg_body'
+        'msg_from',
+        'msg_to',
+        'msg_body',
+        'msg_author'
     ];
 }
