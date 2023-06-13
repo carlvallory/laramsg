@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/author/{author?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
