@@ -97,7 +97,11 @@ class MainController extends Controller
             $from   = request()->get('from');
             $to     = request()->get('to');
             $body   = request()->get('body');
-            $author = request()->get('author');
+
+            if(request()->has('author')) {
+                $author = request()->get('author');
+            }
+            
             Log::info($id);
 
             $msg = new msg();
