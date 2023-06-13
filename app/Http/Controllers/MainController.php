@@ -100,8 +100,10 @@ class MainController extends Controller
 
             if(request()->has('author')) {
                 $author = request()->get('author');
+            } else {
+                $author = null;
             }
-            
+
             Log::info($id);
 
             $msg = new msg();
