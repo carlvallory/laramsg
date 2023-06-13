@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("msg_from");
             $table->string("msg_to");
             $table->string("msg_body");
-            $table->string("msg_author");
+            $table->string("msg_author")->default(null);
             $table->timestamps();
         });
     }
