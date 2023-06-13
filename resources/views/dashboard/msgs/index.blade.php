@@ -26,6 +26,7 @@
             <th class="d-none">to</th>
             <th class="d-none">name</th>
             <th class="d-none">author</th>
+            <th>body</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($msgs as $msg)
