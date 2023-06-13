@@ -23,11 +23,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard/qr', [MainController::class, 'create']);
     Route::get('/dashboard/wa', [MainController::class, 'show']);
 
-    Route::get('/dashboard/msgs',          [MsgController::class, 'index']);
-    Route::post('/dashboard/msgs',         [MsgController::class, 'store']);
-    Route::get('/dashboard/msgs/create',   [MsgController::class, 'create']);
-    Route::get('/dashboard/msgs/{id}',     [MsgController::class, 'show']);
-    Route::put('/dashboard/msgs/{id}',     [MsgController::class, 'update']);
-    Route::delete('/dashboard/msgs/{id}',  [MsgController::class, 'destroy']);
-    Route::get('/dashboard/msgs/{id}/edit',[MsgController::class, 'edit']);
+    Route::get('/dashboard/msgs',          [MsgController::class, 'index'])->name('msgs.index');
+    Route::post('/dashboard/msgs',         [MsgController::class, 'store'])->name('msgs.store');
+    Route::get('/dashboard/msgs/create',   [MsgController::class, 'create'])->name('msgs.create');
+    Route::get('/dashboard/msgs/{id}',     [MsgController::class, 'show'])->name('msgs.show');
+    Route::put('/dashboard/msgs/{id}',     [MsgController::class, 'update'])->name('msgs.update');
+    Route::delete('/dashboard/msgs/{id}',  [MsgController::class, 'destroy'])->name('msgs.destroy');
+    Route::get('/dashboard/msgs/{id}/edit',[MsgController::class, 'edit'])->name('msgs.edit');
 });
