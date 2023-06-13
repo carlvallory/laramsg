@@ -16,7 +16,7 @@ class MsgController extends Controller
     {
         $msgs = Msg::latest()->paginate(5);
 
-        return view('msgs.index',compact('msgs'))
+        return view('dashboard.msgs.index',compact('msgs'))
 
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -28,7 +28,7 @@ class MsgController extends Controller
      */
     public function create()
     {
-        return view('msgs.create');
+        return view('dashboard.msgs.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class MsgController extends Controller
         
         Msg::create($request->all());
          
-        return redirect()->route('msgs.index')
+        return redirect()->route('dashboard.msgs.index')
                         ->with('success','Msg created successfully.');
     }
 
@@ -58,7 +58,7 @@ class MsgController extends Controller
      */
     public function show(Msg $msg)
     {
-        return view('msgs.show',compact('msg'));
+        return view('dashboard.msgs.show',compact('msg'));
     }
 
     /**
@@ -69,7 +69,7 @@ class MsgController extends Controller
      */
     public function edit(Msg $msg)
     {
-        return view('msgs.edit',compact('msg'));
+        return view('dashboard.msgs.edit',compact('msg'));
     }
 
     /**
@@ -88,7 +88,7 @@ class MsgController extends Controller
         
         $msg->update($request->all());
         
-        return redirect()->route('msgs.index')
+        return redirect()->route('dashboard.msgs.index')
                         ->with('success','Msg updated successfully');
     }
 
@@ -102,7 +102,7 @@ class MsgController extends Controller
     {
         $msg->delete();
          
-        return redirect()->route('msgs.index')
+        return redirect()->route('dashboard.msgs.index')
                         ->with('success','Msg deleted successfully');
     }
 }
