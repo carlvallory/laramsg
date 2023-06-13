@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Laravel 10 CRUD Example from scratch - ItSolutionStuff.com</h2>
+                <h2>Laravel 10 CRUD</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('admin.msgs.create') }}"> Create New Message</a>
@@ -21,8 +21,10 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Name</th>
-            <th>Details</th>
+            <th>id</th>
+            <th>from</th>
+            <th class="d-none">to</th>
+            <th class="d-none">author</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($msgs as $msg)
@@ -30,8 +32,8 @@
             <td>{{ ++$i }}</td>
             <td>{{ $msg->msg_id }}</td>
             <td>{{ $msg->msg_from }}</td>
-            <td>{{ $msg->msg_to }}</td>
-            <td>{{ $msg->msg_author }}</td>
+            <td class="d-none">{{ $msg->msg_to }}</td>
+            <td class="d-none">{{ $msg->msg_author }}</td>
             <td>{{ $msg->msg_body }}</td>
             <td>
                 <form action="{{ route('admin.msgs.destroy',$msg->id) }}" method="POST">
