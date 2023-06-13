@@ -93,8 +93,11 @@ class MainController extends Controller
     public function store(Request $request, $id, $from, $to, $body, $author = null)
     {
         if (request()->has('id') && request()->has('body')) {
-            $id    = request()->get('id');
+            $id     = request()->get('id');
+            $from   = request()->get('from');
+            $to     = request()->get('to');
             $body   = request()->get('body');
+            $author = request()->get('author');
             Log::info($id);
 
             $msg = new msg();
