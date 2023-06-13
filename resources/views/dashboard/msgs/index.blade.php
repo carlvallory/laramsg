@@ -7,7 +7,7 @@
                 <h2>Laravel 10 CRUD Example from scratch - ItSolutionStuff.com</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('msgs.create') }}"> Create New Message</a>
+                <a class="btn btn-success" href="{{ route('admin.msgs.create') }}"> Create New Message</a>
             </div>
         </div>
     </div>
@@ -31,11 +31,11 @@
             <td>{{ $msg->name }}</td>
             <td>{{ $msg->detail }}</td>
             <td>
-                <form action="{{ route('msgs.destroy',$msg->id) }}" method="POST">
+                <form action="{{ route('admin.msgs.destroy',$msg->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('msgs.show',$msg->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.msgs.show',$msg->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('msgs.edit',$msg->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.msgs.edit',$msg->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')

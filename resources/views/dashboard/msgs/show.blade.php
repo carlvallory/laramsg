@@ -7,7 +7,7 @@
                 <h2> Show Message</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('msgs.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.msgs.index') }}"> Back</a>
             </div>
         </div>
     </div>
