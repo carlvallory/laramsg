@@ -209,6 +209,9 @@ body{margin-top:20px;
     .chat_box .chat_message_wrapper ul.chat_message > li p {
         margin: 0;
     }
+    .chat_box .chat_message_wrapper ul.chat_message > li a {
+        color: #00ffff;
+    }
     .chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li .chat_message_time {
         color: rgba(185, 186, 180, 0.9);
     }
