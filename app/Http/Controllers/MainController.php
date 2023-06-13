@@ -98,6 +98,12 @@ class MainController extends Controller
             $to     = request()->get('to');
             $body   = request()->get('body');
 
+            if(request()->has('name')) {
+                $name   = request()->get('name');
+            } else {
+                $name   = null;
+            }
+
             if(request()->has('author')) {
                 $author = request()->get('author');
             } else {
@@ -111,6 +117,7 @@ class MainController extends Controller
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
             $msg->msg_body  = $body;
+            $msg->msg_name  = $name;
             $msg->msg_author = $author;
             $msg->save();
 
@@ -131,6 +138,7 @@ class MainController extends Controller
             $msg->msg_from  = $from;
             $msg->msg_to    = $to;
             $msg->msg_body = $body;
+            $msg->msg_name  = $name;
             $msg->msg_author = $author;
             $msg->save();
 

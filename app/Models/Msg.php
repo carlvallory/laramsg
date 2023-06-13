@@ -18,6 +18,7 @@ class Msg extends Model
         'msg_from',
         'msg_to',
         'msg_body',
+        'msg_name',
         'msg_author'
     ];
 }
