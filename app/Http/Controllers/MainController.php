@@ -114,6 +114,8 @@ class MainController extends Controller
             $msg->msg_author = $author;
             $msg->save();
 
+            Log::warning($name);
+
             $response = [ 
                 'status'    => 200, 
                 'message'   => 'Message Receive',
