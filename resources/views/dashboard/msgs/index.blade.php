@@ -28,8 +28,11 @@
         @foreach ($msgs as $msg)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $msg->name }}</td>
-            <td>{{ $msg->detail }}</td>
+            <td>{{ $msg->msg_id }}</td>
+            <td>{{ $msg->msg_from }}</td>
+            <td>{{ $msg->msg_to }}</td>
+            <td>{{ $msg->msg_author }}</td>
+            <td>{{ $msg->msg_body }}</td>
             <td>
                 <form action="{{ route('admin.msgs.destroy',$msg->id) }}" method="POST">
    
