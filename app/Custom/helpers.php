@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Request;
 
 use App\Custom\Constants;
 
@@ -95,7 +96,7 @@ if(!function_exists('uploads_url')) {
 if(!function_exists('getMysqlVersion')){
     function getMysqlVersion()
     {
-        $pdo     = \DB::connection()->getPdo();
+        $pdo     = DB::connection()->getPdo();
         $version = $pdo->query('select version()')->fetchColumn();
 
         (float)$version = mb_substr($version, 0, 6);
@@ -579,5 +580,21 @@ if(!function_exists('return_kilobytes')){
         }
 
         return $val;
+    }
+}
+
+if(!function_exists('is_base64')){
+    function is_base64($string){
+        // Check if there are valid base64 characters
+        if (!preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string)) return false;
+
+        // Decode the string in strict mode and check the results
+        $decoded = base64_decode($string, true);
+        if(false === $decoded) return false;
+
+        // Encode the string again
+        if(base64_encode($decoded) != $string) return false;
+
+        return true;
     }
 }
