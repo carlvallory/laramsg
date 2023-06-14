@@ -585,6 +585,7 @@ if(!function_exists('return_kilobytes')){
 
 if(!function_exists('is_base64')){
     function is_base64($string){
+        if (strlen($string)%4!==0) return false;
         // Check if there are valid base64 characters
         if (!preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string)) return false;
 
@@ -596,5 +597,29 @@ if(!function_exists('is_base64')){
         if(base64_encode($decoded) != $string) return false;
 
         return true;
+    }
+}
+
+if(!function_exists('base_decoded')){
+    function base_decoded($string) { 
+        if (preg_match('/([\w ]+)/imu', $string)){ return true; } 
+        return false; 
+    }
+}
+
+if(!function_exists('while_decode')){
+    function while_decode($string) {
+        if(!Str::contains($string, "_")) { return $string; }
+        $arr = explode("_", $string);
+        $string = $arr[0];
+        $n = $arr[1];
+        $i = 0;
+        
+        while ($i < $n) {
+            $i++;
+            $string = base64_decode($string);
+        }
+
+        return $string;
     }
 }
