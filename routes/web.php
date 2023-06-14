@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/dashboard/wa');
+Route::redirect('/', 'admin/dashboard/wa');
 
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/author/{author?}', [MainController::class, 'store']);
@@ -24,7 +24,7 @@ Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',    [MainController::class, 'index']);
     Route::get('/dashboard/qr', [MainController::class, 'create']);
-    Route::get('/dashboard/wa', [MainController::class, 'show']);
+    Route::get('/dashboard/wa/{id?}', [MainController::class, 'show'])->name('wa.frontend');
 
     Route::get('/dashboard/msgs',          [MsgController::class, 'index'])->name('msgs.index');
     Route::post('/dashboard/msgs',         [MsgController::class, 'store'])->name('msgs.store');
