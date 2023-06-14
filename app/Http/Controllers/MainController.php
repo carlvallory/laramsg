@@ -112,13 +112,8 @@ class MainController extends Controller
 
             Log::info($id);
 
-            while (is_base64(base64_decode($body))) {
-                $body = base64_decode($body);
-            }
-
-            while (is_base64(base64_decode($name))) {
-                $name = base64_decode($name);
-            }
+            $body = base64_encode(while_decode($body));
+            $name = base64_encode(while_decode($name));
 
             $msg = new Msg();
             $msg->msg_id    = $id;
@@ -141,8 +136,8 @@ class MainController extends Controller
         } else if($id && $body) {
             Log::info($id);
 
-            $body = while_decode($body);
-            $name = while_decode($name);
+            $body = base64_encode(while_decode($body));
+            $name = base64_encode(while_decode($name));
 
             $msg = new Msg();
             $msg->msg_id    = $id;
