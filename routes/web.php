@@ -24,7 +24,7 @@ Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard',                [MainController::class, 'index']);
+    Route::get('/dashboard',                [MainController::class, 'index'])->name('wa.app');
     Route::get('/dashboard/qr',             [MainController::class, 'create']);
     Route::get('/dashboard/wa/{id?}',       [MainController::class, 'show'])->name('wa.frontend');
 
