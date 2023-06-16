@@ -36,6 +36,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('/dashboard/msgs/{id}',   [MsgController::class, 'destroy'])->name('msgs.destroy');
     Route::get('/dashboard/msgs/{id}/edit', [MsgController::class, 'edit'])->name('msgs.edit');
 
-    Route::get('/dashboard/wa/home',        [MsgController::class, 'home'])->name('msgs.home');
+    Route::get('/dashboard/wa/chat',        [MsgController::class, 'chat'])->name('msgs.chat');
     Route::delete('/dashboard/wa/{id}',     [MsgController::class, 'delete'])->name('msgs.delete');
 });

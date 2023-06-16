@@ -26,11 +26,11 @@ class MsgController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function chat()
     {
         $msgs = Msg::latest()->paginate(9);
 
-        return view('dashboard.msgs.home',compact('msgs'))
+        return view('dashboard.msgs.chat',compact('msgs'))
 
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -110,7 +110,7 @@ class MsgController extends Controller
     {
         $msg->delete();
          
-        return redirect()->route('dashboard.msgs.home')
+        return redirect()->route('dashboard.msgs.chat')
                         ->with('success','Msg deleted successfully');
     }
 
