@@ -365,6 +365,18 @@ body {
   padding-bottom: 0 !important;
 }
 
+.message-text a { 
+  color:#00dd99;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.message-text a { 
+  color:#333;
+  font-size: 14px;
+  font-weight: 200;
+}
+
 .message-time {
   margin: 0 !important;
   margin-left: 50px !important;

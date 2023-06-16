@@ -149,7 +149,7 @@
                                 <div class="sender">
                                     <div class="message-text">
                                         <a> {{base64_decode($msg->msg_name)}} </a>
-                                        <p> {{ base64_decode($msg->msg_name) }} </p>
+                                        <p> {{ base64_decode($msg->msg_body) }} </p>
                                     </div>
                                     <span class="message-time pull-right">
                                         {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }}
