@@ -35,7 +35,7 @@
             <td>{{ $msg->msg_id }}</td>
             <td>{{ $msg->msg_from }}</td>
             <td class="d-none">{{ $msg->msg_to }}</td>
-            <td class="d-none">{{ $msg->msg_name }}</td>
+            <td class="d-none">{{ base64_decode($msg->msg_name) }}</td>
             <td class="d-none">{{ $msg->msg_author }}</td>
             <td>{{ base64_decode($msg->msg_body) }}</td>
             <td>

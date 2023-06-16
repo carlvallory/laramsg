@@ -22,7 +22,7 @@
             }
         </style>
 
-        <link rel="stylesheet" href="{{ asset('css/app.css?v='.((int)(time()/60))) }}">
+        <link rel="stylesheet" href="{{ asset('css/wa_app.css?v='.((int)(time()/60))) }}">
     </head>
     <body class="antialiased">
         <div class="container">

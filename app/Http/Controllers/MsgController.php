@@ -22,6 +22,20 @@ class MsgController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+        $msgs = Msg::latest()->paginate(9);
+
+        return view('dashboard.msgs.home',compact('msgs'))
+
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
