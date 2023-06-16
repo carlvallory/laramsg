@@ -24,18 +24,18 @@ Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard',            [MainController::class, 'index']);
-    Route::get('/dashboard/qr',         [MainController::class, 'create']);
-    Route::get('/dashboard/wa/{id?}',   [MainController::class, 'show'])->name('wa.frontend');
+    Route::get('/dashboard',                [MainController::class, 'index']);
+    Route::get('/dashboard/qr',             [MainController::class, 'create']);
+    Route::get('/dashboard/wa/{id?}',       [MainController::class, 'show'])->name('wa.frontend');
 
-    Route::get('/dashboard/msgs',          [MsgController::class, 'index'])->name('msgs.index');
-    Route::post('/dashboard/msgs',         [MsgController::class, 'store'])->name('msgs.store');
-    Route::get('/dashboard/msgs/create',   [MsgController::class, 'create'])->name('msgs.create');
-    Route::get('/dashboard/msgs/{id}',     [MsgController::class, 'show'])->name('msgs.show');
-    Route::put('/dashboard/msgs/{id}',     [MsgController::class, 'update'])->name('msgs.update');
-    Route::delete('/dashboard/msgs/{id}',  [MsgController::class, 'destroy'])->name('msgs.destroy');
-    Route::get('/dashboard/msgs/{id}/edit',[MsgController::class, 'edit'])->name('msgs.edit');
+    Route::get('/dashboard/msgs',           [MsgController::class, 'index'])->name('msgs.index');
+    Route::post('/dashboard/msgs',          [MsgController::class, 'store'])->name('msgs.store');
+    Route::get('/dashboard/msgs/create',    [MsgController::class, 'create'])->name('msgs.create');
+    Route::get('/dashboard/msgs/{id}',      [MsgController::class, 'show'])->name('msgs.show');
+    Route::put('/dashboard/msgs/{id}',      [MsgController::class, 'update'])->name('msgs.update');
+    Route::delete('/dashboard/msgs/{id}',   [MsgController::class, 'destroy'])->name('msgs.destroy');
+    Route::get('/dashboard/msgs/{id}/edit', [MsgController::class, 'edit'])->name('msgs.edit');
 
-    Route::get('/dashboard/wa/home',          [MsgController::class, 'home'])->name('msgs.home');
-    Route::delete('/dashboard/wa/{id}',[MsgController::class, 'delete'])->name('msgs.delete');
+    Route::get('/dashboard/wa/home',        [MsgController::class, 'home'])->name('msgs.home');
+    Route::delete('/dashboard/wa/{id}',     [MsgController::class, 'delete'])->name('msgs.delete');
 });
