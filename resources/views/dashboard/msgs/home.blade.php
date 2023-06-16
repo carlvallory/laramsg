@@ -143,21 +143,25 @@
                             </div>
                         </div>
                     </div> --}}
-                    @foreach($msgs as $key => $msg)
-                        <div class="row message-body">
-                            <div class="col-sm-12 message-main-sender">
-                                <div class="sender">
-                                    <div class="message-text">
-                                        <a> {{base64_decode($msg->msg_name)}} </a>
-                                        <p> {{ base64_decode($msg->msg_body) }} </p>
+                    <form method="POST" action="{{ route('msgs.delete') }}">
+                        @csrf
+                        @foreach($msgs as $key => $msg)
+                            <div class="row message-body">
+                                <div class="col-sm-12 message-main-sender">
+                                    <div class="sender">
+                                        <div class="message-text">
+                                            <a> {{base64_decode($msg->msg_name)}} </a>
+                                            <p> {{ base64_decode($msg->msg_body) }} </p>
+                                        </div>
+                                        <span><input type="checkbox" name="delete" value="{{$msg->id}}"></span>
+                                        <span class="message-time pull-right">
+                                            {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }}
+                                        </span>
                                     </div>
-                                    <span class="message-time pull-right">
-                                        {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }}
-                                    </span>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </form>
                 </div>
                 <div class="row reply">
                     <div class="col-sm-1 col-xs-1 reply-emojis">

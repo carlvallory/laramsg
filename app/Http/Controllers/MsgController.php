@@ -106,6 +106,14 @@ class MsgController extends Controller
                         ->with('success','Msg updated successfully');
     }
 
+    public function delete(Msg $msg)
+    {
+        $msg->delete();
+         
+        return redirect()->route('dashboard.msgs.home')
+                        ->with('success','Msg deleted successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

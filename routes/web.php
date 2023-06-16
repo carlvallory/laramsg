@@ -29,6 +29,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard/wa/{id?}', [MainController::class, 'show'])->name('wa.frontend');
 
     Route::get('/dashboard/msgs/home',     [MsgController::class, 'home'])->name('msgs.home');
+    Route::delete('/dashboard/msgs/{id}',  [MsgController::class, 'delete'])->name('msgs.delete');
+
     Route::get('/dashboard/msgs',          [MsgController::class, 'index'])->name('msgs.index');
     Route::post('/dashboard/msgs',         [MsgController::class, 'store'])->name('msgs.store');
     Route::get('/dashboard/msgs/create',   [MsgController::class, 'create'])->name('msgs.create');
