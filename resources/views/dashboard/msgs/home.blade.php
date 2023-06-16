@@ -143,7 +143,7 @@
                             </div>
                         </div>
                     </div> --}}
-                    <form method="POST" action="{{ route('msgs.delete') }}">
+                    <form method="POST" action="{{ route('admin.msgs.delete') }}">
                         @csrf
                         @foreach($msgs as $key => $msg)
                             <div class="row message-body">
