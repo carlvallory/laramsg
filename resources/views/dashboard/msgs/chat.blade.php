@@ -143,9 +143,10 @@
                             </div>
                         </div>
                     </div> --}}
-                    <form method="POST" action="{{ route('admin.msgs.delete', $id) }}">
-                        @csrf
-                        @foreach($msgs as $key => $msg)
+                    
+                    @foreach($msgs as $key => $msg)
+                        <form method="POST" action="{{ route('admin.msgs.delete', $id) }}">
+                            @csrf
                             <div class="row message-body">
                                 <div class="col-sm-12 message-main-sender">
                                     <div class="sender">
@@ -160,8 +161,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </form>
+                        </form>
+                    @endforeach
+                    
                 </div>
                 <div class="row reply">
                     <div class="col-sm-1 col-xs-1 reply-emojis">
