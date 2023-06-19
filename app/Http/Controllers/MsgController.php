@@ -108,11 +108,11 @@ class MsgController extends Controller
                         ->with('success','Msg updated successfully');
     }
 
-    public function delete(Msg $msg)
+    public function delete(Request $request, $id)
     {
-        Log::debug($msg);
-        
+
         try {
+            $msg = Msg::find($id);
             $msg->delete();
 
             $response = [ 
