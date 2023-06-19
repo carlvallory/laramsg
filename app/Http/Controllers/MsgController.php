@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Msg;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Throwable;
 
 class MsgController extends Controller
 {
@@ -109,11 +110,26 @@ class MsgController extends Controller
 
     public function delete(Msg $msg)
     {
-        $msg->delete();
-         
-        return Response::json([
-            'success','Msg deleted successfully'
-        ], 200);
+
+        try {
+            $msg->delete();
+
+            $response = [ 
+                        'status' => 200, 
+                        'success' => 'Msg deleted successfully'
+                        ];
+            
+            return response()->json($response);
+
+        } catch (Throwable $e) {
+                    
+            $response = [ 
+                'status' => 500, 
+                'message' => $e->getMessage()
+            ];
+
+            return response()->json($response);
+        }
     }
 
     /**
