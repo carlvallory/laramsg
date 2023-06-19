@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Msg;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class MsgController extends Controller
@@ -110,7 +110,8 @@ class MsgController extends Controller
 
     public function delete(Msg $msg)
     {
-
+        Log::debug($msg);
+        
         try {
             $msg->delete();
 
