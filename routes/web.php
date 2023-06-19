@@ -25,7 +25,7 @@ Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',                [MainController::class, 'index'])->name('wa.app');
-    Route::get('/dashboard/qr',             [MainController::class, 'create']);
+    Route::get('/dashboard/qr',             [MainController::class, 'create'])->name('wa.qr');
     Route::get('/dashboard/wa/{id?}',       [MainController::class, 'show'])->name('wa.frontend');
 
     Route::get('/dashboard/msgs',           [MsgController::class, 'index'])->name('msgs.index');
@@ -36,6 +36,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('/dashboard/msgs/{id}',   [MsgController::class, 'destroy'])->name('msgs.destroy');
     Route::get('/dashboard/msgs/{id}/edit', [MsgController::class, 'edit'])->name('msgs.edit');
 
-    Route::get('/dashboard/wa/chat',        [MsgController::class, 'chat'])->name('msgs.chat');
-    Route::delete('/dashboard/wa/{id}',     [MsgController::class, 'delete'])->name('msgs.delete');
+    Route::get('/dashboard/chat',        [MsgController::class, 'chat'])->name('msgs.chat');
+    Route::delete('/dashboard/delete/{id}',     [MsgController::class, 'delete'])->name('msgs.delete');
 });
