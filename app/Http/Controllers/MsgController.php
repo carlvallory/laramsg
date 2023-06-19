@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Msg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Carbon;
 use Throwable;
 
 class MsgController extends Controller
@@ -28,9 +29,17 @@ class MsgController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chat()
+    public function chat(Request $request)
     {
         $msgs = Msg::latest()->paginate(9);
+
+        if ($request->ajax()) {
+            $html = '';
+            foreach ($msgs as $msg) {
+                $html.= $this->html($msg);
+            }
+            return $html;
+        }
 
         return view('dashboard.msgs.chat',compact('msgs'))
 
@@ -145,5 +154,27 @@ class MsgController extends Controller
          
         return redirect()->route('admin.msgs.index')
                         ->with('success','Msg deleted successfully');
+    }
+
+    private function html($msg) {
+        $html =
+        '<form method="DELETE" action="'+ route('admin.msgs.delete', $msg->id) +'">' +
+            '<div class="row message-body">' +
+                '<div class="col-sm-12 message-main-sender">' +
+                    '<div class="sender">' +
+                        '<div class="message-text">' +
+                            '<a>' + base64_decode($msg->msg_name) + '</a>' +
+                            '<p>' + base64_decode($msg->msg_body) + '</p>' +
+                        '</div>' +
+                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + $msg->id + '"></span>' +
+                        '<span class="message-time pull-right">' +
+                            Carbon::parse(($msg->created_at))->format('H:m') +
+                        '</span>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        "</form>";
+
+        return $html;
     }
 }
