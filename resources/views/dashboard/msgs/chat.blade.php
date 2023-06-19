@@ -198,25 +198,29 @@
                 });
             });
 
-            $("form").on('submit', function(e) { 
+            $('input[type="checkbox"]').on('click', function(e) { 
                 e.preventDefault();
 
-                var newId = $(this).data("id");
-                var newUrl = $(this).attr('action');
-                var token = "{{ csrf_token() }}";
+                if($(this).is(":checked")) {
 
-                $.ajax(
-                {
-                    url: newUrl,
-                    type: 'DELETE',
-                    data: {
-                        "id": newId,
-                        "_token": token,
-                    },
-                    success: function (){
-                        console.log("it Works");
-                    }
-                });
+                    var newForm = $(this).parents('form');
+                    var newId = newForm.data("id");
+                    var newUrl = newForm.attr('action');
+                    var token = "{{ csrf_token() }}";
+
+                    $.ajax(
+                    {
+                        url: newUrl,
+                        type: 'DELETE',
+                        data: {
+                            "id": newId,
+                            "_token": token,
+                        },
+                        success: function (){
+                            console.log("it Works");
+                        }
+                    });
+                }
 
             });
         })
