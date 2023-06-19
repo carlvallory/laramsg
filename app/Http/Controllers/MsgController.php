@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Msg;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MsgController extends Controller
 {
@@ -110,8 +111,9 @@ class MsgController extends Controller
     {
         $msg->delete();
          
-        return redirect()->route('admin.msgs.chat')
-                        ->with('success','Msg deleted successfully');
+        return Response::json([
+            'success','Msg deleted successfully'
+        ], 200);
     }
 
     /**
