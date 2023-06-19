@@ -60,7 +60,7 @@ class MsgController extends Controller
         
         Msg::create($request->all());
          
-        return redirect()->route('dashboard.msgs.index')
+        return redirect()->route('admin.msgs.index')
                         ->with('success','Msg created successfully.');
     }
 
@@ -102,7 +102,7 @@ class MsgController extends Controller
         
         $msg->update($request->all());
         
-        return redirect()->route('dashboard.msgs.index')
+        return redirect()->route('admin.msgs.index')
                         ->with('success','Msg updated successfully');
     }
 
@@ -110,7 +110,7 @@ class MsgController extends Controller
     {
         $msg->delete();
          
-        return redirect()->route('dashboard.msgs.chat')
+        return redirect()->route('admin.msgs.chat')
                         ->with('success','Msg deleted successfully');
     }
 
@@ -124,7 +124,7 @@ class MsgController extends Controller
     {
         $msg->delete();
          
-        return redirect()->route('dashboard.msgs.index')
+        return redirect()->route('admin.msgs.index')
                         ->with('success','Msg deleted successfully');
     }
 }
