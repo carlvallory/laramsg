@@ -186,18 +186,40 @@
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function(){
-        $(".heading-compose").click(function() {
-        $(".side-two").css({
-            "left": "0"
-        });
-        });
+            $(".heading-compose").click(function() {
+                $(".side-two").css({
+                    "left": "0"
+                });
+            });
 
-        $(".newMessage-back").click(function() {
-        $(".side-two").css({
-            "left": "-100%"
-        });
-        });
-    })
+            $(".newMessage-back").click(function() {
+                $(".side-two").css({
+                    "left": "-100%"
+                });
+            });
+
+            $("form").on('submit', function(e) { 
+                e.preventDefault();
+
+                var newId = $(this).data("id");
+                var newUrl = $(this).attr('action');
+                var token = "{{ csrf_token() }}";
+
+                $.ajax(
+                {
+                    url: newUrl,
+                    type: 'DELETE',
+                    data: {
+                        "id": newId,
+                        "_token": token,
+                    },
+                    success: function (){
+                        console.log("it Works");
+                    }
+                });
+
+            });
+        })
     </script>
 </body>
 </html>
