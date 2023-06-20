@@ -159,7 +159,7 @@
                                         </div>
                                         <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
                                         <span class="message-time pull-right">
-                                            {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | {{ $msg->schedule->title }}
+                                            {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | {{ $msg->schedule()->title }}
                                         </span>
                                     </div>
                                 </div>
