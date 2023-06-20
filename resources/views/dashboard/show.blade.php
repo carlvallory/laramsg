@@ -73,6 +73,7 @@
                                     </li> --}}
                                 </ul>
 
+                                <input type="hidden" class="schedule_title" value="{{$msg->schedule->title}}" />
                             </div>
                         @endforeach
                     
