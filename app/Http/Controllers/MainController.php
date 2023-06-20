@@ -19,7 +19,7 @@ class MainController extends Controller
      */
     public function index(Request $request)
     {   
-        $msgs = Msg::all()->getTodayMsgs();
+        $msgs = Msg::getTodayMsgs()->get();
 
         return view('dashboard.index', [
             'msgs' => $msgs

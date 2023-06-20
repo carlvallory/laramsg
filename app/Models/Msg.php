@@ -27,7 +27,11 @@ class Msg extends Model
 
     public function schedule()
     {
-        return $this->belongsTo(Schedule::class, 'schedule_start', 'start');
+        $dt     = Carbon::now()->timezone("America/Asuncion");
+        $today   = $dt->format("l");
+        
+        return $this->belongsTo(Schedule::class, 'schedule_start', 'start')
+                        ->where('day', $today);
     }
 
     public function scopeGetTodayMsgs(Builder $query) {
