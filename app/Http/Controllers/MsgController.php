@@ -33,6 +33,7 @@ class MsgController extends Controller
     public function chat(Request $request)
     {
         $msgs = Msg::latest()->paginate(9);
+        $schedules = Schedule::getTodaySchedules()->get();
         $limit = $msgs->last()->id;
 
         if ($request->ajax()) {
@@ -43,8 +44,7 @@ class MsgController extends Controller
             return $html;
         }
 
-        return view('dashboard.msgs.chat',compact('msgs', 'limit'))
-
+        return view('dashboard.msgs.chat',compact('msgs', 'schedules', 'limit'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
