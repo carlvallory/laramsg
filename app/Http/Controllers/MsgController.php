@@ -32,7 +32,8 @@ class MsgController extends Controller
      */
     public function chat(Request $request)
     {
-        $msgs = Msg::latest()->paginate(9);
+        $msgs = Msg::getTodayMsgs()->paginate(9);
+
         $schedules = Schedule::getTodaySchedules()->get();
         $limit = $msgs->last()->id;
 

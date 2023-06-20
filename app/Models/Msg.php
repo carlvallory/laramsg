@@ -38,6 +38,6 @@ class Msg extends Model
         $dt     = Carbon::now()->timezone("America/Asuncion");
         $today   = $dt->format("Y-m-d");
 
-        return $query->whereDate('created_at', $today);
+        return $query->whereDate('created_at', $today)->orderBy('created_at', 'desc');
     }
 }
