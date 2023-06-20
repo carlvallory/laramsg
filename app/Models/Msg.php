@@ -29,15 +29,15 @@ class Msg extends Model
     {
         $dt     = Carbon::now()->timezone("America/Asuncion");
         $today   = $dt->format("l");
-        
+
         return $this->belongsTo(Schedule::class, 'schedule_start', 'start')
                         ->where('day', $today);
     }
 
     public function scopeGetTodayMsgs(Builder $query) {
         $dt     = Carbon::now()->timezone("America/Asuncion");
-        $today   = $dt->format("l");
+        $today   = $dt->format("Y-m-d");
 
-        return $query->where('day', $today);
+        return $query->where('created_at', $today);
     }
 }
