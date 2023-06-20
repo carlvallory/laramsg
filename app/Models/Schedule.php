@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class Schedule extends Model
 {
@@ -25,7 +26,7 @@ class Schedule extends Model
 
     public function scopeGetTodaySchedules(Builder $query) {
         $dt     = Carbon::now()->timezone("America/Asuncion");
-        $today   = $dt->format("l");
+        $today   = Str::lower($dt->format("l"));
 
         return $query->where('day', $today);
     }
