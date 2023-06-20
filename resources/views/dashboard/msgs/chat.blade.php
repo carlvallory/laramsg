@@ -162,6 +162,9 @@
                                 </div>
                             </div>
                         </form>
+                        @if($loop->last)
+                            <input type="hidden" name="last_id" value="{{$msg->id}}">
+                        @endif
                     @endforeach
                     
                 </div>
@@ -224,6 +227,43 @@
 
             });
         })
+    </script>
+    <script type="text/javascript">
+        var paginate = 1;
+        loadMoreData(paginate);
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                paginate++;
+                loadMoreData(paginate);
+              }
+        });
+        // run function when user reaches to end of the page
+        function loadMoreData(paginate) {
+            var lastId = $('input[name="last_id"]').value();
+            var loadUrl = "{{ route('admin.msgs.chat', $limit) }}";
+            var lUrl = "/admin/dashboard/chat/{id?}";
+
+            $.ajax({
+                url: loadUrl,
+                type: 'get',
+                datatype: 'html',
+                beforeSend: function() {
+                    $('.loading').show();
+                }
+            })
+            .done(function(data) {
+                if(data.length == 0) {
+                    $('.loading').html('No more posts.');
+                    return;
+                  } else {
+                    $('.loading').hide();
+                    $('#post').append(data);
+                  }
+            })
+               .fail(function(jqXHR, ajaxOptions, thrownError) {
+                  alert('Something went wrong.');
+               });
+        }
     </script>
 </body>
 </html>

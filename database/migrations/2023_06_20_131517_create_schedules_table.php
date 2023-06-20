@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('msgs', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string("msg_id");
-            $table->string("msg_from");
-            $table->string("msg_to");
-            $table->text("msg_body");
-            $table->text("msg_name")->nullable(true);
-            $table->string("msg_author")->nullable(true);
-            $table->time("schedule_start")->nullable(true);
-            $table->softDeletes();
+            $table->string('day', 8);
+            $table->time("start");
+            $table->time("stop");
+            $table->string('title', 64);
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('msgs');
+        Schema::dropIfExists('schedules');
     }
 };

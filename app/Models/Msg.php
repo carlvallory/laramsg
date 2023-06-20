@@ -19,6 +19,12 @@ class Msg extends Model
         'msg_to',
         'msg_body',
         'msg_name',
-        'msg_author'
+        'msg_author',
+        'schedule_start'
     ];
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
 }

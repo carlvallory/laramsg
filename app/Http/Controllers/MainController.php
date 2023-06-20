@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Carbon;
 
 class MainController extends Controller
 {
@@ -112,6 +113,10 @@ class MainController extends Controller
 
             Log::info($id);
 
+            $dt     = Carbon::now()->timezone("America/Asuncion");
+            $hour   = $dt->format("H");
+            $time   = $hour . ":00";
+
             $body = base64_encode(while_decode($body));
             $name = base64_encode(while_decode($name));
 
@@ -122,6 +127,7 @@ class MainController extends Controller
             $msg->msg_body  = $body;
             $msg->msg_name  = $name;
             $msg->msg_author = $author;
+            $msg->schedule_start = $time;
             $msg->save();
 
             Log::warning($name);
@@ -136,6 +142,10 @@ class MainController extends Controller
         } else if($id && $body) {
             Log::info($id);
 
+            $dt     = Carbon::now()->timezone("America/Asuncion");
+            $hour   = $dt->format("H");
+            $time   = $hour . ":00";
+
             $body = base64_encode(while_decode($body));
             $name = base64_encode(while_decode($name));
 
@@ -146,6 +156,7 @@ class MainController extends Controller
             $msg->msg_body  = $body;
             $msg->msg_name  = $name;
             $msg->msg_author = $author;
+            $msg->schedule_start = $time;
             $msg->save();
 
             $response = [ 

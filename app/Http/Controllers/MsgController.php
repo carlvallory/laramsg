@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Msg;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
@@ -32,6 +33,7 @@ class MsgController extends Controller
     public function chat(Request $request)
     {
         $msgs = Msg::latest()->paginate(9);
+        $limit = $msgs->last()->id;
 
         if ($request->ajax()) {
             $html = '';
@@ -41,7 +43,7 @@ class MsgController extends Controller
             return $html;
         }
 
-        return view('dashboard.msgs.chat',compact('msgs'))
+        return view('dashboard.msgs.chat',compact('msgs', 'limit'))
 
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
