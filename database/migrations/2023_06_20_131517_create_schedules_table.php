@@ -23,9 +23,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('schedules', function (Blueprint $table) {
+        /* Schema::table('schedules', function (Blueprint $table) {
             $table->foreign('parent_id')->references('id')->on('schedules')->onUpdate('cascade')->onDelete('cascade');
-        });
+        }); */
     }
 
     /**
