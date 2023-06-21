@@ -15,11 +15,16 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->integer('parent_id')->nullable();
             $table->string('day', 16);
             $table->time("start");
             $table->time("stop");
             $table->string('title', 64);
             $table->timestamps();
+        });
+
+        Schema::table('schedules', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('schedules')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

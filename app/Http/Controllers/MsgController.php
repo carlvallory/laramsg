@@ -34,7 +34,8 @@ class MsgController extends Controller
     {
         $msgs = Msg::getTodayMsgs()->paginate(9);
 
-        $schedules = Schedule::getTodaySchedules()->get();
+        $altSchedules = Schedule::getTodaySchedules()->get();
+        $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
         $limit = $msgs->last()->id;
 
         if ($request->ajax()) {

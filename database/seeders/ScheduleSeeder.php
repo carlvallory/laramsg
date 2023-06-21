@@ -16,70 +16,41 @@ class ScheduleSeeder extends Seeder
      */
     public function run()
     {
-        $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        $days       = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        $titles      = ["Tarde y Temprano", "Así son las Cosas", "Dos en la Ciudad", "Pase lo que pase", "Cuenta Final Radio", 
+                    "Estar Mejor", "Agenda País", "Viajes de Radio", "Tu Diario Cooperativo"];
+        $start      = ["0:00", "6:00", "10:00", "12:00", "16:00", "18:00", "20:00", "21:00", "22:00"];
+        $stop       = ["5:59", "9:59", "11:59", "15:59", "17:59", "19:59", "20:59", "21:59", "23:59"];
+        $iteration  = [5, 3, 1, 3, 1, 1, 0, 0, 1];
+
         foreach($days as $key => $day) {
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "0:00",
-                'stop'  => "6:00",
-                'title' => "Tarde y Temprano",
-            ]);
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "6:00",
-                'stop'  => "10:00",
-                'title' => "Así son las Cosas",
-            ]);
+            foreach($titles as $jey => $title) {
+                DB::table('schedules')->insert([
+                    'day'   => Str::lower($day),
+                    'start' => $start[$jey],
+                    'stop'  => $stop[$jey],
+                    'title' => $title[$jey],
+                ]);
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "10:00",
-                'stop'  => "12:00",
-                'title' => "Dos en la Ciudad",
-            ]);
+                $n = 0;
+                $lastid = DB::getPdo()->lastInsertId();
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "12:00",
-                'stop'  => "16:00",
-                'title' => "Pase lo que pase",
-            ]);
+                do {
+                    $h = $this->diff($n, $iteration[$jey], $start[$jey], $stop[$jey]);
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "16:00",
-                'stop'  => "18:00",
-                'title' => "Cuenta Final Radio",
-            ]);
+                    DB::table('schedules')->insert([
+                        'parent_id' => $lastid,
+                        'day'       => Str::lower($day),
+                        'start'     => $h["start"], // 
+                        'stop'      => $h["stop"], //
+                        'title'     => $title,
+                    ]);
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "18:00",
-                'stop'  => "20:00",
-                'title' => "Cuenta Final Radio",
-            ]);
+                    $n++;
+                } while($n <= $iteration[$jey]);
+            }
 
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "20:00",
-                'stop'  => "21:00",
-                'title' => "Estar Mejor",
-            ]);
-
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "21:00",
-                'stop'  => "22:00",
-                'title' => "Agenda País",
-            ]);
-
-            DB::table('schedules')->insert([
-                'day'   => Str::lower($day),
-                'start' => "22:00",
-                'stop'  => "23:59",
-                'title' => "Viajes de Radio",
-            ]);
         }
 
         DB::table('schedules')->insert([
@@ -90,5 +61,25 @@ class ScheduleSeeder extends Seeder
         ]);
 
 
+    }
+
+    public function diff($n, $iteration, $start, $stop) {
+        $iStart = intval(explode(":", $start)[0]);
+        $iStop = intval(explode(":", $start)[0]);
+
+        if($n <= $iteration) { 
+            $niStart = $iStart + $n;
+            $niStop = $iStop + $n;
+        } else {
+            $niStart = $iStart;
+            $niStop = $iStop;
+        }
+
+        $newStart = implode(":", [$niStart, "00"]);
+        $newStop = implode(":", [$niStop, "59"]);
+
+        $result = ["start" => $newStart, "stop" => $newStop];
+
+        return $result;
     }
 }

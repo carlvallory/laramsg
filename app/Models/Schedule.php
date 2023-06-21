@@ -18,6 +18,7 @@ class Schedule extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'parent_id',
         'day',
         'start',
         'stop',
