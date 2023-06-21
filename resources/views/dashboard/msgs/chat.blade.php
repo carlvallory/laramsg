@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="row sideBar">
-                        @foreach($schedules as $key => $schedule)
+                        @foreach($mainSchedules as $key => $schedule)
                             <div class="row sideBar-body">
                                 <div class="col-sm-3 col-xs-3 sideBar-avatar">
                                 <div class="avatar-icon">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="row compose-sideBar">
-                        @foreach($schedules as $key => $schedule)
+                        @foreach($mainSchedules as $key => $schedule)
                             <div class="row sideBar-body">
                                 <div class="col-sm-3 col-xs-3 sideBar-avatar">
                                     <div class="avatar-icon">

@@ -34,7 +34,7 @@ class MsgController extends Controller
     {
         $msgs = Msg::getTodayMsgs()->paginate(9);
 
-        $altSchedules = Schedule::getTodaySchedules()->get();
+        $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
         $limit = $msgs->last()->id;
 
@@ -46,7 +46,7 @@ class MsgController extends Controller
             return $html;
         }
 
-        return view('dashboard.msgs.chat',compact('msgs', 'schedules', 'limit'))
+        return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
