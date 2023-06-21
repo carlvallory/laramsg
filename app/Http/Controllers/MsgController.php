@@ -32,7 +32,7 @@ class MsgController extends Controller
      */
     public function chat(Request $request)
     {
-        $msgs = Msg::getTodayMsgs()->paginate(9);
+        $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
 
         $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
@@ -131,6 +131,31 @@ class MsgController extends Controller
             $response = [ 
                         'status' => 200, 
                         'success' => 'Msg deleted successfully'
+                        ];
+            
+            return response()->json($response);
+
+        } catch (Throwable $e) {
+                    
+            $response = [ 
+                'status' => 500, 
+                'message' => $e->getMessage()
+            ];
+
+            return response()->json($response);
+        }
+    }
+
+    public function restore(Request $request, $id)
+    {
+
+        try {
+            $msg = Msg::find($id);
+            $msg->restore();
+
+            $response = [ 
+                        'status' => 200, 
+                        'success' => 'Msg restore successfully'
                         ];
             
             return response()->json($response);

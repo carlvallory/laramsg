@@ -21,6 +21,7 @@ class Msg extends Model
         'msg_to',
         'msg_body',
         'msg_name',
+        'msg_image',
         'msg_author',
         'schedule_start'
     ];
@@ -39,5 +40,12 @@ class Msg extends Model
         $today   = $dt->format("Y-m-d");
 
         return $query->whereDate('created_at', $today)->orderBy('created_at', 'desc');
+    }
+
+    public function scopeGetTodayTrashedMsgs(Builder $query) {
+        $dt     = Carbon::now()->timezone("America/Asuncion");
+        $today   = $dt->format("Y-m-d");
+
+        return $query->onlyTrashed()->whereDate('created_at', $today)->orderBy('created_at', 'desc');
     }
 }

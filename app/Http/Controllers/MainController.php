@@ -91,7 +91,7 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id, $from, $to, $body, $name = null, $author = null)
+    public function store(Request $request, $id, $from, $to, $body, $name = null, $image = null, $author = null)
     {
         if (request()->has('id') && request()->has('body')) {
             $id     = request()->get('id');
@@ -103,6 +103,12 @@ class MainController extends Controller
                 $name   = request()->get('name');
             } else {
                 $name   = null;
+            }
+
+            if(request()->has('image')) {
+                $image   = request()->get('image');
+            } else {
+                $image   = null;
             }
 
             if(request()->has('author')) {
@@ -126,9 +132,12 @@ class MainController extends Controller
             $msg->msg_to    = $to;
             $msg->msg_body  = $body;
             $msg->msg_name  = $name;
+            $msg->msg_image = $image;
             $msg->msg_author = $author;
             $msg->schedule_start = $time;
             $msg->save();
+
+            $msg->delete();
 
             Log::warning($name);
 
@@ -155,9 +164,12 @@ class MainController extends Controller
             $msg->msg_to    = $to;
             $msg->msg_body  = $body;
             $msg->msg_name  = $name;
+            $msg->msg_image = $image;
             $msg->msg_author = $author;
             $msg->schedule_start = $time;
             $msg->save();
+
+            $msg->delete();
 
             $response = [ 
                 'status'    => 200, 
