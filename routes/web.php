@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'admin/dashboard/wa');
 
-Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/image/{image?}/author/{author?}', [MainController::class, 'store']);
-Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/image/{image?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/profilepicture/{image?}/author/{author?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/profilepicture/{image?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
