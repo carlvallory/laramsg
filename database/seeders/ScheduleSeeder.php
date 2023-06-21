@@ -30,7 +30,7 @@ class ScheduleSeeder extends Seeder
                     'day'   => Str::lower($day),
                     'start' => $start[$jey],
                     'stop'  => $stop[$jey],
-                    'title' => $title[$jey],
+                    'title' => $title,
                 ]);
 
                 $n = 0;
