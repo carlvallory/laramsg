@@ -149,7 +149,7 @@
                     
                     @foreach($msgs as $key => $msg)
                         @if($msg->trashed())
-                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted">
+                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                 @csrf
                                 <div class="row message-body">
                                     <div class="col-sm-12 message-main-sender">
@@ -167,7 +167,7 @@
                                 </div>
                             </form>
                         @else
-                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none">
+                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}>
                                 @csrf
                                 <div class="row message-body">
                                     <div class="col-sm-12 message-main-sender">
@@ -253,19 +253,28 @@
         })
     </script>
     <script type="text/javascript">
-        var paginate = 1;
-        loadMoreData(paginate);
         $(window).scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                paginate++;
+                let paginate = $('.msg-deleted').first().data("id");
                 loadMoreData(paginate);
               }
         });
+
+        $('#conversation').on('DOMNodeInserted', '.msg-deleted', function(e){
+            clearInterval(loadInterval);
+            let id = $(this).data("id");
+            var loadInterval = setInterval(loadMoreData(id), 1000*60);
+        });
+        
+        var limit = $('.msg-deleted').first().data("id");
+        var loadInterval = setInterval(loadMoreData(limit), 1000*60);
+
         // run function when user reaches to end of the page
         function loadMoreData(paginate) {
-            var lastId = $('input[name="last_id"]').val();
-            var loadUrl = "{{ route('admin.msgs.load.chat', $limit) }}";
-            var lUrl = "/admin/dashboard/load/chat/{id?}";
+            let lastId = $('input[name="last_id"]').val();
+            /* var loadUrl = "{{ route('admin.msgs.load.chat', $limit) }}"; */
+            let baseUrl = window.location.origin;
+            let loadUrl = baseUrl + "/admin/dashboard/load/chat/" + paginate;
 
             $.ajax({
                 url: loadUrl,
@@ -284,9 +293,9 @@
                     $('#post').append(data);
                   }
             })
-               .fail(function(jqXHR, ajaxOptions, thrownError) {
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
                   alert('Something went wrong.');
-               });
+            });
         }
     </script>
 </body>
