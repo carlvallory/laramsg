@@ -61,7 +61,8 @@ class MsgController extends Controller
 
         $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
-        $limit = $msgs->last()->id;
+        $msg    = $msgs->last();
+        $limit  = $msg->id;
 
         if($id != $limit) {
 
