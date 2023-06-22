@@ -253,7 +253,7 @@
         })
     </script>
     <script type="text/javascript">
-        $(window).scroll(function() {
+        $('#conversation').scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
                 let paginate = $('.msg-deleted').first().data("id");
                 loadMoreData(paginate);
