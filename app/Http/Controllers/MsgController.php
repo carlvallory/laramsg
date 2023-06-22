@@ -73,9 +73,13 @@ class MsgController extends Controller
                 return $html;
             }
         }
+        
+        $response = [ 
+            'status' => 200, 
+            'error' => 'Ajax expected'
+            ];
 
-        return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+        return response()->json($response);
     }
 
     /**
@@ -215,21 +219,21 @@ class MsgController extends Controller
 
     private function html($msg) {
         $html =
-        '<form method="DELETE" action="'+ route('admin.msgs.delete', $msg->id) +'">' +
-            '<div class="row message-body">' +
-                '<div class="col-sm-12 message-main-sender">' +
-                    '<div class="sender">' +
-                        '<div class="message-text">' +
-                            '<a>' + base64_decode($msg->msg_name) + '</a>' +
-                            '<p>' + base64_decode($msg->msg_body) + '</p>' +
-                        '</div>' +
-                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + $msg->id + '"></span>' +
-                        '<span class="message-time pull-right">' +
-                            Carbon::parse(($msg->created_at))->format('H:m') +
-                        '</span>' +
-                    '</div>' +
-                '</div>' +
-            '</div>' +
+        '<form method="DELETE" action="'+ route('admin.msgs.delete', $msg->id) +'">' .
+            '<div class="row message-body">' .
+                '<div class="col-sm-12 message-main-sender">' .
+                    '<div class="sender">' .
+                        '<div class="message-text">' .
+                            '<a>' . base64_decode($msg->msg_name) . '</a>' .
+                            '<p>' . base64_decode($msg->msg_body) . '</p>' .
+                        '</div>' .
+                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' . $msg->id . '"></span>' .
+                        '<span class="message-time pull-right">' .
+                            Carbon::parse(($msg->created_at))->format('H:m') .
+                        '</span>' .
+                    '</div>' .
+                '</div>' .
+            '</div>' .
         "</form>";
 
         return $html;
