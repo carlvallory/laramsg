@@ -243,6 +243,7 @@
                             "_token": token,
                         },
                         success: function (){
+                            newForm.remove();
                             console.log("it Works");
                         }
                     });
