@@ -57,11 +57,11 @@
                     
                         @foreach($msgs as $key => $msg)
                             <div class="chat_message_wrapper">
-                                {{-- <div class="chat_user_avatar">
-                                    <a href="https://web.facebook.com/iamgurdeeposahan" target="_blank">
-                                    <img alt="Gurdeep Osahan (Web Designer)" title="Gurdeep Osahan (Web Designer)" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="md-user-image">
+                                <div class="chat_user_avatar">
+                                    <a href="#" target="_blank">
+                                    <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{base64_decode($msg->msg_name)}}" class="md-user-image">
                                     </a>
-                                </div> --}}
+                                </div>
                                 
                                 <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                     <li>
