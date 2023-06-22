@@ -182,7 +182,7 @@ class MsgController extends Controller
     {
 
         try {
-            $msg = Msg::find($id);
+            $msg = Msg::withTrashed()->find($id);
             $msg->restore();
 
             $response = [ 
