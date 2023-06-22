@@ -61,22 +61,32 @@ class MsgController extends Controller
 
         $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
-        $msg    = $msgs->last();
-        $limit  = $msg->id;
+        
+        if(!$msgs->isEmpty()) {
+            $msg    = $msgs->last();
+            $limit  = $msg->id;
 
-        if($id != $limit) {
+            if($id != $limit) {
 
-            if ($request->ajax()) {
-                $html = '';
-                foreach ($msgs as $msg) {
-                    $html.= $this->html($msg);
+                if ($request->ajax()) {
+                    $html = '';
+                    foreach ($msgs as $msg) {
+                        $html.= $this->html($msg);
+                    }
+                    return $html;
                 }
-                return $html;
             }
+        } else {
+            $response = [ 
+                'status' => 500, 
+                'error' => 'Response is empty'
+                ];
+    
+            return response()->json($response);
         }
         
         $response = [ 
-            'status' => 200, 
+            'status' => 404, 
             'error' => 'Ajax expected'
             ];
 
