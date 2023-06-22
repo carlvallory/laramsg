@@ -288,10 +288,11 @@
                 if(data.length == 0) {
                     $('.loading').html('No more posts.');
                     return;
-                  } else {
+                } else {
                     $('.loading').hide();
                     $('#post').append(data);
-                  }
+                }
+                console.log(data);
             })
             .fail(function(jqXHR, ajaxOptions, thrownError) {
                   alert('Something went wrong.');
