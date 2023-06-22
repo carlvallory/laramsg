@@ -148,7 +148,7 @@
                     </div> --}}
                     
                     @foreach($msgs as $key => $msg)
-                        @if($msgs->trashed())
+                        @if($msg->trashed())
                             <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted">
                                 @csrf
                                 <div class="row message-body">
