@@ -187,7 +187,7 @@ class MsgController extends Controller
 
             $response = [ 
                         'status' => 200, 
-                        'success' => 'Msg restore successfully'
+                        'success' => 'Msg restored successfully'
                         ];
             
             return response()->json($response);

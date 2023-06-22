@@ -148,23 +148,43 @@
                     </div> --}}
                     
                     @foreach($msgs as $key => $msg)
-                        <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}">
-                            @csrf
-                            <div class="row message-body">
-                                <div class="col-sm-12 message-main-sender">
-                                    <div class="sender">
-                                        <div class="message-text">
-                                            <a> {{base64_decode($msg->msg_name)}} </a>
-                                            <p> {{ base64_decode($msg->msg_body) }} </p>
+                        @if($msgs->trashed())
+                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted">
+                                @csrf
+                                <div class="row message-body">
+                                    <div class="col-sm-12 message-main-sender">
+                                        <div class="sender">
+                                            <div class="message-text">
+                                                <a> {{base64_decode($msg->msg_name)}} </a>
+                                                <p> {{ base64_decode($msg->msg_body) }} </p>
+                                            </div>
+                                            <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="message-time pull-right">
+                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                            </span>
                                         </div>
-                                        <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
-                                        <span class="message-time pull-right">
-                                            {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
-                                        </span>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @else
+                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none">
+                                @csrf
+                                <div class="row message-body">
+                                    <div class="col-sm-12 message-main-sender">
+                                        <div class="sender">
+                                            <div class="message-text">
+                                                <a> {{base64_decode($msg->msg_name)}} </a>
+                                                <p> {{ base64_decode($msg->msg_body) }} </p>
+                                            </div>
+                                            <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="message-time pull-right">
+                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
                         @if($loop->last)
                             <input type="hidden" name="last_id" value="{{$msg->id}}">
                         @endif
