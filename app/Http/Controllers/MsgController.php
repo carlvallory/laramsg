@@ -219,7 +219,7 @@ class MsgController extends Controller
 
     private function html($msg) {
         $html =
-        '<form method="DELETE" action="'+ route('admin.msgs.delete', $msg->id) +'">' .
+        '<form method="DELETE" action="'. route('admin.msgs.delete', $msg->id) .'">' .
             '<div class="row message-body">' .
                 '<div class="col-sm-12 message-main-sender">' .
                     '<div class="sender">' .
