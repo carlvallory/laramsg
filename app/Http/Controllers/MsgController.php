@@ -30,7 +30,7 @@ class MsgController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chat(Request $request)
+    public function chat(Request $request, $id = null)
     {
         $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
 
@@ -44,6 +44,34 @@ class MsgController extends Controller
                 $html.= $this->html($msg);
             }
             return $html;
+        }
+
+        return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadChat(Request $request, $id = null)
+    {
+        $msgs = Msg::getTodayTrashedMsgs()->where('id', '>', $id)->paginate(9);
+
+        $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
+        $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
+        $limit = $msgs->last()->id;
+
+        if($id != $limit) {
+
+            if ($request->ajax()) {
+                $html = '';
+                foreach ($msgs as $msg) {
+                    $html.= $this->html($msg);
+                }
+                return $html;
+            }
         }
 
         return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
