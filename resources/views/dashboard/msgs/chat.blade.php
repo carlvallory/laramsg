@@ -242,7 +242,7 @@
         });
         // run function when user reaches to end of the page
         function loadMoreData(paginate) {
-            var lastId = $('input[name="last_id"]').value();
+            var lastId = $('input[name="last_id"]').val();
             var loadUrl = "{{ route('admin.msgs.chat', $limit) }}";
             var lUrl = "/admin/dashboard/chat/{id?}";
 
