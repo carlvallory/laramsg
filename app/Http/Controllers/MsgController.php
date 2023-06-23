@@ -34,20 +34,30 @@ class MsgController extends Controller
     {
         $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
 
-        $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
-        $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
-        $limit = $msgs->last()->id;
+        if(!$msgs->isEmpty()) {
 
-        if ($request->ajax()) {
-            $html = '';
-            foreach ($msgs as $msg) {
-                $html.= $this->html($msg);
+            $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
+            $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
+            $limit = $msgs->last()->id;
+
+            if ($request->ajax()) {
+                $html = '';
+                foreach ($msgs as $msg) {
+                    $html.= $this->html($msg);
+                }
+                return $html;
             }
-            return $html;
-        }
 
-        return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
+                        ->with('i', (request()->input('page', 1) - 1) * 5);
+        } else {
+            $response = [ 
+                'status' => 500, 
+                'error' => 'Response is empty'
+                ];
+    
+            return response()->json($response);
+        }
     }
 
     /**
