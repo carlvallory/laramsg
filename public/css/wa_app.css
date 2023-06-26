@@ -120,7 +120,7 @@ body{margin-top:20px;
         display: none;
         
         position: fixed;
-        right: 70px;
+        right: 0;
         width: 840px;
         height: 100vh;
         flex-shrink: 0;
