@@ -6,7 +6,7 @@ body{margin-top:20px;
     @import url(https://fonts.googleapis.com/css?family=Open+Sans);
     body
     {
-    font-family: 'Open Sans', sans-serif;
+        font-family: 'Noto Sans', sans-serif;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li + li {
         margin-top: 4px;
@@ -21,7 +21,8 @@ body{margin-top:20px;
     .popup-head-left.pull-left h1 {
         color: #2C2C2E;
         float: left;
-        font-family: oswald;
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 600;
         font-size: 30px;
         margin: 13px 0 12px 23px;
        
@@ -72,7 +73,7 @@ body{margin-top:20px;
     }
     .gurdeepoushan .dropdown-menu li a {
         border-radius: 7px;
-        font-family: oswald;
+        font-family: 'Noto Sans', sans-serif;
         padding: 3px;
        transition: all 0.3s ease-in-out 0s;
     }
@@ -118,13 +119,13 @@ body{margin-top:20px;
         border: 1px solid #304445;
         bottom: 0;
         display: none;
-        
         position: fixed;
         right: 0;
         width: 840px;
         height: 100vh;
         flex-shrink: 0;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 400;
     }
     aside .glow {
         margin: 50px auto;
@@ -237,10 +238,12 @@ body{margin-top:20px;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li p {
         margin: 2px 0 0 0;
+        font-weight: 400;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li a {
         color: #00ffff;
         margin-bottom: 2px;
+        font-weight: 600;
     }
     .chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li .chat_message_time {
         color: rgba(185, 186, 180, 0.9);
