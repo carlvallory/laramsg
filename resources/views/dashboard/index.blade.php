@@ -59,7 +59,11 @@
                                         <div class="chat_message_wrapper">
                                             <div class="chat_user_avatar">
                                                 <a href="#" target="_blank">
-                                                <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="@if(!empty(base64_decode($msg->msg_image))) {{base64_decode($msg->msg_image)}} @else {{asset('images/default.svg')}} @endif" class="md-user-image">
+                                                    @if($msg->msg_image)
+                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{base64_decode($msg->msg_image)}}" class="md-user-image">
+                                                    @else
+                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" class="md-user-image">
+                                                    @endif
                                                 </a>
                                             </div>
                                             
