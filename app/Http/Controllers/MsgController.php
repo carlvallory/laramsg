@@ -203,7 +203,9 @@ class MsgController extends Controller
     {
 
         $msgs = Msg::all();
-        $msgs->delete();
+        if($msgs) {
+            $msgs->delete();
+        }
 
         try {
             $msg = Msg::withTrashed()->find($id);
