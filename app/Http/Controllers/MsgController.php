@@ -203,8 +203,8 @@ class MsgController extends Controller
     {
 
         $msgs = Msg::all();
-        if($msgs) {
-            $msgs->delete();
+        foreach($msgs as $msg) {
+            $msg->delete();
         }
 
         try {
