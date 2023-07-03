@@ -202,6 +202,9 @@ class MsgController extends Controller
     public function restore(Request $request, $id)
     {
 
+        $msgs = Msg::all();
+        $msgs->delete();
+
         try {
             $msg = Msg::withTrashed()->find($id);
             $msg->restore();

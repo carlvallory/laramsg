@@ -95,8 +95,8 @@
             });
 
             $(document).ready(function(){
-                var colors = ["#2C2C2E","#4E5462"];                
-                var rand = Math.floor(Math.random()*colors.length);           
+                var colors = ["#2C2C2E","#4E5462"];
+                var rand = Math.floor(Math.random()*colors.length);
                 document.querySelectorAll('.chat_box .chat_message_wrapper ul.chat_message > li a').forEach(element => { element.style.color = colors[rand]; });
             });
         </script>
