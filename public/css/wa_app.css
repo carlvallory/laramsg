@@ -238,11 +238,14 @@ body{margin-top:20px;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li p {
         margin: 2px 0 0 0;
+        font-size: 44px;
         font-weight: 400;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li a {
-        color: #00ffff;
+        display: flex;
+        color: #4E5462;
         margin-bottom: 2px;
+        font-size: 24px;
         font-weight: 600;
     }
     .chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li .chat_message_time {
