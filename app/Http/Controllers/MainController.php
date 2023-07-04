@@ -125,6 +125,7 @@ class MainController extends Controller
 
             $body = base64_encode(while_decode($body));
             $name = base64_encode(while_decode($name));
+            $image = base64_encode(while_decode($image));
 
             $msg = new Msg();
             $msg->msg_id    = $id;
