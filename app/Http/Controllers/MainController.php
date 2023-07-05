@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Msg;
 use App\Models\Qr;
+use App\Models\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -57,6 +58,82 @@ class MainController extends Controller
             $response = [ 
                 'status'    => 404, 
                 'message'   => 'QR Not Found'
+            ];
+            return response()->json($response);
+        }
+    }
+
+    public function login(Request $request, $user)
+    {   
+        if (request()->has('user')) {
+            $user    = request()->get('user');
+
+            $msgLogin = new Login();
+            $msgLogin->user = $user;
+            $msgLogin->status = true;
+            $msgLogin->save();
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else if($user) {
+
+            Log::info(base64_decode($user));
+            
+            $msgLogin = new Login();
+            $msgLogin->user = $user;
+            $msgLogin->status = true;
+            $msgLogin->save();
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else {
+            $response = [ 
+                'status'    => 404, 
+                'message'   => 'Schedule Not Found'
+            ];
+            return response()->json($response);
+        }
+    }
+
+    public function logout(Request $request, $user)
+    {   
+        if (request()->has('user')) {
+            $user    = request()->get('user');
+
+            $msgLogin = new Login();
+            $msgLogin->user = $user;
+            $msgLogin->status = false;
+            $msgLogin->save();
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else if($user) {
+
+            Log::info(base64_decode($user));
+            
+            $msgLogin = new Login();
+            $msgLogin->user = $user;
+            $msgLogin->status = false;
+            $msgLogin->save();
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else {
+            $response = [ 
+                'status'    => 404, 
+                'message'   => 'Schedule Not Found'
             ];
             return response()->json($response);
         }
