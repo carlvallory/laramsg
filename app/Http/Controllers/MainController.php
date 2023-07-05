@@ -62,6 +62,36 @@ class MainController extends Controller
         }
     }
 
+    public function schedules(Request $request, $id)
+    {   
+        if (request()->has('id')) {
+            $id    = request()->get('id');
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else if($id) {
+
+            Log::info(base64_decode($id));
+            
+            //code
+
+            $response = [ 
+                'status'    => 200, 
+                'message'   => 'Schedule Receive'
+            ];
+            return response()->json($response);
+        } else {
+            $response = [ 
+                'status'    => 404, 
+                'message'   => 'Schedule Not Found'
+            ];
+            return response()->json($response);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

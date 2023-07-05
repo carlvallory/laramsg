@@ -22,6 +22,7 @@ Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/profilepic
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);
+Route::get('/msg/schedules/{id}', [MainController::class, 'schedules']);
 
 
 
