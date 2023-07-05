@@ -6,9 +6,10 @@ use App\Models\Msg;
 use App\Models\Qr;
 use App\Models\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Carbon;
 
 class MainController extends Controller
@@ -106,6 +107,12 @@ class MainController extends Controller
         if (request()->has('user')) {
             $user    = request()->get('user');
 
+            $url = config('node.url');
+            $port = config('node.port');
+
+            $response = Http::get($url . ':' . $port . '/logout');
+            $jsonData = $response->json();
+
             $msgLogin = new Login();
             $msgLogin->user = $user;
             $msgLogin->status = false;
@@ -113,13 +120,20 @@ class MainController extends Controller
 
             $response = [ 
                 'status'    => 200, 
-                'message'   => 'Schedule Receive'
+                'message'   => 'Logout Receive',
+                'data'      => $jsonData
             ];
             return response()->json($response);
         } else if($user) {
 
             Log::info(base64_decode($user));
             
+            $url = config('node.url');
+            $port = config('node.port');
+
+            $response = Http::get($url . ':' . $port . '/logout');
+            $jsonData = $response->json();
+
             $msgLogin = new Login();
             $msgLogin->user = $user;
             $msgLogin->status = false;
@@ -127,13 +141,14 @@ class MainController extends Controller
 
             $response = [ 
                 'status'    => 200, 
-                'message'   => 'Schedule Receive'
+                'message'   => 'Logout Receive',
+                'data'      => $jsonData
             ];
             return response()->json($response);
         } else {
             $response = [ 
                 'status'    => 404, 
-                'message'   => 'Schedule Not Found'
+                'message'   => 'Logout Not Found'
             ];
             return response()->json($response);
         }
