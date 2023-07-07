@@ -34,7 +34,7 @@ class MsgController extends Controller
     public function chat(Request $request, $id = null)
     {
         $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
-        $login = Login::latest()->get();
+        $login = Login::latest()->first();
 
         if(!$msgs->isEmpty()) {
 
