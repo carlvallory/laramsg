@@ -241,6 +241,8 @@ body{margin-top:20px;
         margin: 2px 0 0 0;
         font-size: 44px;
         font-weight: 400;
+        white-space: break-spaces;
+        word-break: keep-all;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li a {
         display: flex;
