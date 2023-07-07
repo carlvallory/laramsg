@@ -30,7 +30,7 @@
 
                                 <ul class="dropdown-menu" id="dropdown-menu-1" aria-labelledby="dropdownMenu1">
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-                                    <li><a href="#" onclick="logout({{$login->user}})">Logout</a></li>
+                                    <li><a href="#" onclick="logout('{{$login->user}}')">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
