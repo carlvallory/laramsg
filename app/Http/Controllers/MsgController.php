@@ -35,6 +35,7 @@ class MsgController extends Controller
     {
         $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
         $login = Login::latest()->first();
+        $loginAuth = Login::isLogged();
 
         if(!$msgs->isEmpty()) {
 
@@ -50,7 +51,8 @@ class MsgController extends Controller
                 return $html;
             }
 
-            return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login'))
+            return view('dashboard.msgs.chat',
+                compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login', 'loginAuth'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
         } else {
             $response = [ 
