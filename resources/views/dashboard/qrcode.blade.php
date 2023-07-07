@@ -1,6 +1,6 @@
 <style>
     svg {
-        margin: 0 auto;
+        margin: 40px auto;
         display: block;
     }
 </style>
