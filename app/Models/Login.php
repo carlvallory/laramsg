@@ -25,4 +25,7 @@ class Login extends Model
         'status'
     ];
 
+    public static function isLogged() {
+        return self::latest()->first() ? true : false;
+    }
 }
