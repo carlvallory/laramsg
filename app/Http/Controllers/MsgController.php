@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Login;
 use App\Models\Msg;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class MsgController extends Controller
     public function chat(Request $request, $id = null)
     {
         $msgs = Msg::getTodayTrashedMsgs()->paginate(9);
+        $login = Login::latest()->get();
 
         if(!$msgs->isEmpty()) {
 
@@ -48,7 +50,7 @@ class MsgController extends Controller
                 return $html;
             }
 
-            return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit'))
+            return view('dashboard.msgs.chat',compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
         } else {
             $response = [ 

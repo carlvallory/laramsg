@@ -30,7 +30,7 @@
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-                                    <li><a href="{{ route('wa.logout') }}">Logout</a></li>
+                                    <li><a href="{{ route('wa.logout', base64_decode($login->user)) }}">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
