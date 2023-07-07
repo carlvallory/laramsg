@@ -616,7 +616,7 @@ body {
   display: block;
 }
 
-.card .card-body svg {
+svg {
   margin: 0 auto;
   display: block;
 }
