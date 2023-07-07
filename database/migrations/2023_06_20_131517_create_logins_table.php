@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('user', 16);
             $table->boolean('status');
+            $table->softDeletes();
             $table->timestamps();
         });
 
