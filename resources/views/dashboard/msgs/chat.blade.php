@@ -20,15 +20,22 @@
                 <div class="side-one">
                     <div class="row heading">
                         <div class="col-sm-3 col-xs-3 heading-avatar">
-                        <div class="heading-avatar-icon">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                        </div>
+                            <div class="heading-avatar-icon">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </div>
                         </div>
                         <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
-                        <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                            <div class="dropdown">
+                                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="col-sm-2 col-xs-2 heading-compose  pull-right">
-                        <i class="fa fa-comments fa-2x  pull-right" aria-hidden="true"></i>
+                            <i class="fa fa-comments fa-2x  pull-right" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="row searchBox">
@@ -208,6 +215,32 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="iframeid"
+                            src="{{ route('admin.wa.qr') }}" 
+                            width="400" 
+                            height="300"
+                            frameborder="0" 
+                            style="border:0" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -250,6 +283,10 @@
                 }
 
             });
+
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#iframeid').focus();
+            })
         })
     </script>
     <script type="text/javascript">
