@@ -348,8 +348,10 @@
         function getXY(element, id) {
             var pos = getPosition(element);
             console.log(pos);
+            document.getElementById(id).style.position="fixed";
+            document.getElementById(id).style.maxWidth="200px";
             document.getElementById(id).style.top=pos.y + "px";
-            document.getElementById(id).style.right=pos.x + "px";
+            document.getElementById(id).style.left=pos.x + "px";
         }
     </script>
 </body>
