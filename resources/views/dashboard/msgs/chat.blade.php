@@ -26,9 +26,9 @@
                         </div>
                         <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
                             <div class="dropdown">
-                                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="getXY(this, 'dropdown-menu-1')"></i>
 
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <ul class="dropdown-menu" id="dropdown-menu-1" aria-labelledby="dropdownMenu1">
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
                                     <li><a href="{{ route('wa.logout', base64_decode($login->user)) }}">Logout</a></li>
                                 </ul>
@@ -286,7 +286,7 @@
 
             $('#myModal').on('shown.bs.modal', function () {
                 $('#iframeid').focus();
-            })
+            });
         })
     </script>
     <script type="text/javascript">
@@ -334,6 +334,14 @@
             .fail(function(jqXHR, ajaxOptions, thrownError) {
                   alert('Something went wrong.');
             });
+        }
+    </script>
+    <script>
+        function getXY(element, id) {
+            var pos = getPosition(element);
+
+            document.getElementById(id).style.top=pos.y;
+            document.getElementById(id).style.right=pos.x;
         }
     </script>
 </body>
