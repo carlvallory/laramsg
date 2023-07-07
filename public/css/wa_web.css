@@ -596,15 +596,17 @@ body {
 }
 
 /** Modal **/
-
+.modal-dialog {
+  height: 546px;
+}
 .modal-header {
-  height: 50px;
+  height: 60px;
 }
 
 .modal-body {
-  height: 500px;
+  height: 420px;
 }
 
 .modal-footer {
-  height: 50px;
+  height: 66px;
 }
