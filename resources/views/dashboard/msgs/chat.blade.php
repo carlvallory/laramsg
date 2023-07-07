@@ -222,13 +222,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">QR</h4>
                 </div>
                 <div class="modal-body">
                     <iframe id="iframeid"
                             src="{{ route('admin.wa.qr') }}" 
                             width="400" 
-                            height="300"
+                            height="400"
                             frameborder="0" 
                             style="border:0" 
                             allowfullscreen>
