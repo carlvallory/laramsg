@@ -347,9 +347,9 @@
 
         function getXY(element, id) {
             var pos = getPosition(element);
-
-            document.getElementById(id).style.top=pos.y;
-            document.getElementById(id).style.right=pos.x;
+            console.log(pos);
+            document.getElementById(id).style.top=pos.y + "px";
+            document.getElementById(id).style.right=pos.x + "px";
         }
     </script>
 </body>
