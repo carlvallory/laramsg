@@ -604,3 +604,7 @@ body {
 .modal-body {
   height: 500px;
 }
+
+.modal-footer {
+  height: 50px;
+}
