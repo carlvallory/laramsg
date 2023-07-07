@@ -594,3 +594,9 @@ body {
     font-size: 1.8em !important;
   }
 }
+
+/** Modal **/
+
+.modal-header {
+  height: 50px;
+}
