@@ -114,7 +114,7 @@ class MainController extends Controller
             $jsonData = $response->json();
 
             $msgLogin = new Login();
-            $msgLogin->user = $user;
+            $msgLogin->user = base64_encode($user);
             $msgLogin->status = false;
             $msgLogin->save();
 
