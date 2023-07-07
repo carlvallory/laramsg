@@ -288,6 +288,7 @@
             });
 
             $('#myModal').on('shown.bs.modal', function () {
+                reload();
                 $('#iframeid').focus();
             });
         })
@@ -371,6 +372,10 @@
             document.getElementById(id).style.maxWidth="200px";
             document.getElementById(id).style.top=pos.y + "px";
             document.getElementById(id).style.left=pos.x + "px";
+        }
+
+        function reload() {
+            document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
         }
     </script>
 </body>
