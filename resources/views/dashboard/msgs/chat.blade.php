@@ -30,7 +30,7 @@
 
                                 <ul class="dropdown-menu" id="dropdown-menu-1" aria-labelledby="dropdownMenu1">
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-                                    <li><a href="{{ route('wa.logout', base64_decode($login->user)) }}">Logout</a></li>
+                                    <li><a href="#" onclick="logout({{$login->user}})">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -329,6 +329,22 @@
                     $('.loading').hide();
                     $('#post').append(data);
                 }
+                console.log(data);
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                  alert('Something went wrong.');
+            });
+        }
+
+        function logout(user) {
+            let logoutUrl = "{{ route('wa.logout', base64_decode($login->user)) }}";
+
+            $.ajax({
+                url: logoutUrl,
+                type: 'get',
+            })
+            .done(function(data) {
+                alert(user);
                 console.log(data);
             })
             .fail(function(jqXHR, ajaxOptions, thrownError) {
