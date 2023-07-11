@@ -37,10 +37,11 @@ class MsgController extends Controller
         $login = Login::latest()->first();
         $loginAuth = Login::isLogged();
 
+        $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
+        $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
+
         if(!$msgs->isEmpty()) {
 
-            $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
-            $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
             $limit = $msgs->last()->id;
 
             if ($request->ajax()) {
