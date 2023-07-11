@@ -93,7 +93,7 @@
         </div>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript" charset="utf-8">
             $(function(){
                 $('#sidebar_secondary').addClass('popup-box-on');
             });
