@@ -23,7 +23,7 @@ class MainController extends Controller
     public function index(Request $request)
     {   
         $msgs = Msg::getTodayMsgs()->get();
-	    $schedule = Schedule::all();
+	    $schedule = Schedule::all()->toArray();
 
         if($request->ajax()){
             return response()->json(['msgs'=> $msgs, 'schedules' => $schedule]);
