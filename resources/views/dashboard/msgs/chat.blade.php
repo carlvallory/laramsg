@@ -281,10 +281,9 @@
                         success: function (){
                             newForm.remove();
                             console.log("it Works");
+                            updateData();
                         }
                     });
-
-                    updateData();
                 }
 
             });

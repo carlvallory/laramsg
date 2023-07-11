@@ -55,12 +55,8 @@ class MsgController extends Controller
                 compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login', 'loginAuth'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
         } else {
-            $response = [ 
-                'status' => 500, 
-                'error' => 'Response is empty'
-                ];
-    
-            return response()->json($response);
+            return view('dashboard.msgs.chat',
+                compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login', 'loginAuth'));
         }
     }
 
