@@ -120,11 +120,12 @@
                     } else {
                         //console.log(data);
                         let str = html(data);
+                        console.log(str);
                         
                         var Obj = document.getElementById('chat_box');
-                        if(Obj.innerHTML) {
+                        /* if(Obj.innerHTML) {
                             Obj.innerHTML=str;
-                        }
+                        } */
                     }
                     //console.log(data);
                 })
@@ -132,6 +133,8 @@
                     alert('Something went wrong.');
                 });
             }
+
+            updateData();
 
             /* document.getElementById("chat").addEventListener(
                 "DOMNodeInserted",
@@ -142,7 +145,7 @@
                 false,
             ); */
 
-            var loadInterval = setInterval(updateData(), 1000*60);
+            //var loadInterval = setInterval(updateData(), 1000*60);
 
             function html(msg) {
 
