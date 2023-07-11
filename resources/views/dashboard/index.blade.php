@@ -137,7 +137,7 @@
                 false,
             );
 
-            var loadInterval = setInterval(updateData(limit), 1000*60);
+            var loadInterval = setInterval(updateData(), 1000*60);
 
         </script>
     </body>
