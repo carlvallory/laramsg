@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -22,15 +23,21 @@ class MainController extends Controller
      */
     public function index(Request $request)
     {   
+        $dt     = Carbon::now()->timezone("America/Asuncion");
+        $hour   = $dt->format("H");
+        $time   = $hour . ":00";
+        $today   = Str::lower($dt->format("l"));
+
         $msgs = Msg::getTodayMsgs()->get();
-	    $schedule = Schedule::all()->toArray();
+	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
 
         if($request->ajax()){
             return response()->json(['msgs'=> $msgs, 'schedules' => $schedule]);
         }
 
         return view('dashboard.index', [
-            'msgs' => $msgs
+            'msgs' => $msgs,
+            'schedule'  => $schedule
         ]);
     }
 
