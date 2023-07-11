@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Msg;
 use App\Models\Qr;
 use App\Models\Login;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
@@ -22,9 +23,10 @@ class MainController extends Controller
     public function index(Request $request)
     {   
         $msgs = Msg::getTodayMsgs()->get();
+	    $schedule = Schedule::all();
 
         if($request->ajax()){
-            return response()->json(['msgs'=> $msgs, 'schedule' => $msgs->schedule]);
+            return response()->json(['msgs'=> $msgs, 'schedules' => $schedule]);
         }
 
         return view('dashboard.index', [

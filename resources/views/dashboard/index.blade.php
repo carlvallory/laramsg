@@ -148,7 +148,7 @@
             function html(msg) {
 
                 const msgs = Object.assign([], msg)['msgs'][0];
-                const schedules = Object.assign([], msg)['schedule'][0];
+                const schedules = Object.assign([], msg)['schedules'][0];
                 
                 let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
