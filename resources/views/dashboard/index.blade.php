@@ -208,7 +208,9 @@
                 for (let i = 0; i < bytes.length; i++) {
                     bytes[i] = binary.charCodeAt(i);
                 }
-                return String.fromCharCode(...new Uint16Array(bytes.buffer));
+
+                var decoder = new TextDecoder("utf-8");
+                return decoder.decode(...new Uint16Array(bytes.buffer));
             }
 
         </script>
