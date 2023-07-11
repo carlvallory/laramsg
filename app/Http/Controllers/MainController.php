@@ -23,6 +23,10 @@ class MainController extends Controller
     {   
         $msgs = Msg::getTodayMsgs()->get();
 
+        if($request->ajax()){
+            return response()->json(['msgs'=> $msgs]);
+        }
+
         return view('dashboard.index', [
             'msgs' => $msgs
         ]);

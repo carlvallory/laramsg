@@ -283,6 +283,8 @@
                             console.log("it Works");
                         }
                     });
+
+                    updateData();
                 }
 
             });
@@ -332,6 +334,29 @@
                 } else {
                     $('.loading').hide();
                     $('#post').append(data);
+                }
+                console.log(data);
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                  alert('Something went wrong.');
+            });
+        }
+
+        function updateData() {
+            let baseUrl = window.location.origin;
+            let updateUrl = baseUrl + "/admin/dashboard";
+
+            $.ajax({
+                url: updateUrl,
+                type: 'get',
+                datatype: 'json'
+            })
+            .done(function(data) {
+                if(data.length == 0) {
+                    console.log("Empty")
+                    return;
+                } else {
+                    console.log(data);
                 }
                 console.log(data);
             })
