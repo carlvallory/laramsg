@@ -120,12 +120,11 @@
                     } else {
                         //console.log(data);
                         let str = html(data);
-                        console.log(str);
                         
                         var Obj = document.getElementById('chat_box');
-                        /* if(Obj.innerHTML) {
+                        if(Obj.innerHTML) {
                             Obj.innerHTML=str;
-                        } */
+                        }
                     }
                     //console.log(data);
                 })
@@ -158,9 +157,9 @@
                 let html = null;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    msg_image = while_decode(msg_image);
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
                 } else {
+                    msg_image = while_decode(msg_image);
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
                 }
 
