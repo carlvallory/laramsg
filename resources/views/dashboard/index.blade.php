@@ -156,9 +156,9 @@
 
                 if(!msg_image || msg_image.includes('@')) {
                     msg_image = atob(msg_image);
-                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
+                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
                 } else {
-                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
+                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
                 }
 
                 html = '<div class="chat_message_wrapper">' +
