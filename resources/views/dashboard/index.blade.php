@@ -147,6 +147,7 @@
 
             function html(msg) {
 
+                let msg = msg.msg;
                 console.log(msg);
 
                 let msg_image = msg.msg_image;
