@@ -111,7 +111,8 @@
                 $.ajax({
                     url: updateUrl,
                     type: 'get',
-                    datatype: 'json'
+                    datatype: 'json',
+                    contentType: "application/x-www-form-urlencoded;charset=utf-8"
                 })
                 .done(function(data) {
                     if(data.length == 0) {
