@@ -24,7 +24,7 @@ class MainController extends Controller
         $msgs = Msg::getTodayMsgs()->get();
 
         if($request->ajax()){
-            return response()->json(['msgs'=> $msgs]);
+            return response()->json(['msgs'=> $msgs, 'schedule' => $msgs->schedules]);
         }
 
         return view('dashboard.index', [

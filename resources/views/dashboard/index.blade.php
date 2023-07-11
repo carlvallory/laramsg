@@ -148,7 +148,8 @@
             function html(msg) {
 
                 const msgs = Object.assign([], msg)['msgs'][0];
-
+                const schedules = Object.assign([], msg)['schedules'][0];
+                
                 let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
                 let image = null;
@@ -173,7 +174,7 @@
                             '<p>' + atob(msgs.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
-                    '<input type="hidden" class="schedule_title" value="' + msgs.schedule.title + '" />' +
+                    '<input type="hidden" class="schedule_title" value="' + schedules.title + '" />' +
                 '</div>';
 
                 return html;
