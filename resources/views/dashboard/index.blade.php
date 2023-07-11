@@ -149,12 +149,13 @@
 
                 const msgs = Object.assign([], msg)['msgs'][0];
 
+                let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
                 let image = null;
                 let html = null;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    let msg_image = atob(msgs.msg_image);
+                    msg_image = atob(msg_image);
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
                 } else {
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
