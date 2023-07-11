@@ -57,7 +57,7 @@ class MsgController extends Controller
                         ->with('i', (request()->input('page', 1) - 1) * 5);
         } else {
             return view('dashboard.msgs.chat',
-                compact('msgs', 'mainSchedules', 'altSchedules', 'limit', 'login', 'loginAuth'));
+                compact('msgs', 'mainSchedules', 'altSchedules', 'login', 'loginAuth'));
         }
     }
 
