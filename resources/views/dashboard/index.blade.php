@@ -147,16 +147,16 @@
 
             function html(msg) {
 
-                const msgs = Object.assign([], msg);;
+                const msgs = Object.assign([], msg)[0];
                 console.log(msgs);
 
-                let msg_image = msg.msg_image;
+                let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    var image = '<img alt="' + atob(msg.msg_name) + '" title="' + atob(msg.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
+                    var image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
                 } else {
-                    var image = '<img alt="' + atob(msg.msg_name) + '" title="' + atob(msg.msg_name) + '" src="' + atob(msg_image) + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
+                    var image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + atob(msg_image) + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
                 }
 
                 var html = '<div class="chat_message_wrapper">' +
@@ -166,14 +166,14 @@
                         '</a>' +
                     '</div>' +
                     
-                    '<ul class="chat_message" id="' + msg.msg_id + '" data-from="' + msg.msg_from + '">' +
+                    '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                         '<li>' +
-                            '<a>' + atob(msg.msg_name) + '</a>' +
-                            '<p>' + atob(msg.msg_body) + '</p>' +
+                            '<a>' + atob(msgs.msg_name) + '</a>' +
+                            '<p>' + atob(msgs.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
 
-                    '<input type="hidden" class="schedule_title" value="' + msg.schedule.title + '" />' +
+                    '<input type="hidden" class="schedule_title" value="' + msgs.schedule.title + '" />' +
 
                 '</div>';
 
