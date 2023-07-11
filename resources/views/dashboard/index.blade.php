@@ -53,7 +53,7 @@
                             </div>
 
                             <div id="chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
-                                <div class="chat_box touchscroll chat_box_colors_a">
+                                <div id="chat_box" class="chat_box touchscroll chat_box_colors_a">
                                 
                                     @foreach($msgs as $key => $msg)
                                         <div class="chat_message_wrapper">
@@ -119,7 +119,12 @@
                         return;
                     } else {
                         console.log(data);
-                        html(data);
+                        let str = html(data);
+                        
+                        var Obj = document.getElementById('chat_box');
+                        if(Obj.innerHTML) {
+                            Obj.innerHTML=str;
+                        }
                     }
                     console.log(data);
                 })
@@ -144,10 +149,13 @@
 
                 console.log(msg);
 
-                if(!msg->msg_image || msg->msg_image.includes('@')) {
-                    var image = '<img alt="' + atob(msg->msg_name) + '" title="' + atob(msg->msg_name) + '" src="images/default.svg" class="md-user-image">';
+                let msg_image = msg.msg_image;
+                let baseUrl = window.location.origin;
+
+                if(!msg_image || msg_image.includes('@')) {
+                    var image = '<img alt="' + atob(msg.msg_name) + '" title="' + atob(msg.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
                 } else {
-                    var image = '<img alt="' + atob(msg->msg_name) + '" title="' + atob(msg->msg_name) + '" src="' + atob(msg->msg_image) + '" onerror="this.src=\'images/default.svg\';" class="md-user-image">';
+                    var image = '<img alt="' + atob(msg.msg_name) + '" title="' + atob(msg.msg_name) + '" src="' + atob(msg_image) + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
                 }
 
                 var html = '<div class="chat_message_wrapper">' +
@@ -157,14 +165,14 @@
                         '</a>' +
                     '</div>' +
                     
-                    '<ul class="chat_message" id="' + msg->msg_id + '" data-from="' + msg->msg_from + '">' +
+                    '<ul class="chat_message" id="' + msg.msg_id + '" data-from="' + msg.msg_from + '">' +
                         '<li>' +
-                            '<a>' + atob(msg->msg_name) + '</a>' +
-                            '<p>' + atob($msg->msg_body) + '</p>' +
+                            '<a>' + atob(msg.msg_name) + '</a>' +
+                            '<p>' + atob($msg.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
 
-                    '<input type="hidden" class="schedule_title" value="' + msg->schedule->title + '" />' +
+                    '<input type="hidden" class="schedule_title" value="' + msg.schedule.title + '" />' +
 
                 '</div>';
 
