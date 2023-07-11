@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
+        <meta charset="iso-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Dashboard</title>
@@ -93,7 +93,7 @@
         </div>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript" charset="iso-8859-1">
             $(function(){
                 $('#sidebar_secondary').addClass('popup-box-on');
             });
@@ -111,8 +111,7 @@
                 $.ajax({
                     url: updateUrl,
                     type: 'get',
-                    datatype: 'json',
-                    contentType: "application/x-www-form-urlencoded;charset=utf-8"
+                    datatype: 'json'
                 })
                 .done(function(data) {
                     if(data.length == 0) {
