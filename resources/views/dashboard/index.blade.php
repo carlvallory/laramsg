@@ -149,31 +149,30 @@
 
                 const msgs = Object.assign([], msg)['msgs'][0];
 
-                let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
+                let image = null;
+                let html = null;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    var image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
+                    let msg_image = atob(msgs.msg_image);
+                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + 'images/default.svg" class="md-user-image">';
                 } else {
-                    var image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + atob(msg_image) + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
+                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + 'images/default.svg\';" class="md-user-image">';
                 }
 
-                var html = '<div class="chat_message_wrapper">' +
+                html = '<div class="chat_message_wrapper">' +
                     '<div class="chat_user_avatar">' +
                         '<a href="#" target="_blank">' +
                             image +
                         '</a>' +
                     '</div>' +
-                    
                     '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                         '<li>' +
                             '<a>' + atob(msgs.msg_name) + '</a>' +
                             '<p>' + atob(msgs.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
-
                     '<input type="hidden" class="schedule_title" value="' + msgs.schedule.title + '" />' +
-
                 '</div>';
 
                 return html;
