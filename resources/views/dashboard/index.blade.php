@@ -147,8 +147,7 @@
 
             function html(msg) {
 
-                const msgs = Object.assign([], msg);
-                console.log(msgs['msg_image']);
+                const msgs = Object.assign([], msg)['msgs'][0];
 
                 let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
