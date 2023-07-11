@@ -118,7 +118,7 @@
                         console.log("Empty")
                         return;
                     } else {
-                        console.log(data);
+                        //console.log(data);
                         let str = html(data);
                         
                         var Obj = document.getElementById('chat_box');
@@ -147,7 +147,8 @@
 
             function html(msg) {
 
-                console.log(msg['msg']);
+                const msgs = Object.assign([], msg);;
+                console.log(msgs);
 
                 let msg_image = msg.msg_image;
                 let baseUrl = window.location.origin;
