@@ -133,22 +133,21 @@
                 });
             }
 
-            document.getElementById("chat").addEventListener(
+            /* document.getElementById("chat").addEventListener(
                 "DOMNodeInserted",
                 (event) => {
                     clearInterval(loadInterval);
-                    let id = $(this).data("id");
                     var loadInterval = setInterval(updateData(), 1000*60);
                 },
                 false,
-            );
+            ); */
 
             var loadInterval = setInterval(updateData(), 1000*60);
 
             function html(msg) {
 
                 const msgs = Object.assign([], msg)['msgs'][0];
-                const schedules = Object.assign([], msg)['schedules'][0];
+                //const schedules = Object.assign([], msg)['schedules'][0];
                 
                 let msg_image = msgs.msg_image;
                 let baseUrl = window.location.origin;
@@ -174,7 +173,7 @@
                             '<p>' + atob(msgs.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
-                    '<input type="hidden" class="schedule_title" value="' + schedules.title + '" />' +
+                    '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '" />' +
                 '</div>';
 
                 return html;

@@ -32,12 +32,11 @@ class MainController extends Controller
 	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
 
         if($request->ajax()){
-            return response()->json(['msgs'=> $msgs, 'schedules' => $schedule]);
+            return response()->json(['msgs'=> $msgs]);
         }
 
         return view('dashboard.index', [
-            'msgs' => $msgs,
-            'schedule'  => $schedule
+            'msgs' => $msgs
         ]);
     }
 
