@@ -133,18 +133,16 @@
                 });
             }
 
-            updateData();
-
-            /* document.getElementById("chat").addEventListener(
+            document.getElementById("chat").addEventListener(
                 "DOMNodeInserted",
                 (event) => {
                     clearInterval(loadInterval);
                     var loadInterval = setInterval(updateData(), 1000*60);
                 },
                 false,
-            ); */
+            );
 
-            //var loadInterval = setInterval(updateData(), 1000*60);
+            var loadInterval = setInterval(updateData(), 1000*60);
 
             function html(msg) {
 
