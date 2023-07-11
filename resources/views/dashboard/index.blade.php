@@ -155,10 +155,10 @@
                 let html = null;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
+                    image = '<img alt="' + fromBinary(msgs.msg_name) + '" title="' + fromBinary(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
                 } else {
                     msg_image = while_decode(msg_image);
-                    image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
+                    image = '<img alt="' + fromBinary(msgs.msg_name) + '" title="' + fromBinary(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
                 }
 
                 html = '<div class="chat_message_wrapper">' +
@@ -169,8 +169,8 @@
                     '</div>' +
                     '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                         '<li>' +
-                            '<a>' + atob(msgs.msg_name) + '</a>' +
-                            '<p>' + atob(msgs.msg_body) + '</p>' +
+                            '<a>' + fromBinary(msgs.msg_name) + '</a>' +
+                            '<p>' + fromBinary(msgs.msg_body) + '</p>' +
                         '</li>' +
                     '</ul>' +
                     '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '" />' +
@@ -192,6 +192,23 @@
                 }
 
                 return string;
+            }
+
+            function toBinary(string) {
+                const codeUnits = new Uint16Array(string.length);
+                for (let i = 0; i < codeUnits.length; i++) {
+                    codeUnits[i] = string.charCodeAt(i);
+                }
+                return btoa(String.fromCharCode(...new Uint8Array(codeUnits.buffer)));
+            }
+
+            function fromBinary(encoded) {
+                const binary = atob(encoded);
+                const bytes = new Uint8Array(binary.length);
+                for (let i = 0; i < bytes.length; i++) {
+                    bytes[i] = binary.charCodeAt(i);
+                }
+                return String.fromCharCode(...new Uint16Array(bytes.buffer));
             }
 
         </script>
