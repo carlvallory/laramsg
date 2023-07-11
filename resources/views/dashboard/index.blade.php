@@ -155,7 +155,7 @@
                 let html = null;
 
                 if(!msg_image || msg_image.includes('@')) {
-                    msg_image = atob(msg_image);
+                    msg_image = while_decode(msg_image);
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
                 } else {
                     image = '<img alt="' + atob(msgs.msg_name) + '" title="' + atob(msgs.msg_name) + '" src="' + msg_image + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
@@ -177,6 +177,21 @@
                 '</div>';
 
                 return html;
+            }
+
+            function while_decode(string) {
+                if(!string.includes("_")) { return string; }
+                let arr = string.split("_");
+                string = arr[0];
+                let n = arr[1];
+                let i = 0;
+                
+                while (i < n) {
+                    i++;
+                    string = atob(string);
+                }
+
+                return string;
             }
 
         </script>
