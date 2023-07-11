@@ -119,6 +119,7 @@
                         return;
                     } else {
                         console.log(data);
+                        html(data);
                     }
                     console.log(data);
                 })
@@ -138,6 +139,37 @@
             );
 
             var loadInterval = setInterval(updateData(), 1000*60);
+
+            function html(msg) {
+
+                console.log(msg);
+
+                if(!msg->msg_image || msg->msg_image.includes('@')) {
+                    var image = '<img alt="' + atob(msg->msg_name) + '" title="' + atob(msg->msg_name) + '" src="images/default.svg" class="md-user-image">';
+                } else {
+                    var image = '<img alt="' + atob(msg->msg_name) + '" title="' + atob(msg->msg_name) + '" src="' + atob(msg->msg_image) + '" onerror="this.src=\'images/default.svg\';" class="md-user-image">';
+                }
+
+                var html = '<div class="chat_message_wrapper">' +
+                    '<div class="chat_user_avatar">' +
+                        '<a href="#" target="_blank">' +
+                            image +
+                        '</a>' +
+                    '</div>' +
+                    
+                    '<ul class="chat_message" id="' + msg->msg_id + '" data-from="' + msg->msg_from + '">' +
+                        '<li>' +
+                            '<a>' + atob(msg->msg_name) + '</a>' +
+                            '<p>' + atob($msg->msg_body) + '</p>' +
+                        '</li>' +
+                    '</ul>' +
+
+                    '<input type="hidden" class="schedule_title" value="' + msg->schedule->title + '" />' +
+
+                '</div>';
+
+                return html;
+            }
 
         </script>
     </body>
