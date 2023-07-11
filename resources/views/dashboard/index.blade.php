@@ -103,6 +103,42 @@
                 var rand = Math.floor(Math.random()*colors.length);
                 document.querySelectorAll('.chat_box .chat_message_wrapper ul.chat_message > li a').forEach(element => { element.style.color = colors[rand]; });
             });
+
+            function updateData() {
+                let baseUrl = window.location.origin;
+                let updateUrl = baseUrl + "/admin/dashboard";
+
+                $.ajax({
+                    url: updateUrl,
+                    type: 'get',
+                    datatype: 'json'
+                })
+                .done(function(data) {
+                    if(data.length == 0) {
+                        console.log("Empty")
+                        return;
+                    } else {
+                        console.log(data);
+                    }
+                    console.log(data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+            }
+
+            document.getElementById("chat").addEventListener(
+                "DOMNodeInserted",
+                (event) => {
+                    clearInterval(loadInterval);
+                    let id = $(this).data("id");
+                    var loadInterval = setInterval(updateData(), 1000*60);
+                },
+                false,
+            );
+
+            var loadInterval = setInterval(loadMoreData(limit), 1000*60);
+
         </script>
     </body>
 </html>
