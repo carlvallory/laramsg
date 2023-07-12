@@ -334,7 +334,8 @@
                     $('.loading').hide();
                     console.log(data);
                     if(data.status == 200) {
-                        $('#conversation').prepend(html(data));
+                        let msg = Object.assign([], data);
+                        $('#conversation').prepend(html(msg));
                     }
                 }
                 console.log(data);
@@ -406,8 +407,7 @@
         }
 
         function html(msg) {
-            const msgs = Object.assign([], msg);
-
+            const msgs = msg['msgs'];
             console.log(msgs);
 
             let baseUrl = window.location.origin;
