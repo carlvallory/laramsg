@@ -401,6 +401,67 @@
         function reload() {
             document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
         }
+
+        function html(msg) {
+
+            let baseUrl = window.location.origin;
+            let html = null;
+
+            const date = new Date(msg.created_at);
+            const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+
+            html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msg.id + '">' +
+                '<div class="row message-body">' +
+                    '<div class="col-sm-12 message-main-sender">' +
+                        '<div class="sender">' +
+                            '<div class="message-text">' +
+                                '<a>' + b64DecodeUnicode(msg.msg_name) + '</a>' +
+                                '<p>' + b64DecodeUnicode(msg.msg_body) + '</p>' +
+                            '</div>' +
+                            '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msg.id + '"></span>' +
+                            '<span class="message-time pull-right">' +
+                                formatted +
+                            '</span>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            "</form>";
+
+            return html;
+        }
+
+        function while_decode(string) {
+            if(!string.includes("_")) { return string; }
+            let arr = string.split("_");
+            string = arr[0];
+            let n = arr[1];
+            let i = 0;
+            
+            while (i < n) {
+                i++;
+                string = b64DecodeUnicode(string);
+            }
+
+            return string;
+        }
+
+        function b64EncodeUnicode(str) {
+            // first we use encodeURIComponent to get percent-encoded Unicode,
+            // then we convert the percent encodings into raw bytes which
+            // can be fed into btoa.
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+                function toSolidBytes(match, p1) {
+                    return String.fromCharCode('0x' + p1);
+            }));
+        }
+
+
+        function b64DecodeUnicode(str) {
+            // Going backwards: from bytestream, to percent-encoding, to original string.
+            return decodeURIComponent(atob(str).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }
     </script>
 </body>
 </html>
