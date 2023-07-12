@@ -328,16 +328,23 @@
             })
             .done(function(data) {
                 if(data.length == 0) {
-                    $('.loading').html('No more conversation.');
+                    $('.loading').html('No more conversations.');
                     return;
                 } else {
                     $('.loading').hide();
                     console.log(data);
                     if(data.status == 200) {
                         let msgData = Object.assign([], data);
+                        let msgId   = msgData.msg;
+                        let limit   = msgData.limit;
+
+                        var lastId = 0;
                         
                         msgData['msgs'].data.forEach(async (msg) => {
-                            $('#conversation').prepend(html(msg));
+                            if(lastId < msg.id) {
+                                lastId = msg.id;
+                                $('#conversation').prepend(html(msg));
+                            }
                         });
                     }
                 }
