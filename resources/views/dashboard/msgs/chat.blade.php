@@ -332,7 +332,8 @@
                     return;
                 } else {
                     $('.loading').hide();
-                    $('#conversation').prepend(html(data.msgs));
+                    console.log(data);
+                    $('#conversation').prepend(html(data));
                 }
                 console.log(data);
             })
@@ -403,22 +404,25 @@
         }
 
         function html(msg) {
+            const msgs = Object.assign([], msg)['msgs'][0];
+
+            console.log(msgs);
 
             let baseUrl = window.location.origin;
             let html = null;
 
-            const date = new Date(msg.created_at);
+            const date = new Date(msgs.created_at);
             const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
 
-            html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msg.id + '">' +
+            html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
                 '<div class="row message-body">' +
                     '<div class="col-sm-12 message-main-sender">' +
                         '<div class="sender">' +
                             '<div class="message-text">' +
-                                '<a>' + b64DecodeUnicode(msg.msg_name) + '</a>' +
-                                '<p>' + b64DecodeUnicode(msg.msg_body) + '</p>' +
+                                '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                             '</div>' +
-                            '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msg.id + '"></span>' +
+                            '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
                             '<span class="message-time pull-right">' +
                                 formatted +
                             '</span>' +
