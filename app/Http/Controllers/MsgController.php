@@ -81,11 +81,14 @@ class MsgController extends Controller
             if($id != $limit) {
 
                 if ($request->ajax()) {
-                    $html = '';
-                    foreach ($msgs as $msg) {
-                        $html.= $this->html($msg);
-                    }
-                    return $html;
+                    $response = [ 
+                        'status'    => 200, 
+                        'success'   => 'Response is ready',
+                        'msgs'      => $msgs,
+                        'msg'       => $msg,
+                        'limit'     => $limit
+                        ];
+                    return response()->json($response);
                 }
             }
         } else {
