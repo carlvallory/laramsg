@@ -332,7 +332,7 @@
                     return;
                 } else {
                     $('.loading').hide();
-                    $('#conversation').prepend(html(data));
+                    $('#conversation').prepend(html(data.msgs));
                 }
                 console.log(data);
             })
