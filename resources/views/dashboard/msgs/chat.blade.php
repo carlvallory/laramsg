@@ -333,7 +333,9 @@
                 } else {
                     $('.loading').hide();
                     console.log(data);
-                    $('#conversation').prepend(html(data));
+                    if(data.status == 200) {
+                        $('#conversation').prepend(html(data));
+                    }
                 }
                 console.log(data);
             })
@@ -404,7 +406,7 @@
         }
 
         function html(msg) {
-            const msgs = Object.assign([], msg)['msgs'][0];
+            const msgs = Object.assign([], msg);
 
             console.log(msgs);
 
