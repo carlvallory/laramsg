@@ -336,7 +336,7 @@
                     if(data.status == 200) {
                         let msgData = Object.assign([], data);
                         let msgId   = msgData['msg'].id;
-                        let limit   = msgData.['limit'];
+                        let limit   = msgData['limit'];
 
                         var lastId = 0;
                         
