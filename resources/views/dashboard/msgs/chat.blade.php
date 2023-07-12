@@ -335,8 +335,8 @@
                     console.log(data);
                     if(data.status == 200) {
                         let msgData = Object.assign([], data);
-                        let msgId   = msgData.msg;
-                        let limit   = msgData.limit;
+                        let msgId   = msgData['msg'].id;
+                        let limit   = msgData.['limit'];
 
                         var lastId = 0;
                         
@@ -345,6 +345,7 @@
                                 lastId = msg.id;
                                 $('#conversation').prepend(html(msg));
                             }
+                            console.log(msg);
                         });
                     }
                 }
