@@ -334,8 +334,11 @@
                     $('.loading').hide();
                     console.log(data);
                     if(data.status == 200) {
-                        let msg = Object.assign([], data);
-                        $('#conversation').prepend(html(msg));
+                        let msgData = Object.assign([], data);
+                        
+                        msgData['msgs'].data.forEach(async (msg) => {
+                            $('#conversation').prepend(html(msg));
+                        });
                     }
                 }
                 console.log(data);
