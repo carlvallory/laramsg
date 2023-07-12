@@ -305,11 +305,11 @@
         $('#conversation').on('DOMNodeInserted', '.msg-deleted', function(e){
             clearInterval(loadInterval);
             let id = $(this).data("id");
-            var loadInterval = setInterval(loadMoreData(id), 1000*60);
+            var loadInterval = setInterval(loadMoreData(id), 1000*10);
         });
         
         var limit = $('.msg-deleted').first().data("id");
-        var loadInterval = setInterval(loadMoreData(limit), 1000*60);
+        var loadInterval = setInterval(loadMoreData(limit), 1000*10);
 
         // run function when user reaches to end of the page
         function loadMoreData(paginate) {
@@ -333,6 +333,7 @@
                 } else {
                     $('.loading').hide();
                     $('#post').append(data);
+                    console.log(data);
                 }
                 console.log(data);
             })
