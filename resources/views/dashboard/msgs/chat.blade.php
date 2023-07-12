@@ -328,12 +328,11 @@
             })
             .done(function(data) {
                 if(data.length == 0) {
-                    $('.loading').html('No more posts.');
+                    $('.loading').html('No more conversation.');
                     return;
                 } else {
                     $('.loading').hide();
-                    $('#post').append(data);
-                    console.log(data);
+                    $('#conversation').append(data);
                 }
                 console.log(data);
             })
