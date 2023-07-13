@@ -84,7 +84,7 @@ class MsgController extends Controller
                     $response = [ 
                         'status'    => 200, 
                         'success'   => 'Response is ready',
-                        'msgs'      => $msgs,
+                        'msgs'      => $msgs->toarray(),
                         'msg'       => $msg,
                         'limit'     => $limit
                         ];
