@@ -1,7 +1,10 @@
-body{margin-top:20px;
-    background:#eee;
+    body{
+        margin-top:20px;
+        background:#eee;
     }
-    
+    html, body {
+        background: transparent;
+    }
     @import url(https://fonts.googleapis.com/css?family=Oswald:400,300);
     @import url(https://fonts.googleapis.com/css?family=Open+Sans);
     body
@@ -104,7 +107,7 @@ body{margin-top:20px;
     }
     .chat_box_wrapper.chat_box_small.chat_box_active {
         
-        height: 480px;
+        height: 740px;
         overflow-y: auto;
         width: 640px;
     }
