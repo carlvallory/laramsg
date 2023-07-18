@@ -20,8 +20,9 @@ class Msg extends Model
         'msg_from',
         'msg_to',
         'msg_body',
-        'msg_name',
         'msg_image',
+        'msg_name',
+        'msg_picture',
         'msg_author',
         'schedule_start'
     ];

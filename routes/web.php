@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'admin/dashboard/wa');
 
-Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/profilepicture/{image?}/author/{author?}', [MainController::class, 'store']);
-Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/profilepicture/{image?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/image/{image?}/name/{name?}/picture/{picture?}/author/{author?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/picture/{picture?}/author/{author?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/image/{image?}/name/{name?}/picture/{picture?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/picture/{picture?}', [MainController::class, 'store']);
+Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/image/{image?}/name/{name?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/name/{name?}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/id/{id}/from/{from}/to/{to}/body/{body}/author/{author?}', [MainController::class, 'store']);
 Route::get('/msg/qr/{qr}', [MainController::class, 'qr']);

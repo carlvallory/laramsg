@@ -225,7 +225,7 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id, $from, $to, $body, $name = null, $image = null, $author = null)
+    public function store(Request $request, $id, $from, $to, $body, $image = null, $name = null, $picture = null, $author = null)
     {
         if (request()->has('id') && request()->has('body')) {
             $id     = request()->get('id');
@@ -233,16 +233,22 @@ class MainController extends Controller
             $to     = request()->get('to');
             $body   = request()->get('body');
 
+            if(request()->has('image')) {
+                $image   = request()->get('image');
+            } else {
+                $image   = null;
+            }
+
             if(request()->has('name')) {
                 $name   = request()->get('name');
             } else {
                 $name   = null;
             }
 
-            if(request()->has('image')) {
-                $image   = request()->get('image');
+            if(request()->has('picture')) {
+                $picture   = request()->get('picture');
             } else {
-                $image   = null;
+                $picture   = null;
             }
 
             if(request()->has('author')) {
@@ -258,17 +264,19 @@ class MainController extends Controller
             $time   = $hour . ":00";
 
             $body = base64_encode(while_decode($body));
-            $name = base64_encode(while_decode($name));
             $image = base64_encode(while_decode($image));
+            $name = base64_encode(while_decode($name));
+            $picture = base64_encode(while_decode($picture));
 
             $msg = new Msg();
-            $msg->msg_id    = $id;
-            $msg->msg_from  = $from;
-            $msg->msg_to    = $to;
-            $msg->msg_body  = $body;
-            $msg->msg_name  = $name;
-            $msg->msg_image = $image;
-            $msg->msg_author = $author;
+            $msg->msg_id        = $id;
+            $msg->msg_from      = $from;
+            $msg->msg_to        = $to;
+            $msg->msg_body      = $body;
+            $msg->msg_image     = $image;
+            $msg->msg_name      = $name;
+            $msg->msg_picture   = $picture;
+            $msg->msg_author    = $author;
             $msg->schedule_start = $time;
             $msg->save();
 
@@ -290,17 +298,20 @@ class MainController extends Controller
             $hour   = $dt->format("H");
             $time   = $hour . ":00";
 
-            $body = base64_encode(while_decode($body));
-            $name = base64_encode(while_decode($name));
+            $body   = base64_encode(while_decode($body));
+            $image  = base64_encode(while_decode($image));
+            $name   = base64_encode(while_decode($name));
+            $picture = base64_encode(while_decode($picture));
 
             $msg = new Msg();
-            $msg->msg_id    = $id;
-            $msg->msg_from  = $from;
-            $msg->msg_to    = $to;
-            $msg->msg_body  = $body;
-            $msg->msg_name  = $name;
-            $msg->msg_image = $image;
-            $msg->msg_author = $author;
+            $msg->msg_id        = $id;
+            $msg->msg_from      = $from;
+            $msg->msg_to        = $to;
+            $msg->msg_body      = $body;
+            $msg->msg_image     = $image;
+            $msg->msg_name      = $name;
+            $msg->msg_picture   = $picture;
+            $msg->msg_author    = $author;
             $msg->schedule_start = $time;
             $msg->save();
 
