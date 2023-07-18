@@ -264,9 +264,10 @@ class MainController extends Controller
             $time   = $hour . ":00";
 
             $body = base64_encode(while_decode($body));
-            $image = base64_encode(while_decode($image));
-            $name = base64_encode(while_decode($name));
-            $picture = base64_encode(while_decode($picture));
+            if($image != 00) { $image = base64_encode(while_decode($image)); } else { $image = null; }
+            if($name != 00) { $name = base64_encode(while_decode($name)); } else { $name = null; }
+            if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
+            if($author == 00) { $author = null; }
 
             $msg = new Msg();
             $msg->msg_id        = $id;
@@ -299,9 +300,10 @@ class MainController extends Controller
             $time   = $hour . ":00";
 
             $body   = base64_encode(while_decode($body));
-            $image  = base64_encode(while_decode($image));
-            $name   = base64_encode(while_decode($name));
-            $picture = base64_encode(while_decode($picture));
+            if($image != 00) { $image = base64_encode(while_decode($image)); } else { $image = null; }
+            if($name != 00) { $name = base64_encode(while_decode($name)); } else { $name = null; }
+            if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
+            if($author == 00) { $author = null; }
 
             $msg = new Msg();
             $msg->msg_id        = $id;
