@@ -165,8 +165,14 @@
                                     <div class="col-sm-12 message-main-sender">
                                         <div class="sender">
                                             <div class="message-text">
-                                                <a> {{base64_decode($msg->msg_name)}} </a>
+                                                <a> {{ base64_decode($msg->msg_name) }} </a>
+                                                @if($msg->msg_image !== null) 
+                                                    <figure class="figure">
+                                                        <img src="{{ base64_decode($msg->msg_image) }}" class="figure-img img-fluid" />
+                                                    </figure>
+                                                @endif
                                                 <p> {{ base64_decode($msg->msg_body) }} </p>
+                                                
                                             </div>
                                             <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
                                             <span class="message-time pull-right">
@@ -184,7 +190,13 @@
                                         <div class="sender">
                                             <div class="message-text">
                                                 <a> {{base64_decode($msg->msg_name)}} </a>
+                                                @if($msg->msg_image !== null) 
+                                                    <figure class="figure">
+                                                        <img src="{{ base64_decode($msg->msg_image) }}" class="figure-img img-fluid" />
+                                                    </figure>
+                                                @endif
                                                 <p> {{ base64_decode($msg->msg_body) }} </p>
+                                                
                                             </div>
                                             <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
                                             <span class="message-time pull-right">
