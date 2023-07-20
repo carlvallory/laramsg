@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Throwable;
 
 class MainController extends Controller
 {
@@ -302,6 +303,7 @@ class MainController extends Controller
 
             if(request()->has('binary')) {
                 $image   = request()->get('binary');
+                Log::alert($image);
             } else {
                 $image   = null;
             }
@@ -316,19 +318,30 @@ class MainController extends Controller
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
             if($author == 00) { $author = null; }
 
-            $msg = new Msg();
-            $msg->msg_id        = $id;
-            $msg->msg_from      = $from;
-            $msg->msg_to        = $to;
-            $msg->msg_body      = $body;
-            $msg->msg_image     = $image;
-            $msg->msg_name      = $name;
-            $msg->msg_picture   = $picture;
-            $msg->msg_author    = $author;
-            $msg->schedule_start = $time;
-            $msg->save();
+            try {
+                $msg = new Msg();
+                $msg->msg_id        = $id;
+                $msg->msg_from      = $from;
+                $msg->msg_to        = $to;
+                $msg->msg_body      = $body;
+                $msg->msg_image     = $image;
+                $msg->msg_name      = $name;
+                $msg->msg_picture   = $picture;
+                $msg->msg_author    = $author;
+                $msg->schedule_start = $time;
+                $msg->save();
 
-            $msg->delete();
+                $msg->delete();
+
+            } catch (Throwable $e) {
+                    
+                $response = [ 
+                    'status' => 500, 
+                    'message' => $e->getMessage()
+                ];
+    
+                return response()->json($response);
+            }
 
             $response = [ 
                 'status'    => 200, 
