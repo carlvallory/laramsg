@@ -319,17 +319,19 @@ class MainController extends Controller
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
             if($author == 00) { $author = null; }
 
-            try {
-                $fileName = "{$id}.jpg";
-                Storage::put($fileName, $image);
+            if($image !== null) {
+                try {
+                    $fileName = "{$id}.jpg";
+                    Storage::put($fileName, $image);
 
-            } catch (Throwable $e) {
-                $response = [ 
-                    'status' => 500, 
-                    'message' => $e->getMessage()
-                ];
-    
-                return response()->json($response);
+                } catch (Throwable $e) {
+                    $response = [ 
+                        'status' => 500, 
+                        'message' => $e->getMessage()
+                    ];
+        
+                    return response()->json($response);
+                }
             }
             
 
