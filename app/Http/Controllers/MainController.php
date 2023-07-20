@@ -295,6 +295,12 @@ class MainController extends Controller
         } else if($id && $body) {
             Log::info($id);
 
+            if(request()->has('image')) {
+                $image   = request()->get('image');
+            } else {
+                $image   = null;
+            }
+
             $dt     = Carbon::now()->timezone("America/Asuncion");
             $hour   = $dt->format("H");
             $time   = $hour . ":00";
