@@ -332,6 +332,8 @@ class MainController extends Controller
         
                     return response()->json($response);
                 }
+            } else {
+                $fileName = null;
             }
             
 
