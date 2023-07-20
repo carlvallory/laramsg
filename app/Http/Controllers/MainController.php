@@ -295,8 +295,13 @@ class MainController extends Controller
         } else if($id && $body) {
             Log::info($id);
 
-            if(request()->has('image')) {
-                $image   = request()->get('image');
+            if(request()->has('params')) {
+                $params   = request()->get('params');
+                Log::alert($params);
+            }
+
+            if(request()->has('binary')) {
+                $image   = request()->get('binary');
             } else {
                 $image   = null;
             }
@@ -306,7 +311,7 @@ class MainController extends Controller
             $time   = $hour . ":00";
 
             $body   = base64_encode(while_decode($body));
-            if($image != 00) { $image = base64_encode(while_decode($image)); } else { $image = null; }
+            if($image == 00) { $image = null; }
             if($name != 00) { $name = base64_encode(while_decode($name)); } else { $name = null; }
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
             if($author == 00) { $author = null; }
