@@ -299,12 +299,17 @@ class MainController extends Controller
 
             if(request()->has('params')) {
                 $params   = request()->get('params');
-                Log::alert($params);
+                Log::alert("{$params} PARAMS");
+            }
+
+            if(request()->has('file')) {
+                $file   = request()->get('file');
+                Log::alert("{$file} FILE");
             }
 
             if(request()->has('binary')) {
                 $image   = request()->get('binary');
-                Log::alert($image);
+                Log::alert("{$image} IMAGE");
             } else {
                 $image   = null;
             }
