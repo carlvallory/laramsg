@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Throwable;
@@ -319,12 +320,26 @@ class MainController extends Controller
             if($author == 00) { $author = null; }
 
             try {
+                $fileName = "{$id}.jpg";
+                Storage::put($fileName, $image);
+
+            } catch (Throwable $e) {
+                $response = [ 
+                    'status' => 500, 
+                    'message' => $e->getMessage()
+                ];
+    
+                return response()->json($response);
+            }
+            
+
+            try {
                 $msg = new Msg();
                 $msg->msg_id        = $id;
                 $msg->msg_from      = $from;
                 $msg->msg_to        = $to;
                 $msg->msg_body      = $body;
-                $msg->msg_image     = $image;
+                $msg->msg_image     = $fileName;
                 $msg->msg_name      = $name;
                 $msg->msg_picture   = $picture;
                 $msg->msg_author    = $author;
@@ -350,6 +365,7 @@ class MainController extends Controller
                 'body'      => $body
             ];
             return response()->json($response);
+            
         } else {
             $response = [ 
                 'status'    => 404, 
