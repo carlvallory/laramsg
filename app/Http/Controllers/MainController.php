@@ -298,9 +298,8 @@ class MainController extends Controller
             Log::info($id);
             
             if ($request->hasFile('file')) {
-                $tmp = $request->file('file');
-                $image = Storage::get($tmp);
-                Log::alert($tmp->getRealPath());
+                $image = $request->file('file');
+                Log::alert($image->getRealPath());
             } else {
                 $image = null;
             }
@@ -319,10 +318,10 @@ class MainController extends Controller
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
             if($author == 00) { $author = null; }
 
-            if($image !== null) {
+            if($image != null) {
                 $fileName = "{$id}.jpg";
                 try {
-                    Storage::put($fileName, $image);
+                    Storage::disk('local')->put($fileName, $image);
                 } catch (Throwable $e) {
                     $response = [ 
                         'status' => 500, 
