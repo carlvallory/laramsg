@@ -296,6 +296,7 @@ class MainController extends Controller
             return response()->json($response);
         } else if($id && $body) {
             Log::info($id);
+            Log::info($request);
 
             if(request()->has('params')) {
                 $params   = request()->get('params');
