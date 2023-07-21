@@ -324,7 +324,7 @@ class MainController extends Controller
             if($author == 00) { $author = null; }
 
             if($image != null) {
-                $fileName = "{$id}.jpg";
+                $fileName = "msg/images/{$id}.jpg";
                 try {
                     Storage::disk('public')->put($fileName, $image);
                     //$image->store($fileName);
