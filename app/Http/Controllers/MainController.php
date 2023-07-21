@@ -325,7 +325,11 @@ class MainController extends Controller
             $hour   = $dt->format("H");
             $time   = $hour . ":00";
 
-            $body   = base64_encode(while_decode($body));
+            if(base64_decode($body) == "file") {
+                $body = null;
+            } else {
+                $body = base64_encode(while_decode($body));
+            }
             if($image == 00) { $image = null; }
             if($name != 00) { $name = base64_encode(while_decode($name)); } else { $name = null; }
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
