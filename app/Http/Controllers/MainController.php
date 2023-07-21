@@ -7,6 +7,7 @@ use App\Models\Qr;
 use App\Models\Login;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -313,7 +314,12 @@ class MainController extends Controller
             } else {
                 $body = base64_encode(while_decode($body));
             }
-            if($image == 00) { $image = null; }
+
+            if($image instanceof UploadedFile) {
+                //
+            } else {
+                if($image == 00) { $image = null; }
+            }
             if($name != 00) { $name = base64_encode(while_decode($name)); } else { $name = null; }
             if($picture != 00) { $picture = base64_encode(while_decode($picture)); } else { $picture = null; }
             if($author == 00) { $author = null; }
