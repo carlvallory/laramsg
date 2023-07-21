@@ -321,7 +321,7 @@ class MainController extends Controller
             if($image != null) {
                 $fileName = "{$id}.jpg";
                 try {
-                    Storage::disk('local')->put($fileName, $image);
+                    $image->store($fileName);
                 } catch (Throwable $e) {
                     $response = [ 
                         'status' => 500, 
