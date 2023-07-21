@@ -296,30 +296,12 @@ class MainController extends Controller
             return response()->json($response);
         } else if($id && $body) {
             Log::info($id);
-            Log::info($request);
-
-            if(request()->has('params')) {
-                $params   = request()->get('params');
-                Log::alert("{$params} PARAMS");
-            }
-
-            if(request()->has('file')) {
-                $file   = request()->get('file');
-                Log::alert("{$file} FILE");
-            }
-
-            if(request()->has('binary')) {
-                $image   = request()->get('binary');
-                Log::alert("{$image} IMAGE");
-            } else {
-                $image   = null;
-            }
-
+            
             if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                Log::alert("{$file} FILE FILE");
+                $image = $request->file('file');
+                Log::alert("{$image} FILE FILE");
             } else {
-                $file = null;
+                $image = null;
             }
 
             $dt     = Carbon::now()->timezone("America/Asuncion");
