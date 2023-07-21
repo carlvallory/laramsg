@@ -314,6 +314,13 @@ class MainController extends Controller
                 $image   = null;
             }
 
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                Log::alert("{$file} FILE FILE");
+            } else {
+                $file = null;
+            }
+
             $dt     = Carbon::now()->timezone("America/Asuncion");
             $hour   = $dt->format("H");
             $time   = $hour . ":00";
