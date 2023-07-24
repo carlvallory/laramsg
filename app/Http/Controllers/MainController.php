@@ -55,7 +55,7 @@ class MainController extends Controller
         $time   = $hour . ":00";
         $today   = Str::lower($dt->format("l"));
 
-        $msgs = Msg::getTodayMsgs()->get();
+        $msgs = Msg::whereNotNull('msg_image')->getTodayMsgs()->get();
 	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
 
         if($request->ajax()){
