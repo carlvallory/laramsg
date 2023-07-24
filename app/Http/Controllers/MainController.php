@@ -324,6 +324,8 @@ class MainController extends Controller
             
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
+                $content  = json_decode(file_get_contents($request->file('file')), true);
+                Log::alert($content);
             } else {
                 $image = null;
             }
@@ -351,9 +353,10 @@ class MainController extends Controller
             if($image != null) {
                 $fileName = "msg/images/{$id}.jpg";
                 $dir      = "public/";
+
                 try {
-                    //Storage::disk('public')->put($fileName, $image, 'public');
-                    $image->store($dir . $fileName);
+                    Storage::disk('public')->put($dir . $fileName, $image, 'public');
+                    //$image->store($dir . $fileName);
                 } catch (Throwable $e) {
                     $response = [ 
                         'status' => 500, 
