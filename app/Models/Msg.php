@@ -43,6 +43,13 @@ class Msg extends Model
         return $query->whereDate('created_at', $today)->orderBy('created_at', 'desc');
     }
 
+    public function scopeGetTodayMsgsWithOnlyImages(Builder $query) {
+        $dt     = Carbon::now()->timezone("America/Asuncion");
+        $today   = $dt->format("Y-m-d");
+
+        return $query->whereDate('created_at', $today)->whereNotNull('msg_image')->orderBy('created_at', 'desc');
+    }
+
     public function scopeGetTodayTrashedMsgs(Builder $query) {
         $dt     = Carbon::now()->timezone("America/Asuncion");
         $today   = $dt->format("Y-m-d");
