@@ -168,7 +168,7 @@
                                                 <a> {{ base64_decode($msg->msg_name) }} </a>
                                                 @if($msg->msg_image != null) 
                                                     <figure class="figure">
-                                                        <img src="{{ asset($msg->msg_image) }}" class="figure-img img-fluid" />
+                                                        <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
                                                     </figure>
                                                 @endif
                                                 @if(base64_decode($msg->msg_body) != "file")
