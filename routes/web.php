@@ -33,6 +33,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard',                [MainController::class, 'index'])->name('wa.app');
     Route::get('/dashboard/qr',             [MainController::class, 'create'])->name('wa.qr');
     Route::get('/dashboard/wa/{id?}',       [MainController::class, 'show'])->name('wa.frontend');
+    Route::get('/dashboard/landscape',      [MainController::class, 'landscape'])->name('wa.landscape');
 
     Route::get('/dashboard/msgs',           [MsgController::class, 'index'])->name('msgs.index');
     Route::post('/dashboard/msgs',          [MsgController::class, 'store'])->name('msgs.store');

@@ -43,6 +43,30 @@ class MainController extends Controller
         ]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function landscape(Request $request)
+    {   
+        $dt     = Carbon::now()->timezone("America/Asuncion");
+        $hour   = $dt->format("H");
+        $time   = $hour . ":00";
+        $today   = Str::lower($dt->format("l"));
+
+        $msgs = Msg::getTodayMsgs()->get();
+	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
+
+        if($request->ajax()){
+            return response()->json(['msgs'=> $msgs]);
+        }
+
+        return view('dashboard.landscape', [
+            'msgs' => $msgs
+        ]);
+    }
+
     public function qr(Request $request, $qr)
     {   
         if (request()->has('id')) {
