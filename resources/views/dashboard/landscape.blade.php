@@ -4,7 +4,7 @@
         <meta charset="iso-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Dashboard</title>
+        <title>Landscape</title>
 
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
