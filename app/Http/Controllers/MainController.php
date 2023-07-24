@@ -349,9 +349,10 @@ class MainController extends Controller
 
             if($image != null) {
                 $fileName = "msg/images/{$id}.jpg";
+                $dir      = "public/";
                 try {
                     //Storage::disk('public')->put($fileName, $image, 'public');
-                    $image->store($fileName);
+                    $image->store($dir . $fileName);
                 } catch (Throwable $e) {
                     $response = [ 
                         'status' => 500, 
