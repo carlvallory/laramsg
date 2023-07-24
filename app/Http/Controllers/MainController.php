@@ -340,6 +340,7 @@ class MainController extends Controller
 
             if($image instanceof UploadedFile) {
                 Log::alert($image->getRealPath());
+                Log::alert($image);
             } else {
                 if($image == 00) { $image = null; }
             }
