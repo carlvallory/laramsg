@@ -467,7 +467,7 @@
                                     '<div class="message-text">' +
                                         '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                         '<figure class="figure">' +
-                                            '<img src="' + b64DecodeUnicode(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                            '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
                                         '</figure>' +
                                         '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                     '</div>' +
@@ -480,7 +480,7 @@
                         '</div>' +
                     "</form>";
                 }
-                
+
             } else {
 
                 html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
@@ -490,7 +490,7 @@
                                 '<div class="message-text">' +
                                     '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                     '<figure class="figure">' +
-                                        '<img src="' + b64DecodeUnicode(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                        '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
                                 '</div>' +
                                 '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
