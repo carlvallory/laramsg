@@ -350,7 +350,7 @@ class MainController extends Controller
 
             if($image != null) {
                 $fileName = "msg/images/{$id}.jpg";
-                $dir      = "public/";
+                //$dir      = "public/";
 
                 try {
                     Storage::disk('public')->put($fileName, $content, 'public');
