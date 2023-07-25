@@ -129,7 +129,7 @@
                         let str = html(data);
                         
                         var Obj = document.getElementById('chat_box');
-                        if(Obj.innerHTML != str) {
+                        if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
                             Obj.innerHTML=str;
                         }
                     }
