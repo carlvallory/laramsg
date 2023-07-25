@@ -441,22 +441,67 @@
             const date = new Date(msgs.created_at);
             const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
 
-            html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                '<div class="row message-body">' +
-                    '<div class="col-sm-12 message-main-sender">' +
-                        '<div class="sender">' +
-                            '<div class="message-text">' +
-                                '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+            if(b64DecodeUnicode(msgs.msg_body) != "file") {
+                if(msgs.msg_image == null) {
+                    html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                        '<div class="row message-body">' +
+                            '<div class="col-sm-12 message-main-sender">' +
+                                '<div class="sender">' +
+                                    '<div class="message-text">' +
+                                        '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                    '</div>' +
+                                    '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                    '<span class="message-time pull-right">' +
+                                        formatted +
+                                    '</span>' +
+                                '</div>' +
                             '</div>' +
-                            '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
-                            '<span class="message-time pull-right">' +
-                                formatted +
-                            '</span>' +
+                        '</div>' +
+                    "</form>";
+                } else {
+                    html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                        '<div class="row message-body">' +
+                            '<div class="col-sm-12 message-main-sender">' +
+                                '<div class="sender">' +
+                                    '<div class="message-text">' +
+                                        '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                        '<figure class="figure">' +
+                                            '<img src="' + b64DecodeUnicode(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                        '</figure>' +
+                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                    '</div>' +
+                                    '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                    '<span class="message-time pull-right">' +
+                                        formatted +
+                                    '</span>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    "</form>";
+                }
+                
+            } else {
+
+                html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                    '<div class="row message-body">' +
+                        '<div class="col-sm-12 message-main-sender">' +
+                            '<div class="sender">' +
+                                '<div class="message-text">' +
+                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<figure class="figure">' +
+                                        '<img src="' + b64DecodeUnicode(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                    '</figure>' +
+                                '</div>' +
+                                '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                '<span class="message-time pull-right">' +
+                                    formatted +
+                                '</span>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
-                '</div>' +
-            "</form>";
+                "</form>";
+            }
 
             return html;
         }
