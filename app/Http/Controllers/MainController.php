@@ -325,8 +325,7 @@ class MainController extends Controller
             if ($request->hasFile('file')) {
                 $image      = $request->file('file');
                 $base64     = "data:image/jpeg;charset=utf-8;base64,";
-                $fContent   = file_get_contents($image->getRealPath());
-                $content    = $base64 . $fContent;
+                $content   = file_get_contents($image->getRealPath());
             } else {
                 $image = null;
             }
@@ -354,7 +353,7 @@ class MainController extends Controller
                 $fileName = "msg/images/{$id}.jpg";
                 
                 try {
-                    Storage::disk('public')->put($fileName, $content, 'public');
+                    Storage::disk('public')->put($fileName, base64_decode($content), 'public');
                     //$dir      = "public/";
                     //$image->store($dir . $fileName);
                 } catch (Throwable $e) {
