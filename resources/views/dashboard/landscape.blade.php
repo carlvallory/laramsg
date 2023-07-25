@@ -130,6 +130,8 @@
                         
                         var Obj = document.getElementById('chat_box');
                         if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
+                            console.log(Obj.innerHTML.replace(/\s/g, ''));
+                            console.log(str.replace(/\s/g, ''));
                             Obj.innerHTML=str;
                         }
                     }
