@@ -353,7 +353,7 @@ class MainController extends Controller
                 $dir      = "public/";
 
                 try {
-                    Storage::disk('public')->put($dir . $fileName, $content, 'public');
+                    Storage::disk('public')->put($fileName, $content, 'public');
                     //$image->store($dir . $fileName);
                 } catch (Throwable $e) {
                     $response = [ 
