@@ -325,7 +325,6 @@ class MainController extends Controller
             if ($request->hasFile('file')) {
                 $image      = $request->file('file');
                 $content    = file_get_contents($image->getRealPath());
-                Log::alert($content);
             } else {
                 $image = null;
             }
@@ -342,7 +341,6 @@ class MainController extends Controller
 
             if($image instanceof UploadedFile) {
                 Log::alert($image->getRealPath());
-                Log::alert($image);
             } else {
                 if($image == 00) { $image = null; }
             }
@@ -355,7 +353,7 @@ class MainController extends Controller
                 $dir      = "public/";
 
                 try {
-                    Storage::disk('public')->put($dir . $fileName, $image, 'public');
+                    Storage::disk('public')->put($dir . $fileName, $content, 'public');
                     //$image->store($dir . $fileName);
                 } catch (Throwable $e) {
                     $response = [ 
