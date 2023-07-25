@@ -323,8 +323,8 @@ class MainController extends Controller
             Log::info($id);
             
             if ($request->hasFile('file')) {
-                $image = $request->file('file');
-                $content  = json_decode(file_get_contents($request->file('file')), true);
+                $image      = $request->file('file');
+                $content    = file_get_contents($image->getRealPath());
                 Log::alert($content);
             } else {
                 $image = null;
