@@ -60,7 +60,7 @@
                                             <div class="chat_user_avatar">
                                                 <a href="#" target="_blank">
                                                     @if(is_null($msg->msg_picture) || str_contains($msg->msg_picture, '@'))
-                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" class="md-user-image">
+                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
                                                     @else
                                                         <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{while_decode($msg->msg_picture)}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
                                                     @endif
@@ -84,7 +84,7 @@
                                                 </li> --}}
                                             </ul>
 
-                                            <input type="hidden" class="schedule_title" value="{{$msg->schedule->title}}" />
+                                            <input type="hidden" class="schedule_title" value="{{$msg->schedule->title}}">
 
                                         </div>
                                     @endforeach
@@ -184,7 +184,7 @@
                                     '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
                             '</ul>' +
-                            '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '" />' +
+                            '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
                         '</div>';
                     } else {
                         html = '<div class="chat_message_wrapper">' +
@@ -202,7 +202,7 @@
                                     '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
                             '</ul>' +
-                            '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '" />' +
+                            '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
                         '</div>';
                     }
 
@@ -221,7 +221,7 @@
                                 '</figure>' +
                             '</li>' +
                         '</ul>' +
-                        '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '" />' +
+                        '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
                     '</div>';
                 }
 
