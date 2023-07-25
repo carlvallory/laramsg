@@ -467,7 +467,7 @@
                                     '<div class="message-text">' +
                                         '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                         '<figure class="figure">' +
-                                            '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
+                                            '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                         '</figure>' +
                                         '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                     '</div>' +
@@ -490,7 +490,7 @@
                                 '<div class="message-text">' +
                                     '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                     '<figure class="figure">' +
-                                        '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
+                                        '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
                                 '</div>' +
                                 '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
@@ -504,6 +504,13 @@
             }
 
             return html;
+        }
+
+        function asset(src) {
+            let baseUrl = window.location.origin;
+            let str     = baseUrl + '/storage/' + src;
+
+            return str;
         }
 
         function while_decode(string) {

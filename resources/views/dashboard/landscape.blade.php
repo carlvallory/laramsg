@@ -195,7 +195,7 @@
                                 '<li>' +
                                     '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                     '<figure class="figure">' +
-                                        '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
+                                        '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
                                     '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
@@ -215,7 +215,7 @@
                             '<li>' +
                                 '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                 '<figure class="figure">' +
-                                    '<img src="' + msgs.msg_image + '" class="figure-img img-fluid" />' +
+                                    '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                 '</figure>' +
                             '</li>' +
                         '</ul>' +
@@ -224,6 +224,13 @@
                 }
 
                 return html;
+            }
+
+            function asset(src) {
+                let baseUrl = window.location.origin;
+                let str     = baseUrl + '/storage/' + src;
+
+                return str;
             }
 
             function while_decode(string) {
