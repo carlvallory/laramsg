@@ -59,10 +59,10 @@
                                         <div class="chat_message_wrapper">
                                             <div class="chat_user_avatar">
                                                 <a href="#" target="_blank">
-                                                    @if(is_null($msg->msg_image) || str_contains($msg->msg_image, '@'))
+                                                    @if(is_null($msg->msg_picture) || str_contains($msg->msg_picture, '@'))
                                                         <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" class="md-user-image">
                                                     @else
-                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{while_decode($msg->msg_image)}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
+                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{while_decode($msg->msg_picture)}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
                                                     @endif
                                                 </a>
                                             </div>
@@ -70,7 +70,14 @@
                                             <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                                 <li>
                                                     <a> {{base64_decode($msg->msg_name)}} </a>
-                                                    <p> {{base64_decode($msg->msg_body)}} </p>
+                                                    @if($msg->msg_image != null) 
+                                                        <figure class="figure">
+                                                            <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
+                                                        </figure>
+                                                    @endif
+                                                    @if(base64_decode($msg->msg_body) != "file")
+                                                        <p> {{base64_decode($msg->msg_body)}} </p>
+                                                    @endif
                                                 </li>
                                                 {{-- <li>
                                                 <p> Lorem ipsum dolor sit amet.<span class="chat_message_time">13:38</span> </p>
