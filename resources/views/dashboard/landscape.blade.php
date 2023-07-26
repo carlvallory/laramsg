@@ -240,10 +240,10 @@
                 let arr = string.split("@");
                 string = arr[0];
 
-                let countChar = parseInt(string.length) - 3;
-                let character = "*".repeat(countChar);
+                let countChar = parseInt(string.length);
+                let character = "*".repeat(countChar) - 3;
                 
-                let result = string.substring(countChar, 3);
+                let result = string.substring(countChar, countChar-3);
                 string = character + result;
 
                 return string;
