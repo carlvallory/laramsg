@@ -241,9 +241,9 @@
                 string = arr[0];
 
                 let countChar = parseInt(string.length);
-                let character = "*".repeat(countChar) - 3;
+                let character = "*".repeat(countChar - 3);
                 
-                let result = string.substring(countChar, countChar-3);
+                let result = string.substring(countChar, parseInt(countChar-3));
                 string = character + result;
 
                 return string;
