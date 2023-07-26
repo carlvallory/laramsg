@@ -630,10 +630,11 @@ if(!function_exists('strip_number')){
         $arr = explode("@", $string);
         $string = $arr[0];
 
-        $countChar = strlen($string);
+        $countChar = strlen($string) - 3;
+        $character = str_repeat("#", $countChar);
         
-        $result = Str::substr($string, 0, -3);
-        $string = $result . "###";
+        $result = Str::substr($string, 0, 3);
+        $string = $character . $result;
         return $string;
     }
 }
