@@ -623,3 +623,16 @@ if(!function_exists('while_decode')){
         return $string;
     }
 }
+
+if(!function_exists('strip_number')){
+    function strip_number($string) {
+        if(!Str::contains($string, "@")) { return $string; }
+        $arr = explode("@", $string);
+        $string = $arr[0];
+
+        $countChar = strlen($string);
+        
+        $result = Str::substrReplace($string, '*', 0, -3);
+        return $result;
+    }
+}

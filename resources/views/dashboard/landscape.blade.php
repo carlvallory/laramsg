@@ -69,7 +69,7 @@
                                             
                                             <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                                 <li>
-                                                    <a> {{base64_decode($msg->msg_name)}} </a>
+                                                    <a> {{strip_number($msg->msg_from)}} </a>
                                                     @if($msg->msg_image != null) 
                                                         <figure class="figure">
                                                             <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
@@ -180,7 +180,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                     '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
                             '</ul>' +
@@ -195,7 +195,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                     '<figure class="figure">' +
                                         '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
@@ -215,7 +215,7 @@
                         '</div>' +
                         '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                             '<li>' +
-                                '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                 '<figure class="figure">' +
                                     '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                 '</figure>' +
@@ -233,6 +233,14 @@
                 let str     = baseUrl + '/storage/' + src;
 
                 return str;
+            }
+
+            function strip_number($string) {
+                if(!string.includes("@")) { return $string; }
+                let arr = string.split("@");
+                string = arr[0];
+
+                return $string;
             }
 
             function while_decode(string) {

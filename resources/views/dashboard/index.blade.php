@@ -59,17 +59,13 @@
                                         <div class="chat_message_wrapper">
                                             <div class="chat_user_avatar">
                                                 <a href="#" target="_blank">
-                                                    @if(is_null($msg->msg_picture) || str_contains($msg->msg_picture, '@'))
-                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" class="md-user-image">
-                                                    @else
-                                                        <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{while_decode($msg->msg_picture)}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
-                                                    @endif
+                                                    <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" class="md-user-image">
                                                 </a>
                                             </div>
                                             
                                             <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                                 <li>
-                                                    <a> {{base64_decode($msg->msg_name)}} </a>
+                                                    <a> {{strip_number($msg->msg_from)}} </a>
                                                     @if($msg->msg_image != null) 
                                                         <figure class="figure">
                                                             <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
@@ -79,9 +75,6 @@
                                                         <p> {{base64_decode($msg->msg_body)}} </p>
                                                     @endif
                                                 </li>
-                                                {{-- <li>
-                                                <p> Lorem ipsum dolor sit amet.<span class="chat_message_time">13:38</span> </p>
-                                                </li> --}}
                                             </ul>
 
                                             <input type="hidden" class="schedule_title" value="{{$msg->schedule->title}}" />
@@ -161,12 +154,7 @@
                 let image = null;
                 let html = null;
 
-                if(!msg_picture || msg_picture.includes('@')) {
-                    image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
-                } else {
-                    msg_picture = while_decode(msg_picture);
-                    image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + msg_picture + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
-                }
+                image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
 
                 if(b64DecodeUnicode(msgs.msg_body) != "file") {
                     if(msgs.msg_image == null) {
@@ -178,7 +166,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                     '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
                             '</ul>' +
@@ -193,7 +181,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                     '<figure class="figure">' +
                                         '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
@@ -212,7 +200,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
                                     '<figure class="figure">' +
                                         '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
@@ -230,6 +218,14 @@
                 let str     = baseUrl + '/storage/' + src;
 
                 return str;
+            }
+
+            function strip_number($string) {
+                if(!string.includes("@")) { return $string; }
+                let arr = string.split("@");
+                string = arr[0];
+
+                return $string;
             }
 
             function while_decode(string) {
