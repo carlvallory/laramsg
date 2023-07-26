@@ -240,6 +240,12 @@
                 let arr = string.split("@");
                 string = arr[0];
 
+                $countChar = parseInt($string.length) - 3;
+                $character = "*".repeat($countChar);
+                
+                $result = $string.substring($countChar, 3);
+                $string = $character + $result;
+
                 return $string;
             }
 
