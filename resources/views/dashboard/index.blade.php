@@ -228,7 +228,7 @@
                 let countChar = parseInt(string.length) - 3;
                 let character = "*".repeat(countChar);
                 
-                let result = string.substring(countChar, 3);
+                let result = string.substring(countChar, 0);
                 string = character + result;
 
                 return string;
