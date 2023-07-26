@@ -631,7 +631,7 @@ if(!function_exists('strip_number')){
         $string = $arr[0];
 
         $countChar = strlen($string) - 3;
-        $character = str_repeat("#", $countChar);
+        $character = str_repeat("*", $countChar);
         
         $result = Str::substr($string, $countChar, 3);
         $string = $character . $result;
