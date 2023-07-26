@@ -235,18 +235,18 @@
                 return str;
             }
 
-            function strip_number($string) {
-                if(!string.includes("@")) { return $string; }
+            function strip_number(string) {
+                if(!string.includes("@")) { return string; }
                 let arr = string.split("@");
                 string = arr[0];
 
-                $countChar = parseInt($string.length) - 3;
-                $character = "*".repeat($countChar);
+                let countChar = parseInt(string.length) - 3;
+                let character = "*".repeat(countChar);
                 
-                $result = $string.substring($countChar, 3);
-                $string = $character + $result;
+                let result = string.substring(countChar, 3);
+                string = character + result;
 
-                return $string;
+                return string;
             }
 
             function while_decode(string) {
