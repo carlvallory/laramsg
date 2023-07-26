@@ -163,12 +163,7 @@
                 let image = null;
                 let html = null;
 
-                if(!msg_picture || msg_picture.includes('@')) {
-                    image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
-                } else {
-                    msg_picture = while_decode(msg_picture);
-                    image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + msg_picture + '" onerror="this.src=\'' + baseUrl + '/images/default.svg\';" class="md-user-image">';
-                }
+                image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
 
                 if(b64DecodeUnicode(msgs.msg_body) != "file") {
                     if(msgs.msg_image == null) {
