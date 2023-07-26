@@ -632,7 +632,7 @@ if(!function_exists('strip_number')){
 
         $countChar = strlen($string);
         
-        $result = Str::substr($string, 0, 3);
+        $result = Str::substr($string, 0, -3);
         $string = $result . "###";
         return $string;
     }
