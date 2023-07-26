@@ -225,10 +225,10 @@
                 let arr = string.split("@");
                 string = arr[0];
 
-                let countChar = parseInt(string.length) - 3;
+                let countChar = parseInt(string.length);
                 let character = "*".repeat(countChar);
                 
-                let result = string.substring(countChar, 0);
+                let result = string.substring(countChar, 3);
                 string = character + result;
 
                 return string;
