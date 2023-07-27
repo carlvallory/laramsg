@@ -57,7 +57,7 @@
                                 
                                     @foreach($msgs as $key => $msg)
                                         <div class="chat_message_wrapper">
-                                            <div class="chat_user_avatar">
+                                            {{-- <div class="chat_user_avatar">
                                                 <a href="#" target="_blank">
                                                     @if(is_null($msg->msg_picture) || str_contains($msg->msg_picture, '@'))
                                                         <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{asset('images/default.svg')}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
@@ -65,7 +65,7 @@
                                                         <img alt="{{base64_decode($msg->msg_name)}}" title="{{base64_decode($msg->msg_name)}}" src="{{while_decode($msg->msg_picture)}}" onerror="this.src='{{asset('images/default.svg')}}';" class="md-user-image">
                                                     @endif
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                             
                                             <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                                 <li>
