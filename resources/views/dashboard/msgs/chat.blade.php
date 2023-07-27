@@ -15,7 +15,7 @@
 <body>
     <div class="container app">
         <div class="row app-one">
-            <div class="col-sm-4 side">
+            <div class="d-none"> <!-- col-sm-4 side -->
                 <!-- chat conversation -->
                 <div class="side-one">
                     <div class="row heading">
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <!-- conversation -->
-            <div class="col-sm-8 conversation">
+            <div class="col-sm-12 conversation">
                 <div class="row heading">
                     <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
                         <div class="heading-avatar-icon">
