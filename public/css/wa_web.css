@@ -379,9 +379,9 @@ body {
 
 .message-text .figure img {
   max-width: 400px;
-  -webkit-border-radius: 10% !important;
-  -moz-border-radius: 10% !important;
-  border-radius: 10% !important;
+  -webkit-border-radius: 2% !important;
+  -moz-border-radius: 2% !important;
+  border-radius: 2% !important;
 }
 
 .message-time {
