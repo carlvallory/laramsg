@@ -379,6 +379,9 @@ body {
 
 .message-text img {
   max-width: 400px;
+  -webkit-border-radius: 10%px;
+  -moz-border-radius: 10%px;
+  border-radius: 10%px;
 }
 
 .message-time {
