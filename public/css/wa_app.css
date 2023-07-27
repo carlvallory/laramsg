@@ -234,7 +234,7 @@
         margin: 0;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li p {
-        margin: 2px 0 0 0;
+        margin: 10px 0 0 0;
         font-size: 44px;
         font-weight: 400;
         white-space: break-spaces;
@@ -248,7 +248,7 @@
         font-weight: 600;
     }
     .chat_box .chat_message_wrapper ul.chat_message > li .figure img {
-        max-width: 400px;
+        max-width: 440px;
         -webkit-border-radius: 2% !important;
         -moz-border-radius: 2% !important;
         border-radius: 2% !important;
