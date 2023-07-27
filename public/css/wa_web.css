@@ -377,6 +377,10 @@ body {
   font-weight: 200;
 }
 
+.message-text img {
+  max-width: 400px;
+}
+
 .message-time {
   margin: 0 !important;
   margin-left: 50px !important;
