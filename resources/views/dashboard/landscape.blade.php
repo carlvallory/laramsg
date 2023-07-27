@@ -190,7 +190,7 @@
                             '</div>' +
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
-                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
+                                    /* '<a>' + strip_number(msgs.msg_from) + '</a>' + */
                                     '<figure class="figure">' +
                                         '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
