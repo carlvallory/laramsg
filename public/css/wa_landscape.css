@@ -157,7 +157,7 @@
         border-radius: 45px;
     }
     .chat_box {
-        margin-top: 40px;
+        margin-top: 10px;
         padding: 16px;
     }
     .chat_box .chat_message_wrapper::after {
