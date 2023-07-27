@@ -107,9 +107,9 @@
     }
     .chat_box_wrapper.chat_box_small.chat_box_active {
         
-        height: 740px;
+        /*height: 740px;*/
         overflow-y: auto;
-        width: 1080px;
+        width: 1600px;
     }
     aside {
         background-attachment: fixed;
