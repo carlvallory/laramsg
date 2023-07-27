@@ -255,7 +255,7 @@
         font-size: 24px;
         font-weight: 600;
     }
-    .message-text .figure img {
+    .chat_box .chat_message_wrapper ul.chat_message > li .figure img {
         max-width: 1500px;
         max-height: 620px;
         -webkit-border-radius: 2% !important;
