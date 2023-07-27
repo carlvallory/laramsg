@@ -172,7 +172,8 @@
     }
     .chat_box .chat_message_wrapper {
         margin-bottom: 32px;
-        max-width: 720px; /* fixed */
+        width: fit-content;
+        margin: auto;
     }
     .md-user-image {
         border-radius: 50%;
