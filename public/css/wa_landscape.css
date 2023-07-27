@@ -158,7 +158,7 @@
     }
     .chat_box {
         margin-top: 2px;
-        padding: 16px;
+        padding: 10px;
     }
     .chat_box .chat_message_wrapper::after {
         clear: both;
