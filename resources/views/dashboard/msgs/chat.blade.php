@@ -15,7 +15,7 @@
 <body>
     <div class="container app">
         <div class="row app-one">
-            <div class="d-none"> <!-- col-sm-4 side -->
+            <div class="" style="display: none;"> <!-- col-sm-4 side -->
                 <!-- chat conversation -->
                 <div class="side-one">
                     <div class="row heading">
