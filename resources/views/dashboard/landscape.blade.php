@@ -69,7 +69,7 @@
                                             
                                             <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
                                                 <li>
-                                                    <a> {{strip_number($msg->msg_from)}} </a>
+                                                    {{-- <a> {{strip_number($msg->msg_from)}} </a> --}}
                                                     @if($msg->msg_image != null) 
                                                         <figure class="figure">
                                                             <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
@@ -79,9 +79,7 @@
                                                         <p> {{base64_decode($msg->msg_body)}} </p>
                                                     @endif
                                                 </li>
-                                                {{-- <li>
-                                                <p> Lorem ipsum dolor sit amet.<span class="chat_message_time">13:38</span> </p>
-                                                </li> --}}
+                                                
                                             </ul>
 
                                             <input type="hidden" class="schedule_title" value="{{$msg->schedule->title}}">
