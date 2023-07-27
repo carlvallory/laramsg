@@ -255,6 +255,13 @@
         font-size: 24px;
         font-weight: 600;
     }
+    .message-text .figure img {
+        max-width: 1500px;
+        max-height: 620px;
+        -webkit-border-radius: 2% !important;
+        -moz-border-radius: 2% !important;
+        border-radius: 2% !important;
+      }
     .chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li .chat_message_time {
         color: rgba(185, 186, 180, 0.9);
     }
