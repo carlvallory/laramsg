@@ -166,11 +166,11 @@
                 if(b64DecodeUnicode(msgs.msg_body) != "file") {
                     if(msgs.msg_image == null) {
                         html = '<div class="chat_message_wrapper">' +
-                            '<div class="chat_user_avatar">' +
+                            /* '<div class="chat_user_avatar">' +
                                 '<a href="#" target="_blank">' +
                                     image +
                                 '</a>' +
-                            '</div>' +
+                            '</div>' + */
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
                                     '<a>' + strip_number(msgs.msg_from) + '</a>' +
@@ -181,11 +181,11 @@
                         '</div>';
                     } else {
                         html = '<div class="chat_message_wrapper">' +
-                            '<div class="chat_user_avatar">' +
+                            /* '<div class="chat_user_avatar">' +
                                 '<a href="#" target="_blank">' +
                                     image +
                                 '</a>' +
-                            '</div>' +
+                            '</div>' + */
                             '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                                 '<li>' +
                                     /* '<a>' + strip_number(msgs.msg_from) + '</a>' + */
@@ -201,11 +201,11 @@
 
                 } else {
                     html = '<div class="chat_message_wrapper">' +
-                        '<div class="chat_user_avatar">' +
+                        /* '<div class="chat_user_avatar">' +
                             '<a href="#" target="_blank">' +
                                 image +
                             '</a>' +
-                        '</div>' +
+                        '</div>' + */
                         '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
                             '<li>' +
                                 /* '<a>' + strip_number(msgs.msg_from) + '</a>' + */
