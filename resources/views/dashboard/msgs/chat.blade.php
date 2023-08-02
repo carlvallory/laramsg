@@ -445,6 +445,7 @@
             });
         }
 
+        @if($login)
         function logout(user) {
             let logoutUrl = "{{ route('wa.logout', base64_decode($login->user)) }}";
 
@@ -460,6 +461,11 @@
                   alert('Something went wrong.');
             });
         }
+        @else
+        function logout(user) {
+            console.log(user);
+        }
+        @endif
     </script>
     <script>
         function getPosition( element ) {
