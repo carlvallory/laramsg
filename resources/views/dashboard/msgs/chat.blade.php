@@ -135,9 +135,9 @@
                     </div>
                     <div class="col-sm-1 col-xs-1  heading-dot pull-right">
                         <div class="dropdown">
-                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="getXY(this, 'dropdown-menu-1')"></i>
+                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="getXY(this, 'dropdown-menu-2')"></i>
 
-                            <ul class="dropdown-menu" id="dropdown-menu-1" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu" id="dropdown-menu-2" aria-labelledby="dropdownMenu2">
                                 @if(!$loginAuth)
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
                                 @else
