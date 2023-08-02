@@ -454,29 +454,34 @@
                   alert('Something went wrong.');
             });
         }
-
-        @if($login)
-        function logout(user) {
-            let logoutUrl = "{{ route('wa.logout', base64_decode($login->user)) }}";
-
-            $.ajax({
-                url: logoutUrl,
-                type: 'get',
-            })
-            .done(function(data) {
-                alert(user);
-                console.log(data);
-            })
-            .fail(function(jqXHR, ajaxOptions, thrownError) {
-                  alert('Something went wrong.');
-            });
-        }
-        @else
-        function logout(user) {
-            console.log(user);
-        }
-        @endif
     </script>
+
+    @if($login)
+        <script type="text/javascript">
+            function logout(user) {
+                let logoutUrl = "{{ route('wa.logout', base64_decode($login->user)) }}";
+
+                $.ajax({
+                    url: logoutUrl,
+                    type: 'get',
+                })
+                .done(function(data) {
+                    alert(user);
+                    console.log(data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+            }
+        </script>
+    @else
+        <script type="text/javascript">
+            function logout(user) {
+                console.log(user);
+            }
+        </script>
+    @endif
+
     <script>
         function getPosition( element ) {
             var rect = element.getBoundingClientRect();
