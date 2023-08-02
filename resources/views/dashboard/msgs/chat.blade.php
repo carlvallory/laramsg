@@ -169,108 +169,54 @@
                     </div> --}}
                     
                     @foreach($msgs as $key => $msg)
-                        @if($msg->trashed())
-                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
-                                @csrf
-                                <div class="row message-body">
-                                    <div class="col-sm-12 message-main-sender">
-                                        <div class="sender">
-                                            <div class="message-text">
-                                                <a> {{ base64_decode($msg->msg_name) }} </a>
-                                                @if($msg->msg_image != null) 
-                                                    <figure class="figure">
-                                                        <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
-                                                    </figure>
-                                                @endif
-                                                @if(base64_decode($msg->msg_body) != "file")
-                                                    <p> {{ base64_decode($msg->msg_body) }} </p>
-                                                @endif
-                                                
-                                            </div>
+                            
+                        <div class="row message-body">
+                            <div class="col-sm-12 message-main-sender">
+                                <div class="sender">
+                                    <div class="message-text">
+                                        <a> {{ base64_decode($msg->msg_name) }} </a>
+                                        @if($msg->msg_image != null) 
+                                            <figure class="figure">
+                                                <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
+                                            </figure>
+                                        @endif
+                                        @if(base64_decode($msg->msg_body) != "file")
+                                            <p> {{ base64_decode($msg->msg_body) }} </p>
+                                        @endif
+                                        
+                                    </div>
+                                    
+                                    @if($msg->trashed())
+                                        <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
+                                            @csrf
                                             <span class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
-                                            <span class="message-time pull-right">
-                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                        </form>
+                                    @else
+                                        <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
+                                            @csrf
+                                            <span class="checkbox checkbox-success">
+                                                <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        @else
-                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}>
-                                @csrf
-                                <div class="row message-body">
-                                    <div class="col-sm-12 message-main-sender">
-                                        <div class="sender">
-                                            <div class="message-text">
-                                                <a> {{base64_decode($msg->msg_name)}} </a>
-                                                @if($msg->msg_image !== null) 
-                                                    <figure class="figure">
-                                                        <img src="{{ base64_decode($msg->msg_image) }}" class="figure-img img-fluid" />
-                                                    </figure>
-                                                @endif
-                                                <p> {{ base64_decode($msg->msg_body) }} </p>
-                                                
-                                            </div>
-                                            <span class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
-                                            <span class="message-time pull-right">
-                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        @endif
-                        @if($msg->isActive())
-                            <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
-                                @csrf
-                                <div class="row message-body">
-                                    <div class="col-sm-12 message-main-sender">
-                                        <div class="sender">
-                                            <div class="message-text">
-                                                <a> {{ base64_decode($msg->msg_name) }} </a>
-                                                @if($msg->msg_image != null) 
-                                                    <figure class="figure">
-                                                        <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
-                                                    </figure>
-                                                @endif
-                                                @if(base64_decode($msg->msg_body) != "file")
-                                                    <p> {{ base64_decode($msg->msg_body) }} </p>
-                                                @endif
-                                                
-                                            </div>
+                                        </form>
+                                    @endif
+                                    @if($msg->isActive())
+                                        <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
+                                            @csrf
                                             <span class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
-                                            <span class="message-time pull-right">
-                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        @else
-                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}>
-                                @csrf
-                                <div class="row message-body">
-                                    <div class="col-sm-12 message-main-sender">
-                                        <div class="sender">
-                                            <div class="message-text">
-                                                <a> {{base64_decode($msg->msg_name)}} </a>
-                                                @if($msg->msg_image !== null) 
-                                                    <figure class="figure">
-                                                        <img src="{{ base64_decode($msg->msg_image) }}" class="figure-img img-fluid" />
-                                                    </figure>
-                                                @endif
-                                                <p> {{ base64_decode($msg->msg_body) }} </p>
-                                                
-                                            </div>
+                                        </form>
+                                    @else
+                                        <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
+                                            @csrf
                                             <span class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
-                                            <span class="message-time pull-right">
-                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
-                                            </span>
-                                        </div>
-                                    </div>
+                                        </form>
+                                    @endif
+                                    <span class="message-time pull-right">
+                                        {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                    </span>
                                 </div>
-                            </form>
-                        @endif
+                            </div>
+                        </div>
+                            
                         @if($loop->last)
                             <input type="hidden" name="last_id" value="{{$msg->id}}">
                         @endif
