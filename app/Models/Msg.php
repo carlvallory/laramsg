@@ -24,7 +24,8 @@ class Msg extends Model
         'msg_name',
         'msg_picture',
         'msg_author',
-        'schedule_start'
+        'schedule_start',
+        'active_at'
     ];
 
     public function schedule()
@@ -55,5 +56,17 @@ class Msg extends Model
         $today   = $dt->format("Y-m-d");
 
         return $query->onlyTrashed()->whereDate('created_at', $today)->orderBy('created_at', 'desc');
+    }
+
+    public function scopeActivated(Builder $query) {
+        return $query->whereNotNull('active_at');
+    }
+
+    public function scopeDeactivated(Builder $query) {
+        return $query->whereNull('active_at');
+    }
+
+    public function isActive() {
+        return ($this->whereNotNull('active_at') ? true : false);
     }
 }

@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string("msg_from");
             $table->string("msg_to");
             $table->text("msg_body");
-            $table->text("msg_image")->nullable(true);
-            $table->text("msg_name")->nullable(true);
-            $table->text("msg_picture")->nullable(true);
-            $table->string("msg_author")->nullable(true);
-            $table->time("schedule_start")->nullable(true);
+            $table->text("msg_image")->nullable();
+            $table->text("msg_name")->nullable();
+            $table->text("msg_picture")->nullable();
+            $table->string("msg_author")->nullable();
+            $table->time("schedule_start")->nullable();
+            $table->timestamp('active_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

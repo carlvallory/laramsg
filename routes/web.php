@@ -47,4 +47,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard/load/chat/{id}',     [MsgController::class, 'loadChat'])->name('msgs.load.chat');
     Route::delete('/dashboard/restore/{id}',    [MsgController::class, 'restore'])->name('msgs.restore');
     Route::delete('/dashboard/delete/{id}',     [MsgController::class, 'delete'])->name('msgs.delete');
+    Route::delete('/dashboard/activate/{id}',   [MsgController::class, 'activate'])->name('msgs.activate');
+    Route::delete('/dashboard/deactivate/{id}', [MsgController::class, 'deactivate'])->name('msgs.deactivate');
 });

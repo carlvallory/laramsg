@@ -7,6 +7,7 @@
 <title>Whatsapp web chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/bootstrap-checkbox.css') }}">
 
 <link rel="stylesheet" href="{{ asset('css/wa_web.css?v='.((int)(time()/60))) }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -176,7 +177,7 @@
                                                 @endif
                                                 
                                             </div>
-                                            <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
                                             <span class="message-time pull-right">
                                                 {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
                                             </span>
@@ -200,7 +201,58 @@
                                                 <p> {{ base64_decode($msg->msg_body) }} </p>
                                                 
                                             </div>
-                                            <span><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="message-time pull-right">
+                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
+                        @if($msg->isActive())
+                            <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
+                                @csrf
+                                <div class="row message-body">
+                                    <div class="col-sm-12 message-main-sender">
+                                        <div class="sender">
+                                            <div class="message-text">
+                                                <a> {{ base64_decode($msg->msg_name) }} </a>
+                                                @if($msg->msg_image != null) 
+                                                    <figure class="figure">
+                                                        <img src="{{ asset('storage/' . $msg->msg_image) }}" class="figure-img img-fluid" />
+                                                    </figure>
+                                                @endif
+                                                @if(base64_decode($msg->msg_body) != "file")
+                                                    <p> {{ base64_decode($msg->msg_body) }} </p>
+                                                @endif
+                                                
+                                            </div>
+                                            <span class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
+                                            <span class="message-time pull-right">
+                                                {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}>
+                                @csrf
+                                <div class="row message-body">
+                                    <div class="col-sm-12 message-main-sender">
+                                        <div class="sender">
+                                            <div class="message-text">
+                                                <a> {{base64_decode($msg->msg_name)}} </a>
+                                                @if($msg->msg_image !== null) 
+                                                    <figure class="figure">
+                                                        <img src="{{ base64_decode($msg->msg_image) }}" class="figure-img img-fluid" />
+                                                    </figure>
+                                                @endif
+                                                <p> {{ base64_decode($msg->msg_body) }} </p>
+                                                
+                                            </div>
+                                            <span class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></span>
                                             <span class="message-time pull-right">
                                                 {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
                                             </span>
@@ -432,34 +484,59 @@
         }
 
         function html(msg) {
-            const msgs = msg['msgs'];
-            console.log(msgs);
 
-            let baseUrl = window.location.origin;
-            let html = null;
+            if("msgs" in msg;) {
+                const msgs = msg['msgs'];
+                console.log(msgs);
 
-            const date = new Date(msgs.created_at);
-            const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+                let baseUrl = window.location.origin;
+                let html = null;
 
-            if(b64DecodeUnicode(msgs.msg_body) != "file") {
-                if(msgs.msg_image == null) {
-                    html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                        '<div class="row message-body">' +
-                            '<div class="col-sm-12 message-main-sender">' +
-                                '<div class="sender">' +
-                                    '<div class="message-text">' +
-                                        '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                const date = new Date(msgs.created_at);
+                const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+
+                if(b64DecodeUnicode(msgs.msg_body) != "file") {
+                    if(msgs.msg_image == null) {
+                        html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                            '<div class="row message-body">' +
+                                '<div class="col-sm-12 message-main-sender">' +
+                                    '<div class="sender">' +
+                                        '<div class="message-text">' +
+                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                        '</div>' +
+                                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                        '<span class="message-time pull-right">' +
+                                            formatted +
+                                        '</span>' +
                                     '</div>' +
-                                    '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
-                                    '<span class="message-time pull-right">' +
-                                        formatted +
-                                    '</span>' +
                                 '</div>' +
                             '</div>' +
-                        '</div>' +
-                    "</form>";
+                        "</form>";
+                    } else {
+                        html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                            '<div class="row message-body">' +
+                                '<div class="col-sm-12 message-main-sender">' +
+                                    '<div class="sender">' +
+                                        '<div class="message-text">' +
+                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                            '<figure class="figure">' +
+                                                '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                            '</figure>' +
+                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                        '</div>' +
+                                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                        '<span class="message-time pull-right">' +
+                                            formatted +
+                                        '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        "</form>";
+                    }
+
                 } else {
+
                     html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
                         '<div class="row message-body">' +
                             '<div class="col-sm-12 message-main-sender">' +
@@ -469,7 +546,6 @@
                                         '<figure class="figure">' +
                                             '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                         '</figure>' +
-                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                     '</div>' +
                                     '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
                                     '<span class="message-time pull-right">' +
@@ -481,29 +557,8 @@
                     "</form>";
                 }
 
-            } else {
-
-                html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                    '<div class="row message-body">' +
-                        '<div class="col-sm-12 message-main-sender">' +
-                            '<div class="sender">' +
-                                '<div class="message-text">' +
-                                    '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                    '<figure class="figure">' +
-                                        '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
-                                    '</figure>' +
-                                '</div>' +
-                                '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
-                                '<span class="message-time pull-right">' +
-                                    formatted +
-                                '</span>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                "</form>";
+                return html;
             }
-
-            return html;
         }
 
         function asset(src) {

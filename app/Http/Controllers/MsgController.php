@@ -234,6 +234,58 @@ class MsgController extends Controller
         }
     }
 
+    public function deactivate(Request $request, $id)
+    {
+
+        try {
+            $msg = Msg::find($id);
+            $msg->active_at = null;
+            $msg->save();
+
+            $response = [ 
+                        'status' => 200, 
+                        'success' => 'Msg deactivated successfully'
+                        ];
+            
+            return response()->json($response);
+
+        } catch (Throwable $e) {
+                    
+            $response = [ 
+                'status' => 500, 
+                'message' => $e->getMessage()
+            ];
+
+            return response()->json($response);
+        }
+    }
+
+    public function activate(Request $request, $id)
+    {
+
+        try {
+            $msg = Msg::find($id);
+            $msg->active_at = now();
+            $msg->save();
+
+            $response = [ 
+                        'status' => 200, 
+                        'success' => 'Msg activated successfully'
+                        ];
+            
+            return response()->json($response);
+
+        } catch (Throwable $e) {
+                    
+            $response = [ 
+                'status' => 500, 
+                'message' => $e->getMessage()
+            ];
+
+            return response()->json($response);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
