@@ -134,7 +134,17 @@
                         <span class="heading-online">Online</span>
                     </div>
                     <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                        <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                        <div class="dropdown">
+                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="getXY(this, 'dropdown-menu-1')"></i>
+
+                            <ul class="dropdown-menu" id="dropdown-menu-1" aria-labelledby="dropdownMenu1">
+                                @if(!$loginAuth)
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                @else
+                                    <li><a href="#" onclick="logout('{{$login->user}}')">Logout</a></li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="row message" id="conversation">
