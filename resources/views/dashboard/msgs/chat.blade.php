@@ -183,31 +183,32 @@
                                         @endif
                                         
                                     </div>
-                                    
-                                    @if($msg->trashed())
-                                        <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
-                                            @csrf
-                                            <div class="abc-checkbox abc-checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
-                                        </form>
-                                    @else
-                                        <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
-                                            @csrf
-                                            <span class="abc-checkbox abc-checkbox-success">
-                                                <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
-                                            </span>
-                                        </form>
-                                    @endif
-                                    @if($msg->isActive())
-                                        <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
-                                            @csrf
-                                            <div class="abc-checkbox abc-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
-                                        </form>
-                                    @else
-                                        <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
-                                            @csrf
-                                            <div class="abc-checkbox abc-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
-                                        </form>
-                                    @endif
+                                    <div class="container">
+                                        @if($msg->trashed())
+                                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
+                                                @csrf
+                                                <div class="abc-checkbox abc-checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            </form>
+                                        @else
+                                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
+                                                @csrf
+                                                <span class="abc-checkbox abc-checkbox-success">
+                                                    <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
+                                                </span>
+                                            </form>
+                                        @endif
+                                        @if($msg->isActive())
+                                            <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
+                                                @csrf
+                                                <div class="abc-checkbox abc-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            </form>
+                                        @else
+                                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
+                                                @csrf
+                                                <div class="abc-checkbox abc-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            </form>
+                                        @endif
+                                    </div>
                                     <span class="message-time pull-right">
                                         {{ Carbon\Carbon::parse(($msg->created_at))->format('H:m') }} | @if($msg->schedule) {{ $msg->schedule->title }} @endif
                                     </span>

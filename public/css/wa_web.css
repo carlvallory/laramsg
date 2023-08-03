@@ -417,9 +417,11 @@ body {
 }
 
 form.msg-deleted {
+  display: flex;
   float: left;
 }
 form.msg-deactivated {
+  display: flex;
   float:left;
 }
 input.delete {
