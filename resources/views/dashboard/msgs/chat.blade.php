@@ -192,9 +192,9 @@
                                         @else
                                             <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <span class="abc-checkbox abc-checkbox-success">
+                                                <div class="abc-checkbox abc-checkbox-success">
                                                     <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
-                                                </span>
+                                                </div>
                                             </form>
                                         @endif
                                         @if($msg->isActive())
