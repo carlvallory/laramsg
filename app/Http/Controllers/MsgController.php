@@ -69,7 +69,7 @@ class MsgController extends Controller
      */
     public function loadChat(Request $request, $id = null)
     {
-        $msgs = Msg::getTodayTrashedMsgs()->where('id', '>', $id)->paginate(9);
+        $msgs = Msg::getTodayTrashedMsgs()->deactivated()->where('id', '>', $id)->paginate(9);
 
         $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
