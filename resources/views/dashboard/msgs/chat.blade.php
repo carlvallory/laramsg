@@ -170,7 +170,7 @@
                     
                     @foreach($msgs as $key => $msg)
                             
-                        <div class="row message-body">
+                        <div class="row message-body" data-id="{{$msg->id}}">
                             <div class="col-sm-12 message-main-sender">
                                 <div class="sender">
                                     <div class="message-text">
@@ -303,6 +303,9 @@
                         success: function (){
                             if(newForm.hasClass('msg-deactivated')) {
                                 newForm.remove();
+                            }
+                            if(newForm.hasClass('msg-deleted')) {
+                                //code
                             }
                             console.log("it Works");
                             updateData();
