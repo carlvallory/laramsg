@@ -189,12 +189,12 @@
                                     @if($msg->trashed())
                                         <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                             @csrf
-                                            <div class="checkbox bs-checkbox bs-checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            <div class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
                                         </form>
                                     @else
                                         <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
                                             @csrf
-                                            <span class="checkbox bs-checkbox bs-checkbox-success">
+                                            <span class="checkbox checkbox-success">
                                                 <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
                                             </span>
                                         </form>
@@ -202,12 +202,12 @@
                                     @if($msg->isActive())
                                         <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                             @csrf
-                                            <div class="checkbox bs-checkbox bs-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            <div class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
                                         </form>
                                     @else
                                         <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
                                             @csrf
-                                            <div class="checkbox bs-checkbox bs-checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
+                                            <div class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"></div>
                                         </form>
                                     @endif
                                     <span class="message-time pull-right">
