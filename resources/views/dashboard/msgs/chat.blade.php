@@ -286,7 +286,7 @@
             });
 
             $('input[type="checkbox"]').on('click', function(e) { 
-                e.preventDefault();
+                //e.preventDefault();
 
                 if($(this).is(":checked")) {
 
@@ -310,6 +310,7 @@
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                                $(this).attr('check')
                             }
                             console.log("it Works");
                             updateData();
