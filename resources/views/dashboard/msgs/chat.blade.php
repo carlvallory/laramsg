@@ -183,7 +183,7 @@
                                         @endif
                                         
                                     </div>
-                                    <div class="container">
+                                    <div class="d-flex">
                                         @if($msg->trashed())
                                             <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                                 @csrf
