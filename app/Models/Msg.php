@@ -55,7 +55,7 @@ class Msg extends Model
         $dt     = Carbon::now()->timezone("America/Asuncion");
         $today   = $dt->format("Y-m-d");
 
-        return $query->withTrashed()->whereDate('created_at', $today)->orderBy('created_at', 'desc'); //onlyTrashed
+        return $query->onlyTrashed()->whereDate('created_at', $today)->orderBy('created_at', 'desc');
     }
 
     public function scopeActivated(Builder $query) {
