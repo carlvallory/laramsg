@@ -305,7 +305,8 @@
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
                             }
                             if(newForm.hasClass('msg-deleted')) {
-                                //code
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
+                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
                             console.log("it Works");
                             updateData();
