@@ -302,7 +302,7 @@
                         },
                         success: function (){
                             if(newForm.hasClass('msg-deactivated')) {
-                                newForm.parents('.message-body[data-id="box1"]').remove();
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
                             }
                             if(newForm.hasClass('msg-deleted')) {
                                 //code
