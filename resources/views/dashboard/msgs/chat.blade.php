@@ -187,13 +187,13 @@
                                         @if($msg->trashed())
                                             <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <div class="checkbox checkbox-success"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"><label>Mostrar</label></div>
+                                                <div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Mostrar</label></div>
                                             </form>
                                         @else
                                             <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
-                                                    <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
+                                                    <input type="checkbox" name="delete" value="{{$msg->id}}">
                                                     <label>Mostrar</label>
                                                 </div>
                                             </form>
@@ -201,13 +201,13 @@
                                         @if($msg->isActive())
                                             <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <div class="checkbox checkbox-danger"><input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}"><label>Eliminar</label></div>
+                                                <div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Eliminar</label></div>
                                             </form>
                                         @else
                                             <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-danger">
-                                                    <input type="checkbox" onChange="this.form.submit()" name="delete" value="{{$msg->id}}">
+                                                    <input type="checkbox" name="delete" value="{{$msg->id}}">
                                                     <label>Eliminar</label>
                                                 </div>
                                             </form>
@@ -285,8 +285,7 @@
                 });
             });
 
-            $('input[type="checkbox"]').on('click', function(e) { 
-                e.preventDefault();
+            $('input[type="checkbox"]').on('click', function(e) {
 
                 if($(this).is(":checked")) {
 
@@ -310,7 +309,6 @@
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
-                                $(this).attr('checked', 'checked');
                             }
                             console.log("it Works");
                             updateData();
