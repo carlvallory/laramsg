@@ -310,7 +310,7 @@
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
-                                $(this).attr('checked', '');
+                                $(this).attr('checked', 'checked');
                             }
                             console.log("it Works");
                             updateData();
