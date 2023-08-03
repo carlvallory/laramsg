@@ -1,5 +1,13 @@
-body{margin-top:20px;
-    background:#eee;
+    @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
+    @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+
+    @import "../bower_components/Font-Awesome/scss/variables";
+
+    @import "../awesome-bootstrap-checkbox";
+
+    body{
+        margin-top:20px;
+        background:#eee;
     }
     
     @import url(https://fonts.googleapis.com/css?family=Oswald:400,300);

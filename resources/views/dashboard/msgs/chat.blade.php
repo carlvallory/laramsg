@@ -7,11 +7,10 @@
 <title>Whatsapp web chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('css/bootstrap-checkbox.css') }}">
 
 <link rel="stylesheet" href="{{ asset('css/wa_web.css?v='.((int)(time()/60))) }}">
-<link rel="stylesheet" href="https://flatlogic.github.io/awesome-bootstrap-checkbox/bower_components/Font-Awesome/css/font-awesome.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('css/awesome-bootstrap-checkbox.css') }}">
 
 </head>
 <body>
