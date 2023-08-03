@@ -301,7 +301,9 @@
                             "_token": token,
                         },
                         success: function (){
-                            newForm.remove();
+                            if(newForm.classList.contains('msg-deactivated')) {
+                                newForm.remove();
+                            }
                             console.log("it Works");
                             updateData();
                         }

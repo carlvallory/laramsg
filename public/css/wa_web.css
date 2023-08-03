@@ -416,6 +416,12 @@ body {
   word-wrap: break-word;
 }
 
+form.msg-deleted {
+  float: left;
+}
+form.msg-deactivated {
+  float:left;
+}
 checkbox.delete {
 
 }
