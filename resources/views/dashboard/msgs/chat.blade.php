@@ -297,7 +297,7 @@
         }
 
         /* TODO */
-        function html(msg) {
+        function htmlConcat(msg) {
 
             if("msgs" in msg;) {
                 const msgs = msg['msgs'];
@@ -427,7 +427,7 @@
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         }
-        
+
     </script>
     <script type="text/javascript">
         $(function(){
@@ -531,7 +531,8 @@
                         msgData['msgs'].data.forEach(async (msg) => {
                             if(lastId < msg.id) {
                                 lastId = msg.id;
-                                $('#conversation').prepend(html(msg));
+                                let htmlText = htmlConcat(msg);
+                                $('#conversation').prepend(htmlText);
                             }
                             console.log(msg);
                         });
