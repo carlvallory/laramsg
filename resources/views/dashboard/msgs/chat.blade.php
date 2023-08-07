@@ -194,7 +194,7 @@
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
                                                     <input type="checkbox" name="show" value="{{$msg->id}}" checked="">
-                                                    <label>Mostrar</label>
+                                                    <label>No Mostrar</label>
                                                 </div>
                                             </form>
                                         @endif
