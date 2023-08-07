@@ -184,7 +184,7 @@
                                         
                                     </div>
                                     <div class="d-flex">
-                                        @if($msg->isActive())
+                                        @if(!$msg->isActive())
                                             <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}"><label>Mostrar</label></div>
