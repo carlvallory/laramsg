@@ -33,7 +33,7 @@ class MsgController extends Controller
      */
     public function chat(Request $request, $id = null)
     {
-        $msgs = Msg::getTodayTrashedMsgs()->deactivated()->paginate(15);
+        $msgs = Msg::getTodayMsgs()->paginate(15);
         $login = Login::latest()->first();
         $loginAuth = Login::isLogged();
 
@@ -69,7 +69,7 @@ class MsgController extends Controller
      */
     public function loadChat(Request $request, $id = null)
     {
-        $msgs = Msg::getTodayTrashedMsgs()->deactivated()->where('id', '>', $id)->paginate(9);
+        $msgs = Msg::getTodayMsgs()->where('id', '>', $id)->paginate(5);
 
         $altSchedules = Schedule::getTodaySchedules()->whereNotNull('parent_id')->get();
         $mainSchedules = Schedule::getTodaySchedules()->whereNull('parent_id')->get();
@@ -207,11 +207,6 @@ class MsgController extends Controller
     public function restore(Request $request, $id)
     {
 
-        $msgs = Msg::all();
-        foreach($msgs as $msg) {
-            $msg->delete();
-        }
-
         try {
             $msg = Msg::withTrashed()->find($id);
             $msg->restore();
@@ -262,6 +257,21 @@ class MsgController extends Controller
 
     public function activate(Request $request, $id)
     {
+
+        try {
+            $deactivate = Msg::where('active_at')->first();
+            $deactivate->active_at = null;
+            $deactivate->save();
+
+        } catch (Throwable $e) {
+            $response = [ 
+                'status' => 500, 
+                'message' => $e->getMessage()
+            ];
+
+            return response()->json($response);
+        }
+
 
         try {
             $msg = Msg::find($id);

@@ -185,26 +185,26 @@
                                     </div>
                                     <div class="d-flex">
                                         @if($msg->trashed())
-                                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Mostrar</label></div>
+                                                <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}"><label>Mostrar</label></div>
                                             </form>
                                         @else
-                                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
-                                                    <input type="checkbox" name="delete" value="{{$msg->id}}">
+                                                    <input type="checkbox" name="show" value="{{$msg->id}}">
                                                     <label>Mostrar</label>
                                                 </div>
                                             </form>
                                         @endif
                                         @if($msg->isActive())
-                                            <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Eliminar</label></div>
                                             </form>
                                         @else
-                                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-danger">
                                                     <input type="checkbox" name="delete" value="{{$msg->id}}">
@@ -305,13 +305,13 @@
                         success: function (){
                             if(newForm.hasClass('msg-deactivated')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
+                                updateData();
+                                console.log("it Works");
                             }
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
-                            console.log("it Works");
-                            updateData();
                         }
                     });
                 }
@@ -458,6 +458,7 @@
             document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
         }
 
+        /* TODO */
         function html(msg) {
 
             if("msgs" in msg;) {
@@ -472,7 +473,7 @@
 
                 if(b64DecodeUnicode(msgs.msg_body) != "file") {
                     if(msgs.msg_image == null) {
-                        html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                        html = 
                             '<div class="row message-body">' +
                                 '<div class="col-sm-12 message-main-sender">' +
                                     '<div class="sender">' +
@@ -480,14 +481,18 @@
                                             '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                             '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                         '</div>' +
-                                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/deactivate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
                                         '<span class="message-time pull-right">' +
                                             formatted +
                                         '</span>' +
                                     '</div>' +
                                 '</div>' +
-                            '</div>' +
-                        "</form>";
+                            '</div>';
                     } else {
                         html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
                             '<div class="row message-body">' +

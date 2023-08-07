@@ -31,7 +31,7 @@ class MainController extends Controller
         $time   = $hour . ":00";
         $today   = Str::lower($dt->format("l"));
 
-        $msgs = Msg::getTodayMsgs()->get();
+        $msgs = Msg::getTodayActivatedMsgs()->get();
 	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
 
         if($request->ajax()){
@@ -55,7 +55,7 @@ class MainController extends Controller
         $time   = $hour . ":00";
         $today   = Str::lower($dt->format("l"));
 
-        $msgs = Msg::getTodayMsgs()->whereNotNull('msg_image')->get();
+        $msgs = Msg::getTodayActivatedMsgs()->whereNotNull('msg_image')->get();
 	    $schedule = Schedule::where('start', $time)->where('day', $today)->get();
 
         if($request->ajax()){
@@ -306,9 +306,8 @@ class MainController extends Controller
             $msg->msg_picture   = $picture;
             $msg->msg_author    = $author;
             $msg->schedule_start = $time;
+            $msg->active_at     = null;
             $msg->save();
-
-            $msg->delete();
 
             Log::warning($name);
 
@@ -380,9 +379,8 @@ class MainController extends Controller
                 $msg->msg_picture   = $picture;
                 $msg->msg_author    = $author;
                 $msg->schedule_start = $time;
+                $msg->active_at     = null;
                 $msg->save();
-
-                $msg->delete();
 
             } catch (Throwable $e) {
                     
