@@ -294,6 +294,12 @@
                     var newUrl = newForm.attr('action');
                     var token = "{{ csrf_token() }}";
 
+                    document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
+                        if (checkbox.dataset.id !== newId) {
+                            checkbox.checked = false;
+                        }
+                    });
+
                     $.ajax(
                     {
                         url: newUrl,
@@ -304,11 +310,6 @@
                         },
                         success: function (){
                             if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
-                                newForm.parents('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').each( function() {
-                                    if ($(this).data('id') !== newId) {
-                                        $(this).prop('checked', false);
-                                    }
-                                });
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
