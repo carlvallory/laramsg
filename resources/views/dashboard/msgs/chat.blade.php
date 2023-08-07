@@ -298,7 +298,7 @@
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
                             checkbox.checked = false;
                             oldId = checkbox.id;
-                            let selector = 'label[for="cb-' + oldId +'"]';
+                            let selector = 'label[for="cb-' + oldId + '"]';
                             document.querySelector(selector).innerText = "Mostrar";
                         }
                     });
