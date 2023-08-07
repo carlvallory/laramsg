@@ -473,8 +473,7 @@
 
                 if(b64DecodeUnicode(msgs.msg_body) != "file") {
                     if(msgs.msg_image == null) {
-                        html = 
-                            '<div class="row message-body">' +
+                        html = '<div class="row message-body">' +
                                 '<div class="col-sm-12 message-main-sender">' +
                                     '<div class="sender">' +
                                         '<div class="message-text">' +
@@ -494,8 +493,7 @@
                                 '</div>' +
                             '</div>';
                     } else {
-                        html =
-                            '<div class="row message-body">' +
+                        html = '<div class="row message-body">' +
                                 '<div class="col-sm-12 message-main-sender">' +
                                     '<div class="sender">' +
                                         '<div class="message-text">' +
@@ -521,8 +519,7 @@
 
                 } else {
 
-                    html = 
-                        '<div class="row message-body">' +
+                    html = '<div class="row message-body">' +
                             '<div class="col-sm-12 message-main-sender">' +
                                 '<div class="sender">' +
                                     '<div class="message-text">' +
@@ -547,6 +544,10 @@
 
                 return html;
             }
+            
+            console.log("html doesnt exist");
+
+            return null;
         }
 
         function asset(src) {
