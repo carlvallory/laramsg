@@ -297,7 +297,7 @@
                     document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
                             checkbox.checked = false;
-                            oldId = checkbox.prop('id');
+                            oldId = checkbox.id;
                             document.querySelector(`label[for="${oldId}"]`).innerText = "Mostrar";
                         }
                     });
