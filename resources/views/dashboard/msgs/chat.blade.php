@@ -193,7 +193,7 @@
                                             <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
-                                                    <input type="checkbox" name="show" value="{{$msg->id}}" checked="">
+                                                    <input type="checkbox" name="show" value="{{$msg->id}}">
                                                     <label>No Mostrar</label>
                                                 </div>
                                             </form>
