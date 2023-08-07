@@ -271,6 +271,164 @@
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        /**
+         * Functions
+        */
+        function getPosition( element ) {
+            var rect = element.getBoundingClientRect();
+            return {
+                x: rect.left,
+                y: rect.top
+            };
+        }
+
+        function getXY(element, id) {
+            var pos = getPosition(element);
+            console.log(pos);
+            document.getElementById(id).style.position="fixed";
+            document.getElementById(id).style.maxWidth="200px";
+            document.getElementById(id).style.top=pos.y + "px";
+            document.getElementById(id).style.left=pos.x + "px";
+        }
+
+        function reload() {
+            document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
+        }
+
+        /* TODO */
+        function html(msg) {
+
+            if("msgs" in msg;) {
+                const msgs = msg['msgs'];
+                console.log(msgs);
+
+                let baseUrl = window.location.origin;
+                let html = null;
+
+                const date = new Date(msgs.created_at);
+                const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+
+                if(b64DecodeUnicode(msgs.msg_body) != "file") {
+                    if(msgs.msg_image == null) {
+                        html = '<div class="row message-body">' +
+                                '<div class="col-sm-12 message-main-sender">' +
+                                    '<div class="sender">' +
+                                        '<div class="message-text">' +
+                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                        '</div>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
+                                        '<span class="message-time pull-right">' +
+                                            formatted +
+                                        '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                    } else {
+                        html = '<div class="row message-body">' +
+                                '<div class="col-sm-12 message-main-sender">' +
+                                    '<div class="sender">' +
+                                        '<div class="message-text">' +
+                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                            '<figure class="figure">' +
+                                                '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                            '</figure>' +
+                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                        '</div>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
+                                        '<span class="message-time pull-right">' +
+                                            formatted +
+                                        '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                    }
+
+                } else {
+
+                    html = '<div class="row message-body">' +
+                            '<div class="col-sm-12 message-main-sender">' +
+                                '<div class="sender">' +
+                                    '<div class="message-text">' +
+                                        '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
+                                        '<figure class="figure">' +
+                                            '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                        '</figure>' +
+                                    '</div>' +
+                                    '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
+                                    '<span class="message-time pull-right">' +
+                                        formatted +
+                                    '</span>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                }
+
+                return html;
+            }
+            
+            console.log("html doesnt exist");
+
+            return null;
+        }
+
+        function asset(src) {
+            let baseUrl = window.location.origin;
+            let str     = baseUrl + '/storage/' + src;
+
+            return str;
+        }
+
+        function while_decode(string) {
+            if(!string.includes("_")) { return string; }
+            let arr = string.split("_");
+            string = arr[0];
+            let n = arr[1];
+            let i = 0;
+            
+            while (i < n) {
+                i++;
+                string = b64DecodeUnicode(string);
+            }
+
+            return string;
+        }
+
+        function b64EncodeUnicode(str) {
+            // first we use encodeURIComponent to get percent-encoded Unicode,
+            // then we convert the percent encodings into raw bytes which
+            // can be fed into btoa.
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+                function toSolidBytes(match, p1) {
+                    return String.fromCharCode('0x' + p1);
+            }));
+        }
+
+
+        function b64DecodeUnicode(str) {
+            // Going backwards: from bytestream, to percent-encoding, to original string.
+            return decodeURIComponent(atob(str).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }
+        
+    </script>
     <script type="text/javascript">
         $(function(){
             $(".heading-compose").click(function() {
@@ -436,159 +594,5 @@
         </script>
     @endif
 
-    <script>
-        function getPosition( element ) {
-            var rect = element.getBoundingClientRect();
-            return {
-                x: rect.left,
-                y: rect.top
-            };
-        }
-
-        function getXY(element, id) {
-            var pos = getPosition(element);
-            console.log(pos);
-            document.getElementById(id).style.position="fixed";
-            document.getElementById(id).style.maxWidth="200px";
-            document.getElementById(id).style.top=pos.y + "px";
-            document.getElementById(id).style.left=pos.x + "px";
-        }
-
-        function reload() {
-            document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
-        }
-
-        /* TODO */
-        function html(msg) {
-
-            if("msgs" in msg;) {
-                const msgs = msg['msgs'];
-                console.log(msgs);
-
-                let baseUrl = window.location.origin;
-                let html = null;
-
-                const date = new Date(msgs.created_at);
-                const formatted = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
-
-                if(b64DecodeUnicode(msgs.msg_body) != "file") {
-                    if(msgs.msg_image == null) {
-                        html = '<div class="row message-body">' +
-                                '<div class="col-sm-12 message-main-sender">' +
-                                    '<div class="sender">' +
-                                        '<div class="message-text">' +
-                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
-                                        '</div>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
-                                        '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
-                                        '</form>' +
-                                        '<span class="message-time pull-right">' +
-                                            formatted +
-                                        '</span>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>';
-                    } else {
-                        html = '<div class="row message-body">' +
-                                '<div class="col-sm-12 message-main-sender">' +
-                                    '<div class="sender">' +
-                                        '<div class="message-text">' +
-                                            '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                            '<figure class="figure">' +
-                                                '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
-                                            '</figure>' +
-                                            '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
-                                        '</div>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
-                                        '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
-                                        '</form>' +
-                                        '<span class="message-time pull-right">' +
-                                            formatted +
-                                        '</span>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>';
-                    }
-
-                } else {
-
-                    html = '<div class="row message-body">' +
-                            '<div class="col-sm-12 message-main-sender">' +
-                                '<div class="sender">' +
-                                    '<div class="message-text">' +
-                                        '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
-                                        '<figure class="figure">' +
-                                            '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
-                                        '</figure>' +
-                                    '</div>' +
-                                    '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
-                                        '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
-                                        '</form>' +
-                                    '<span class="message-time pull-right">' +
-                                        formatted +
-                                    '</span>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>';
-                }
-
-                return html;
-            }
-            
-            console.log("html doesnt exist");
-
-            return null;
-        }
-
-        function asset(src) {
-            let baseUrl = window.location.origin;
-            let str     = baseUrl + '/storage/' + src;
-
-            return str;
-        }
-
-        function while_decode(string) {
-            if(!string.includes("_")) { return string; }
-            let arr = string.split("_");
-            string = arr[0];
-            let n = arr[1];
-            let i = 0;
-            
-            while (i < n) {
-                i++;
-                string = b64DecodeUnicode(string);
-            }
-
-            return string;
-        }
-
-        function b64EncodeUnicode(str) {
-            // first we use encodeURIComponent to get percent-encoded Unicode,
-            // then we convert the percent encodings into raw bytes which
-            // can be fed into btoa.
-            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-                function toSolidBytes(match, p1) {
-                    return String.fromCharCode('0x' + p1);
-            }));
-        }
-
-
-        function b64DecodeUnicode(str) {
-            // Going backwards: from bytestream, to percent-encoding, to original string.
-            return decodeURIComponent(atob(str).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-        }
-    </script>
 </body>
 </html>
