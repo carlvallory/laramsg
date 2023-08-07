@@ -299,6 +299,7 @@
                             checkbox.checked = false;
                             oldId = checkbox.id;
                             let selector = 'label[for="cb-' + oldId + '"]';
+                            console.log(selector);
                             document.querySelector(selector).innerText = "Mostrar";
                         }
                     });
