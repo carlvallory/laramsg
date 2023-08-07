@@ -259,7 +259,7 @@ class MsgController extends Controller
     {
         Log::info('activate');
         try {
-            $deactivate = Msg::where('active_at')->first();
+            $deactivate = Msg::whereNotNull('active_at')->first();
             $deactivate->active_at = null;
             $deactivate->save();
 
