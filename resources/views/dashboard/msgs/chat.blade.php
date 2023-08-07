@@ -187,13 +187,13 @@
                                         @if(!$msg->isActive())
                                             <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}><label>Mostrar</label></div>
+                                                <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}"><label>Mostrar</label></div>
                                             </form>
                                         @else
                                             <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
-                                                    <input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}} checked="">
+                                                    <input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}" checked="">
                                                     <label>No Mostrar</label>
                                                 </div>
                                             </form>
