@@ -303,7 +303,7 @@
                             "_token": token,
                         },
                         success: function (){
-                            if(newForm.hasClass('msg-deactivated')) {
+                            if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
