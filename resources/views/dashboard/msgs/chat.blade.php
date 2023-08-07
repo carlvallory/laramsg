@@ -190,7 +190,7 @@
                                                 <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}"><label>Mostrar</label></div>
                                             </form>
                                         @else
-                                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated d-none" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
                                                     <input type="checkbox" name="show" value="{{$msg->id}}" checked="">
