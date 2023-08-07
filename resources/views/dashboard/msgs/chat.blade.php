@@ -271,7 +271,60 @@
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
+    <script type="text/javascript">
+        $(function(){
+            $(".heading-compose").click(function() {
+                $(".side-two").css({
+                    "left": "0"
+                });
+            });
+
+            $(".newMessage-back").click(function() {
+                $(".side-two").css({
+                    "left": "-100%"
+                });
+            });
+
+            $('input[type="checkbox"]').on('click', function(e) {
+
+                if($(this).is(":checked")) {
+
+                    var newForm = $(this).parents('form');
+                    var newId = newForm.data("id");
+                    var newUrl = newForm.attr('action');
+                    var token = "{{ csrf_token() }}";
+
+                    $.ajax(
+                    {
+                        url: newUrl,
+                        type: 'DELETE',
+                        data: {
+                            "id": newId,
+                            "_token": token,
+                        },
+                        success: function (){
+                            if(newForm.hasClass('msg-deactivated')) {
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
+                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                            }
+                            if(newForm.hasClass('msg-deleted')) {
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
+                                updateData();
+                                console.log("it Works");
+                            }
+                        }
+                    });
+                }
+
+            });
+
+            $('#myModal').on('shown.bs.modal', function () {
+                reload();
+                $('#iframeid').focus();
+            });
+        })
+    </script>
+    <script type="text/javascript">
         /**
          * Functions
         */
@@ -296,7 +349,6 @@
             document.getElementById('iframeid').src = "{{ route('admin.wa.qr') }}";
         }
 
-        /* TODO */
         function htmlConcat(msg) {
 
             if("msgs" in msg;) {
@@ -428,61 +480,9 @@
             }).join(''));
         }
 
-    </script>
-    <script type="text/javascript">
-        $(function(){
-            $(".heading-compose").click(function() {
-                $(".side-two").css({
-                    "left": "0"
-                });
-            });
-
-            $(".newMessage-back").click(function() {
-                $(".side-two").css({
-                    "left": "-100%"
-                });
-            });
-
-            $('input[type="checkbox"]').on('click', function(e) {
-
-                if($(this).is(":checked")) {
-
-                    var newForm = $(this).parents('form');
-                    var newId = newForm.data("id");
-                    var newUrl = newForm.attr('action');
-                    var token = "{{ csrf_token() }}";
-
-                    $.ajax(
-                    {
-                        url: newUrl,
-                        type: 'DELETE',
-                        data: {
-                            "id": newId,
-                            "_token": token,
-                        },
-                        success: function (){
-                            if(newForm.hasClass('msg-deactivated')) {
-                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
-                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
-                            }
-                            if(newForm.hasClass('msg-deleted')) {
-                                newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
-                                updateData();
-                                console.log("it Works");
-                            }
-                        }
-                    });
-                }
-
-            });
-
-            $('#myModal').on('shown.bs.modal', function () {
-                reload();
-                $('#iframeid').focus();
-            });
-        })
-    </script>
-    <script type="text/javascript">
+        /**
+         * Iteractive
+         */
         $('#conversation').scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
                 let paginate = $('.msg-deleted').first().data("id");
