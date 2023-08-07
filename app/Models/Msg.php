@@ -74,6 +74,6 @@ class Msg extends Model
     }
 
     public function isActive() {
-        return ($this->whereNotNull('active_at')->get() ? true : false);
+        return (($this->active_at === null) ? false : true);
     }
 }
