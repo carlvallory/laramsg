@@ -304,13 +304,13 @@
                         },
                         success: function (){
                             if(newForm.hasClass('msg-deactivated')) {
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
+                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                            }
+                            if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
                                 updateData();
                                 console.log("it Works");
-                            }
-                            if(newForm.hasClass('msg-deleted')) {
-                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
-                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
                         }
                     });

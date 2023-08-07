@@ -231,7 +231,7 @@ class MsgController extends Controller
 
     public function deactivate(Request $request, $id)
     {
-
+        Log::info('deactivate');
         try {
             $msg = Msg::find($id);
             $msg->active_at = null;
@@ -257,7 +257,7 @@ class MsgController extends Controller
 
     public function activate(Request $request, $id)
     {
-
+        Log::info('activate');
         try {
             $deactivate = Msg::where('active_at')->first();
             $deactivate->active_at = null;
