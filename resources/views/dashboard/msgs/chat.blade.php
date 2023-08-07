@@ -187,14 +187,14 @@
                                         @if(!$msg->isActive())
                                             <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
-                                                <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}"><label>Mostrar</label></div>
+                                                <div class="checkbox checkbox-success"><input id="cb-{{$msg->id}}" type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}"><label for="cb-{{$msg->id}}">Mostrar</label></div>
                                             </form>
                                         @else
                                             <form method="DELETE" action="{{ route('admin.msgs.deactivate', $msg->id) }}" class="msg-activated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success">
-                                                    <input type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}" checked="">
-                                                    <label>No Mostrar</label>
+                                                    <input id="cb-{{$msg->id}}" type="checkbox" name="show" value="{{$msg->id}}" data-id="{{$msg->id}}" checked="">
+                                                    <label for="cb-{{$msg->id}}">No Mostrar</label>
                                                 </div>
                                             </form>
                                         @endif
@@ -295,10 +295,10 @@
                     var token = "{{ csrf_token() }}";
 
                     document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
-                        console.log(checkbox.dataset.id);
-                        console.log(newId);
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
                             checkbox.checked = false;
+                            oldId = checkbox.prop('id');
+                            document.querySelector(`label[for="${oldId}"]`).innerText = "Mostrar";
                         }
                     });
 
@@ -314,6 +314,7 @@
                             if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                                document.querySelector(`label[for="${newId}"]`).innerText = "No Mostrar";
                             }
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
