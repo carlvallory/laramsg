@@ -295,6 +295,8 @@
                     var token = "{{ csrf_token() }}";
 
                     document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
+                        console.log(checkbox.dataset.id);
+                        console.log(newId);
                         if (checkbox.dataset.id !== newId) {
                             checkbox.checked = false;
                         }
