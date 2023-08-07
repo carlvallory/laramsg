@@ -304,8 +304,9 @@
                         },
                         success: function (){
                             if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
-                                newForm.parents('.message-body > .msg-activated:not([data-id="' +newId+ '"])').find('input[type="checkbox"]').prop('checked', false);
-                                newForm.parents('.message-body > .msg-deactivated:not([data-id="' +newId+ '"])').find('input[type="checkbox"]').prop('checked', false);
+                                newForm.parents('.message-body > .msg-activated:not([data-id="' +newId+ '"]) input[type="checkbox"], .message-body > .msg-deactivated:not([data-id="' +newId+ '"]) input[type="checkbox"]').each( function() {
+                                    $(this).prop('checked', false);
+                                });
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                             }
