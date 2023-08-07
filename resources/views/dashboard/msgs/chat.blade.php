@@ -184,7 +184,7 @@
                                         
                                     </div>
                                     <div class="d-flex">
-                                        @if($msg->trashed())
+                                        @if($msg->isActive())
                                             <form method="DELETE" action="{{ route('admin.msgs.activate', $msg->id) }}" class="msg-deactivated" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-success"><input type="checkbox" name="show" value="{{$msg->id}}"><label>Mostrar</label></div>
@@ -198,7 +198,7 @@
                                                 </div>
                                             </form>
                                         @endif
-                                        @if($msg->isActive())
+                                        @if($msg->trashed())
                                             <form method="DELETE" action="{{ route('admin.msgs.restore', $msg->id) }}" class="msg-deleted" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Eliminar</label></div>
