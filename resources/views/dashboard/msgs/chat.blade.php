@@ -481,11 +481,11 @@
                                             '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                             '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                         '</div>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
                                         '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/deactivate/' + msgs.id + '">' +
-                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
                                         '</form>' +
                                         '<span class="message-time pull-right">' +
                                             formatted +
@@ -494,7 +494,7 @@
                                 '</div>' +
                             '</div>';
                     } else {
-                        html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                        html =
                             '<div class="row message-body">' +
                                 '<div class="col-sm-12 message-main-sender">' +
                                     '<div class="sender">' +
@@ -505,19 +505,23 @@
                                             '</figure>' +
                                             '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                         '</div>' +
-                                        '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
                                         '<span class="message-time pull-right">' +
                                             formatted +
                                         '</span>' +
                                     '</div>' +
                                 '</div>' +
-                            '</div>' +
-                        "</form>";
+                            '</div>';
                     }
 
                 } else {
 
-                    html = '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                    html = 
                         '<div class="row message-body">' +
                             '<div class="col-sm-12 message-main-sender">' +
                                 '<div class="sender">' +
@@ -527,14 +531,18 @@
                                             '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                         '</figure>' +
                                     '</div>' +
-                                    '<span><input type="checkbox" onChange="this.form.submit()" name="delete" value="' + msgs.id + '"></span>' +
+                                    '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
+                                        '</form>' +
+                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                            '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
+                                        '</form>' +
                                     '<span class="message-time pull-right">' +
                                         formatted +
                                     '</span>' +
                                 '</div>' +
                             '</div>' +
-                        '</div>' +
-                    "</form>";
+                        '</div>';
                 }
 
                 return html;
