@@ -298,7 +298,8 @@
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
                             checkbox.checked = false;
                             oldId = checkbox.id;
-                            document.querySelector(`label[for="cb-${oldId}"]`).innerText = "Mostrar";
+                            let selector = 'label[for="cb-' + oldId +'"]';
+                            document.querySelector(selector).innerText = "Mostrar";
                         }
                     });
 
@@ -314,7 +315,8 @@
                             if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
-                                document.querySelector('label[for="cb-'+newId+'"]').innerText = "No Mostrar";
+                                let selector = 'label[for="cb-' + newId +'"]';
+                                document.querySelector(selector).innerText = "No Mostrar";
                             }
                             if(newForm.hasClass('msg-deleted')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
