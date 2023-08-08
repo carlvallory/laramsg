@@ -251,6 +251,8 @@ class MsgController extends Controller
                 'message' => $e->getMessage()
             ];
 
+            Log::alert($response);
+
             return response()->json($response);
         }
     }
@@ -264,12 +266,10 @@ class MsgController extends Controller
             $deactivate->save();
 
         } catch (Throwable $e) {
-            $response = [ 
+            Log::alert([ 
                 'status' => 500, 
                 'message' => $e->getMessage()
-            ];
-
-            return response()->json($response);
+            ]);
         }
 
 
