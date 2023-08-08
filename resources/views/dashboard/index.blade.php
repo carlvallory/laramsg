@@ -108,8 +108,8 @@
             $(document).ready( function(){
                 $('figure').on('click', '.figure-img', function(){
                     var img = document.getElementById('myImg');
-                    if(img.src != $(this).src) {
-                        img.src = $(this).src;
+                    if(img.src != $(this).attr('src')) {
+                        img.src = $(this).attr('src');
                     }
 
                     modal();
