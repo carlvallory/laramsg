@@ -91,6 +91,7 @@
                 </aside>
             </div>
         </div>
+        <img src="" class="d-none" id="myImg" />
         <!-- The Modal -->
         <div id="myModal" class="bs-modal">
             <span class="close">&times;</span>
@@ -106,7 +107,12 @@
 
             $(document).ready( function(){
                 $('figure').on('click', '.figure-img', function(){
-                    modal($(this).val('id'));
+                    var img = document.getElementById('myImg');
+                    if(img.src != $(this).src) {
+                        img.src = $(this).src;
+                    }
+
+                    modal();
                 });
             });
 
@@ -284,12 +290,12 @@
                 }).join(''));
             }
 
-            function modal(id) {
+            function modal() {
                 // Get the modal
                 var modal = document.getElementById("myModal");
 
                 // Get the image and insert it inside the modal - use its "alt" text as a caption
-                var img = document.getElementById(id);
+                var img = document.getElementById('myImg');
                 var modalImg = document.getElementById("img01");
                 var captionText = document.getElementById("caption");
                 
