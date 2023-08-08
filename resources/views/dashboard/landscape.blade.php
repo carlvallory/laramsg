@@ -126,11 +126,13 @@
                         //console.log(data);
                         let str = html(data);
                         
-                        var Obj = document.getElementById('chat_box');
-                        if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
-                            console.log(Obj.innerHTML.replace(/\s/g, ''));
-                            console.log(str.replace(/\s/g, ''));
-                            Obj.innerHTML=str;
+                        if(str != null) {
+                            var Obj = document.getElementById('chat_box');
+                            if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
+                                console.log(Obj.innerHTML.replace(/\s/g, ''));
+                                console.log(str.replace(/\s/g, ''));
+                                Obj.innerHTML=str;
+                            }
                         }
                     }
                     //console.log(data);
@@ -155,30 +157,50 @@
 
                 const msgs = Object.assign([], msg)['msgs'][0];
                 //const schedules = Object.assign([], msg)['schedules'][0];
-                
-                let msg_picture = msgs.msg_picture;
-                let baseUrl = window.location.origin;
-                let image = null;
-                let html = null;
+                if (msgs !== undefined) {
+                    let msg_picture = msgs.msg_picture;
+                    let baseUrl = window.location.origin;
+                    let image = null;
+                    let html = null;
 
-                image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
+                    image = '<img alt="' + b64DecodeUnicode(msgs.msg_name) + '" title="' + b64DecodeUnicode(msgs.msg_name) + '" src="' + baseUrl + '/images/default.svg" class="md-user-image">';
 
-                if(b64DecodeUnicode(msgs.msg_body) != "file") {
-                    if(msgs.msg_image == null) {
-                        html = '<div class="chat_message_wrapper">' +
-                            /* '<div class="chat_user_avatar">' +
-                                '<a href="#" target="_blank">' +
-                                    image +
-                                '</a>' +
-                            '</div>' + */
-                            '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
-                                '<li>' +
-                                    '<a>' + strip_number(msgs.msg_from) + '</a>' +
-                                    '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
-                                '</li>' +
-                            '</ul>' +
-                            '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
-                        '</div>';
+                    if(b64DecodeUnicode(msgs.msg_body) != "file") {
+                        if(msgs.msg_image == null) {
+                            html = '<div class="chat_message_wrapper">' +
+                                /* '<div class="chat_user_avatar">' +
+                                    '<a href="#" target="_blank">' +
+                                        image +
+                                    '</a>' +
+                                '</div>' + */
+                                '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
+                                    '<li>' +
+                                        '<a>' + strip_number(msgs.msg_from) + '</a>' +
+                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                    '</li>' +
+                                '</ul>' +
+                                '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
+                            '</div>';
+                        } else {
+                            html = '<div class="chat_message_wrapper">' +
+                                /* '<div class="chat_user_avatar">' +
+                                    '<a href="#" target="_blank">' +
+                                        image +
+                                    '</a>' +
+                                '</div>' + */
+                                '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
+                                    '<li>' +
+                                        /* '<a>' + strip_number(msgs.msg_from) + '</a>' + */
+                                        '<figure class="figure">' +
+                                            '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
+                                        '</figure>' +
+                                        '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
+                                    '</li>' +
+                                '</ul>' +
+                                '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
+                            '</div>';
+                        }
+
                     } else {
                         html = '<div class="chat_message_wrapper">' +
                             /* '<div class="chat_user_avatar">' +
@@ -192,33 +214,16 @@
                                     '<figure class="figure">' +
                                         '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                     '</figure>' +
-                                    '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                 '</li>' +
                             '</ul>' +
                             '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
                         '</div>';
                     }
 
-                } else {
-                    html = '<div class="chat_message_wrapper">' +
-                        /* '<div class="chat_user_avatar">' +
-                            '<a href="#" target="_blank">' +
-                                image +
-                            '</a>' +
-                        '</div>' + */
-                        '<ul class="chat_message" id="' + msgs.msg_id + '" data-from="' + msgs.msg_from + '">' +
-                            '<li>' +
-                                /* '<a>' + strip_number(msgs.msg_from) + '</a>' + */
-                                '<figure class="figure">' +
-                                    '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
-                                '</figure>' +
-                            '</li>' +
-                        '</ul>' +
-                        '<input type="hidden" class="schedule_title" value="' + 'schedules.title' + '">' +
-                    '</div>';
+                    return html;
                 }
 
-                return html;
+                return null;
             }
 
             function asset(src) {
