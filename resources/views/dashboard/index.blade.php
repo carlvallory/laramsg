@@ -91,11 +91,23 @@
                 </aside>
             </div>
         </div>
+        <!-- The Modal -->
+        <div id="myModal" class="bs-modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script type="text/javascript" charset="iso-8859-1">
             $(function(){
                 $('#sidebar_secondary').addClass('popup-box-on');
+            });
+
+            $(document).ready( function(){
+                $('figure').on('click', '.figure-img', function(){
+                    modal($(this).val('id'));
+                });
             });
 
             $(document).ready(function(){
@@ -270,6 +282,30 @@
                 return decodeURIComponent(atob(str).split('').map(function(c) {
                     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                 }).join(''));
+            }
+
+            function modal(id) {
+                // Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById(id);
+                var modalImg = document.getElementById("img01");
+                var captionText = document.getElementById("caption");
+                
+                img.onclick = function(){
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                }
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() { 
+                    modal.style.display = "none";
+                }
             }
 
         </script>
