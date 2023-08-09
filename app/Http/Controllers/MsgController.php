@@ -262,8 +262,10 @@ class MsgController extends Controller
         Log::info('activate');
         try {
             $deactivate = Msg::whereNotNull('active_at')->first();
-            $deactivate->active_at = null;
-            $deactivate->save();
+            if($deactivate) {
+                $deactivate->active_at = null;
+                $deactivate->save();
+            }
 
         } catch (Throwable $e) {
             Log::alert([ 
@@ -275,15 +277,25 @@ class MsgController extends Controller
 
         try {
             $msg = Msg::find($id);
-            $msg->active_at = now();
-            $msg->save();
 
-            $response = [ 
-                        'status' => 200, 
-                        'success' => 'Msg activated successfully'
-                        ];
-            
-            return response()->json($response);
+            if($msg) {
+                $msg->active_at = now();
+                $msg->save();
+
+                $response = [ 
+                            'status' => 200, 
+                            'success' => 'Msg activated successfully'
+                            ];
+                
+                return response()->json($response); 
+            } else {
+                $response = [ 
+                    'status' => 200, 
+                    'success' => 'Msg was not activated'
+                ];
+        
+                return response()->json($response); 
+            }
 
         } catch (Throwable $e) {
                     
