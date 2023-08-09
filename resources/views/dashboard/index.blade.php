@@ -63,7 +63,7 @@
                                                 </a>
                                             </div>
                                             
-                                            <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}">
+                                            <ul class="chat_message" id="{{$msg->msg_id}}" data-from="{{$msg->msg_from}}" data-id="{{$msg->msg_id}}">
                                                 <li>
                                                     <a> {{strip_number($msg->msg_from)}} </a>
                                                     @if($msg->msg_image != null) 
@@ -148,9 +148,14 @@
 
                                 console.log([El.dataset.from, msgs.msg_from])
 
-                                if(El.dataset.from != msgs.msg_from) {
-                                    if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
-                                        Obj.innerHTML=str;
+                                if(El.dataset.id != msgs.msg_id) {
+                                    if(El.dataset.from != msgs.msg_from) {
+                                        if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
+                                            Obj.innerHTML=str;
+                                        }
+                                    } else {
+                                        // code to concatenate str;
+                                        //Obj.innerHTML=Obj.innerHTML+str;
                                     }
                                 } else {
                                     clearInterval(loadInterval);
