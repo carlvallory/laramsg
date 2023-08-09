@@ -292,7 +292,7 @@ class MsgController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            Log::alert($response);
         }
     }
 
