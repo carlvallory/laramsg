@@ -346,6 +346,8 @@
                 } else {
                     var newForm = $(this).parents('form');
                     var newId = newForm.data("id");
+                    var newUrl = newForm.attr('action');
+                    var token = "{{ csrf_token() }}";
 
                     var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
                     var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
