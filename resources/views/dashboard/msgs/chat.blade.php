@@ -350,15 +350,26 @@
                     var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
                     var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
 
-                    if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
-                        newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
-                        setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
-                        newForm.removeClass('msg-activated');
-                        newForm.addClass('msg-deactivated');
-                        newForm.attr('action', activateUrlId);
-                        let selector = 'label[for="cb-' + newId +'"]';
-                        document.querySelector(selector).innerText = "Mostrar";
-                    }
+                    $.ajax(
+                    {
+                        url: newUrl,
+                        type: 'DELETE',
+                        data: {
+                            "id": newId,
+                            "_token": token,
+                        },
+                        success: function (){
+                            if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
+                                newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
+                                setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                                newForm.removeClass('msg-activated');
+                                newForm.addClass('msg-deactivated');
+                                newForm.attr('action', activateUrlId);
+                                let selector = 'label[for="cb-' + newId +'"]';
+                                document.querySelector(selector).innerText = "Mostrar";
+                            }
+                        }
+                    });
                 }
 
             });
