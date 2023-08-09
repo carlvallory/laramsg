@@ -303,9 +303,9 @@
                         if (parseInt(form.dataset.id) !== parseInt(newId)) {
                             oldId = form.dataset.id;
                             let selector = 'form[data-id="' + oldId + '"]';
-                            let activateUrlId = baseUrl + '/admin/dashboard/activate/' + oldId;
+                            let activateUrl = baseUrl + '/admin/dashboard/activate/';
                             document.querySelector(selector).classList.add("msg-deactivated");
-                            document.querySelector(selector).action = activateUrlId;
+                            document.querySelector(selector).action = activateUrl + oldId;
                         }
                     });
 
