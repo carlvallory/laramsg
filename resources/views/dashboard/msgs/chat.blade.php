@@ -336,7 +336,7 @@
                                 let selector = 'label[for="cb-' + newId +'"]';
                                 document.querySelector(selector).innerText = "No Mostrar";
                             }
-                            if(newForm.hasClass('msg-deleted')) {
+                            if(newForm.hasClass('msg-deleted') || newForm.hasClass('msg-restored')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
                                 updateData();
                                 console.log("it Works");
