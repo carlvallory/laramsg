@@ -296,8 +296,8 @@
                     var newUrl = newForm.attr('action');
                     var token = "{{ csrf_token() }}";
 
-                    let activateUrl = baseUrl + '/dashboard/activate/' + newId;
-                    let deactivateUrl = baseUrl + '/dashboard/activate/' + newId;
+                    var activateUrl = baseUrl + '/dashboard/activate/' + newId;
+                    var deactivateUrl = baseUrl + '/dashboard/deactivate/' + newId;
 
                     document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {

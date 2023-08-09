@@ -160,7 +160,7 @@
                                     }
                                 } else {
                                     clearInterval(loadInterval);
-                                    var loadInterval = setInterval(updateData(), 1000*5);
+                                    var loadInterval = setInterval(updateData(), 1000*10);
                                 }
                             }
                         }
