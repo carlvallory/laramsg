@@ -335,12 +335,12 @@
                             }
                             if(newForm.hasClass('msg-deleted') || newForm.hasClass('msg-restored')) {
                                 newForm.parents('.message-body[data-id="' +newId+ '"]').remove();
-                                updateData();
+                                //updateData();
                                 console.log("it Works");
                             }
                         }
                     });
-                    
+
                 } else {
 
                     $.ajax(
