@@ -156,6 +156,7 @@
                                     } else {
                                         // code to concatenate str;
                                         //Obj.innerHTML=Obj.innerHTML+str;
+                                        Obj.innerHTML=str;
                                     }
                                 } else {
                                     clearInterval(loadInterval);
