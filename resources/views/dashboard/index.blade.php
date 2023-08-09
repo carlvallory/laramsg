@@ -152,6 +152,9 @@
                                     if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
                                         Obj.innerHTML=str;
                                     }
+                                } else {
+                                    clearInterval(loadInterval);
+                                    var loadInterval = setInterval(updateData(), 1000*5);
                                 }
                             }
                         }
