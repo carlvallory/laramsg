@@ -296,14 +296,14 @@
                     var newUrl = newForm.attr('action');
                     var token = "{{ csrf_token() }}";
 
-                    var activateUrlId = baseUrl + '/dashboard/activate/' + newId;
-                    var deactivateUrlId = baseUrl + '/dashboard/deactivate/' + newId;
+                    var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
+                    var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
 
                     document.querySelectorAll('form.msg-activated, form.msg-deactivated').forEach(form => {
                         if (parseInt(form.dataset.id) !== parseInt(newId)) {
                             oldId = form.dataset.id;
                             let selector = 'form[data-id="' + oldId + '"]';
-                            let activateUrlId = baseUrl + '/dashboard/activate/' + oldId;
+                            let activateUrlId = baseUrl + '/admin/dashboard/activate/' + oldId;
                             document.querySelector(selector).classList.add("msg-deactivated");
                             document.querySelector(selector).action = activateUrlId;
                         }
@@ -347,8 +347,8 @@
                     var newForm = $(this).parents('form');
                     var newId = newForm.data("id");
 
-                    var activateUrlId = baseUrl + '/dashboard/activate/' + newId;
-                    var deactivateUrlId = baseUrl + '/dashboard/deactivate/' + newId;
+                    var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
+                    var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
 
                     if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                         newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
@@ -415,10 +415,10 @@
                                             '<a>' + b64DecodeUnicode(msgs.msg_name) + '</a>' +
                                             '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                         '</div>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                        '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/activate/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
                                         '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                        '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/delete/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
                                         '</form>' +
                                         '<span class="message-time pull-right">' +
@@ -438,10 +438,10 @@
                                             '</figure>' +
                                             '<p>' + b64DecodeUnicode(msgs.msg_body) + '</p>' +
                                         '</div>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                        '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/activate/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
                                         '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                        '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/delete/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
                                         '</form>' +
                                         '<span class="message-time pull-right">' +
@@ -463,10 +463,10 @@
                                             '<img src="' + asset(msgs.msg_image) + '" class="figure-img img-fluid" />' +
                                         '</figure>' +
                                     '</div>' +
-                                    '<form method="DELETE" action="' + baseUrl + '/dashboard/activate/' + msgs.id + '">' +
+                                    '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/activate/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Mostrar</label></div>' +
                                         '</form>' +
-                                        '<form method="DELETE" action="' + baseUrl + '/dashboard/delete/' + msgs.id + '">' +
+                                        '<form method="DELETE" action="' + baseUrl + '/admin/dashboard/delete/' + msgs.id + '">' +
                                             '<div class="checkbox checkbox-success"><input type="checkbox" name="delete" value="' + msgs.id + '"><label>Eliminar</label></div>' +
                                         '</form>' +
                                     '<span class="message-time pull-right">' +
