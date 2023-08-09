@@ -33,7 +33,7 @@ class MsgController extends Controller
      */
     public function chat(Request $request, $id = null)
     {
-        $msgs = Msg::getTodayMsgs()->paginate(15);
+        $msgs = Msg::getTodayMsgs()->paginate(20);
         $login = Login::latest()->first();
         $loginAuth = Login::isLogged();
 
