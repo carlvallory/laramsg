@@ -204,7 +204,7 @@
                                                 <div class="checkbox checkbox-danger"><input type="checkbox" name="delete" value="{{$msg->id}}"><label>Eliminar</label></div>
                                             </form>
                                         @else
-                                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored d-none" data-id="{{$msg->id}}">
+                                            <form method="DELETE" action="{{ route('admin.msgs.delete', $msg->id) }}" class="msg-restored" data-id="{{$msg->id}}">
                                                 @csrf
                                                 <div class="checkbox checkbox-danger">
                                                     <input type="checkbox" name="delete" value="{{$msg->id}}">
