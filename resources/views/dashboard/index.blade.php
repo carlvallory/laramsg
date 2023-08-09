@@ -146,10 +146,7 @@
                                 var Obj = document.getElementById('chat_box');
                                 var El = document.getElementsByClassName('chat_message')[0];
 
-                                console.log(El.dataset.from);
-                                console.log(msgs.msg_from);
-
-                                if(El.dataset.msg_from != msgs.msg_from) {
+                                if(El.dataset.from != msgs.msg_from) {
                                     if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
                                         Obj.innerHTML=str;
                                     }
