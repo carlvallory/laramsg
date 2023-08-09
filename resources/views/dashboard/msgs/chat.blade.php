@@ -296,8 +296,18 @@
                     var newUrl = newForm.attr('action');
                     var token = "{{ csrf_token() }}";
 
-                    var activateUrl = baseUrl + '/dashboard/activate/' + newId;
-                    var deactivateUrl = baseUrl + '/dashboard/deactivate/' + newId;
+                    var activateUrlId = baseUrl + '/dashboard/activate/' + newId;
+                    var deactivateUrlId = baseUrl + '/dashboard/deactivate/' + newId;
+
+                    document.querySelectorAll('form.msg-activated, form.msg-deactivated').forEach(form => {
+                        if (parseInt(form.dataset.id) !== parseInt(newId)) {
+                            oldId = form.dataset.id;
+                            let selector = 'form[data-id="' + oldId + '"]';
+                            let activateUrlId = baseUrl + '/dashboard/activate/' + oldId;
+                            document.querySelector(selector).classList.add("msg-deactivated");
+                            document.querySelector(selector).action = activateUrlId;
+                        }
+                    });
 
                     document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
                         if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
@@ -322,7 +332,7 @@
                                 setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                                 newForm.removeClass('msg-deactivated');
                                 newForm.addClass('msg-activated');
-                                newForm.attr('action', deactivateUrl);
+                                newForm.attr('action', deactivateUrlId);
                                 let selector = 'label[for="cb-' + newId +'"]';
                                 document.querySelector(selector).innerText = "No Mostrar";
                             }
@@ -337,15 +347,15 @@
                     var newForm = $(this).parents('form');
                     var newId = newForm.data("id");
 
-                    var activateUrl = baseUrl + '/dashboard/activate/' + newId;
-                    var deactivateUrl = baseUrl + '/dashboard/deactivate/' + newId;
+                    var activateUrlId = baseUrl + '/dashboard/activate/' + newId;
+                    var deactivateUrlId = baseUrl + '/dashboard/deactivate/' + newId;
 
                     if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                         newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                         setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
                         newForm.removeClass('msg-activated');
                         newForm.addClass('msg-deactivated');
-                        newForm.attr('action', activateUrl);
+                        newForm.attr('action', activateUrlId);
                         let selector = 'label[for="cb-' + newId +'"]';
                         document.querySelector(selector).innerText = "Mostrar";
                     }
