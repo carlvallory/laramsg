@@ -167,12 +167,12 @@
                 "DOMNodeInserted",
                 (event) => {
                     clearInterval(loadInterval);
-                    var loadInterval = setInterval(updateData(), 1000*60);
+                    var loadInterval = setInterval(updateData(), 1000*5);
                 },
                 false,
             );
 
-            var loadInterval = setInterval(updateData(), 1000*60);
+            var loadInterval = setInterval(updateData(), 1000*5);
 
             function html(msgs) {
 
