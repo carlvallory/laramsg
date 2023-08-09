@@ -325,6 +325,13 @@
                             }
                         }
                     });
+                } else {
+                    if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
+                        newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
+                        setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
+                        let selector = 'label[for="cb-' + newId +'"]';
+                        document.querySelector(selector).innerText = "Mostrar";
+                    }
                 }
 
             });
