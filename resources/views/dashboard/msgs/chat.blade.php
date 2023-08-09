@@ -289,37 +289,34 @@
 
                 let baseUrl = window.location.origin;
 
+                var newForm = $(this).parents('form');
+                var newId = newForm.data("id");
+                var newUrl = newForm.attr('action');
+                var token = "{{ csrf_token() }}";
+                var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
+                var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
+
+                document.querySelectorAll('form.msg-activated, form.msg-deactivated').forEach(form => {
+                    if (parseInt(form.dataset.id) !== parseInt(newId)) {
+                        let oldId = form.dataset.id;
+                        let selector = 'form[data-id="' + oldId + '"]';
+                        document.querySelector(selector).classList.add("msg-deactivated");
+                        document.querySelector(selector).action = baseUrl + '/admin/dashboard/activate/' + oldId;
+                    }
+                });
+
+                document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
+                    if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
+                        checkbox.checked = false;
+                        let oldId = checkbox.id;
+                        let selector = 'label[for="' + oldId + '"]';
+                        document.querySelector(selector).innerText = "Mostrar";
+                    }
+                });
+
                 if($(this).is(":checked")) {
 
-                    var newForm = $(this).parents('form');
-                    var newId = newForm.data("id");
-                    var newUrl = newForm.attr('action');
-                    var token = "{{ csrf_token() }}";
-
-                    var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
-                    var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
-
-                    document.querySelectorAll('form.msg-activated, form.msg-deactivated').forEach(form => {
-                        if (parseInt(form.dataset.id) !== parseInt(newId)) {
-                            oldId = form.dataset.id;
-                            let selector = 'form[data-id="' + oldId + '"]';
-                            let activateUrl = baseUrl + '/admin/dashboard/activate/';
-                            document.querySelector(selector).classList.add("msg-deactivated");
-                            document.querySelector(selector).action = activateUrl + oldId;
-                        }
-                    });
-
-                    document.querySelectorAll('.msg-activated input[type="checkbox"], .msg-deactivated input[type="checkbox"]').forEach(checkbox => {
-                        if (parseInt(checkbox.dataset.id) !== parseInt(newId)) {
-                            checkbox.checked = false;
-                            oldId = checkbox.id;
-                            let selector = 'label[for="' + oldId + '"]';
-                            document.querySelector(selector).innerText = "Mostrar";
-                        }
-                    });
-
-                    $.ajax(
-                    {
+                    $.ajax({
                         url: newUrl,
                         type: 'DELETE',
                         data: {
@@ -343,14 +340,8 @@
                             }
                         }
                     });
+                    
                 } else {
-                    var newForm = $(this).parents('form');
-                    var newId = newForm.data("id");
-                    var newUrl = newForm.attr('action');
-                    var token = "{{ csrf_token() }}";
-
-                    var activateUrlId = baseUrl + '/admin/dashboard/activate/' + newId;
-                    var deactivateUrlId = baseUrl + '/admin/dashboard/deactivate/' + newId;
 
                     $.ajax(
                     {
