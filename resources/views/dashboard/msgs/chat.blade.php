@@ -337,6 +337,9 @@
                     var newForm = $(this).parents('form');
                     var newId = newForm.data("id");
 
+                    var activateUrl = baseUrl + '/dashboard/activate/' + newId;
+                    var deactivateUrl = baseUrl + '/dashboard/deactivate/' + newId;
+
                     if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                         newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                         setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
