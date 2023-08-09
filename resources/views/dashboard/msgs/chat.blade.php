@@ -326,6 +326,9 @@
                         }
                     });
                 } else {
+                    var newForm = $(this).parents('form');
+                    var newId = newForm.data("id");
+                    
                     if(newForm.hasClass('msg-deactivated') || newForm.hasClass('msg-activated')) {
                         newForm.parents('.message-body[data-id="' +newId+ '"]').addClass('shaker');
                         setTimeout(function(){ newForm.parents('.message-body[data-id="' +newId+ '"]').removeClass('shaker'); }, 300);
