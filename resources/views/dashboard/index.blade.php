@@ -136,13 +136,21 @@
                         console.log("Empty")
                         return;
                     } else {
-                        //console.log(data);
-                        let str = html(data);
+                        const msgs = Object.assign([], data)['msgs'][0];
+                        console.log(msgs);
+                        let str = html(msgs);
                         
                         if(str != null) {
                             var Obj = document.getElementById('chat_box');
-                            if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
-                                Obj.innerHTML=str;
+                            var El = document.getElementsByClassName('chat_message')[0];
+
+                            console.log(El.dataset.msg_from);
+                            console.log(msgs.msg_from);
+
+                            if(El.dataset.msg_from != msgs.msg_from) {
+                                if(Obj.innerHTML.replace(/\s/g, '') != str.replace(/\s/g, '')) {
+                                    Obj.innerHTML=str;
+                                }
                             }
                         }
                     }
@@ -164,9 +172,8 @@
 
             var loadInterval = setInterval(updateData(), 1000*60);
 
-            function html(msg) {
+            function html(msgs) {
 
-                const msgs = Object.assign([], msg)['msgs'][0];
                 if (msgs !== undefined) {
                     //const schedules = Object.assign([], msg)['schedules'][0];
                     
